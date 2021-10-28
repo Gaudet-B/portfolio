@@ -1,0 +1,398 @@
+/* ---> Fonts <--- */
+
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+
+/* ======> {{ ANIMATIONS }} <====== */
+
+/* TYPEWRITER */
+@keyframes typewriter{
+    from{width: 0;}
+    to{width: 10em;}
+}
+@keyframes blinkTextCursor{
+    from{border-right-color: rgba(255,255,255,0.75);}
+    to{border-right-color: transparent;}
+}
+@keyframes caret {
+    50% {
+    border-color: transparent;
+    }
+}
+/* FADE-IN */
+@keyframes fade-in {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes fade-in-out {
+    0% {opacity: 0;}
+    50% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+
+/* ======> {{ LANDING }} <====== */
+
+/* ---> Global <--- */
+
+html {
+    height: 100vh;
+    overflow: hidden;
+}
+
+body {
+    margin: 0px;
+}
+
+/* these next two are for the typewriter */
+h1 {
+    font-size: 5em;
+    /* font-size: 24pt; */
+    color: white;
+}
+span {
+    border-right: .05em solid;
+    animation: caret 1s steps(1) infinite;
+}
+
+.bg {
+    background-color: rgb(25,25,25); 
+    margin: 0px; 
+    height: 100vh;
+}
+
+.body {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    color: rgba(255,255,255,.75);
+    font-family: 'Anonymous Pro', monospace;  
+    background: linear-gradient(8deg, rgba(26,26,26,0.3) 0%, rgba(25,25,25,1) 70%);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
+/* FLEX */
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* ---> BACKGROUND <--- */
+
+/* .backgroundImage {
+    background-image: url("../assets/3d-background.png");
+    -webkit-backgound-size: cover;
+    -moz-backgound-size: cover;
+    backgound-size: cover;
+    height: 100vh;
+} */
+
+.bgHorizontal {
+    animation: fade-in 5s;
+    position: absolute;
+    margin-top: 380px;
+    border-top: 1px solid whitesmoke;
+    border-bottom: 2px solid whitesmoke;
+    width: 100%;
+    height: 220px;
+}
+.bgVertical1 {
+    animation: fade-in 5s;
+    position: absolute;
+    margin-left: 8.5px;
+    border-left: 2px solid whitesmoke;
+    width: 20px;
+    height: 1600px;
+    transform: rotate(38deg);
+}
+.bgVertical2 {
+    animation: fade-in 5s;
+    position: absolute;
+    margin-left: 548px;
+    border-left: 2px solid whitesmoke;
+    width: 20px;
+    height: 1200px;
+    transform: rotate(15deg);
+}
+.bgVertical3 {
+    animation: fade-in 5s;
+    position: absolute;
+    position: absolute;
+    margin-left: 870px;
+    border-left: 2px solid whitesmoke;
+    width: 20px;
+    height: 1200px;
+}
+.bgVertical4 {
+    animation: fade-in 5s;
+    position: absolute;
+    margin-left: 1203.5px;
+    border-left: 2px solid whitesmoke;
+    width: 20px;
+    height: 1200px;
+    transform: rotate(-15deg);
+}
+.bgVertical5 {
+    animation: fade-in 5s;
+    position: absolute;
+    margin-left: 1576.5px;
+    border-left: 2px solid whitesmoke;
+    width: 20px;
+    height: 1200px;
+    transform: rotate(-38deg);
+}
+
+
+/* ---> TYPEWRITER <--- */
+
+/* Body */
+.line1{
+    position: relative;
+    top: 16%;  
+    width: 10em;
+    margin: 0 auto;
+    font-size: 180%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);    
+}
+
+.typedLine {
+    margin-top: 6px;
+}
+
+#name {
+    font-size: 3em;
+}
+
+/* Animation */
+.anim-typewriter{
+    animation: typewriter 1.5s steps(65) 1s 1 normal both,
+                blinkTextCursor 450ms steps(65) infinite normal;
+}
+
+
+/* ---> BUTTONS <--- */
+
+/* Individual Button Containers */
+.hoverZoom {
+    transform: 
+        perspective(750px)
+        translate3d(0px, 0px, -250px)
+        rotateX(27deg)
+        scale(0.9, 0.9);
+    box-shadow: 0 70px 40px -20px rgba(245, 245, 245, 0.24);
+    animation: fade-in 3s;
+    height: 150px;
+    width: 150px;
+    border: 2px solid whitesmoke;
+    border-radius: 20%;
+    margin: 0 auto;
+    transition: 0.4s ease-in-out transform;
+    cursor: pointer;
+}
+/* Hover Zoom Animation */
+.hoverZoom:hover {
+    transform: translate3d(0px, 0px, -250px);
+}
+/* Row of Buttons */
+.buttonContainer {
+    animation: fade-in 3s;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    justify-content: space-evenly;
+    margin-top: 18vh;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: whitesmoke;
+    font-size: 18pt;
+    padding-top: 12px;
+}
+.label p {
+    margin: 0px;
+    padding: 0px;
+}
+/* handle spacing exception */
+#resumeLabel {
+    text-align: left;
+    margin-left: 2px;
+}
+
+/* Button Images */
+.projects {
+    background-image: url("../assets/GitHub.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    margin: 0px;
+    padding: 0px;
+}
+.projects .mask {
+    width: inherit;
+    height: inherit;
+    border-radius: 20%;
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(0,0,0,0.5);
+}
+.projects .unmask {
+    width: inherit;
+    height: inherit;
+    border-radius: 20%;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+}
+
+.contact {
+    background-image: url("../assets/Email.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    margin: 0px;
+    padding: 0px;
+}
+.contact .mask {
+    width: inherit;
+    height: inherit;
+    border-radius: 20%;
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(0,0,0,0.5);
+}
+.contact .unmask {
+    width: inherit;
+    height: inherit;
+    border-radius: 20%;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+}
+
+.resume {
+    background-image: url("../assets/LinkedIn.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    margin: 0px;
+    padding: 0px;
+}
+.resume .mask {
+    width: inherit;
+    height: inherit;
+    border-radius: 20%;
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(0,0,0,0.5);
+}
+.resume .unmask {
+    width: inherit;
+    height: inherit;
+    border-radius: 20%;
+    margin: 0px;
+    padding: 0px;
+    background-color: transparent;
+}
+
+/* Copyright & est. text */
+.copyright {
+    animation: fade-in 3s;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.copyright p {
+    margin: 0px;
+}
+/* Social Links */
+.social {
+    /* 3d perspective */
+    transform: 
+        perspective(750px)
+        translate3d(0px, 0px, -250px)
+        rotateX(27deg)
+        scale(0.9, 0.9);
+    box-shadow: 0 70px 40px -20px rgba(245, 245, 245, 0.24);
+    margin-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid whitesmoke;
+    background-color: rgba(211, 211, 211, 0.616);
+    border-radius: 10% / 20%;
+    /* entrance animation */
+    animation: fade-in 3s;
+    /* zoom animation */
+    transition: 0.4s ease-in-out transform;
+}
+.social:hover {
+    /* hover animation */
+    transform: translate3d(0px, 0px, -250px);
+}
+.social a {
+    margin: 5px;
+    height: 40px;
+    width: 40px;
+    border: 1px solid rgb(26,26,26);
+    border-radius: 20%;
+}
+.socialLinkedIn {
+    background-image: url("../assets/LinkedIn.jpg");
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+}
+.socialGitHub {
+    background-image: url("../assets/GitHub.jpg");
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+}
+
+
+/* ======> {{ PROJECTS }} <====== */
+
+/* ---> Global <--- */
+
+.background {
+    background-color: #20242986;
+    text-shadow: 3px 3px 1px black;
+}
+
+/* ---> Card Flipping <--- */
+
+/* flip front-to-back */
+.flip {
+    animation: flip 3s;
+}
+/* flip back-to-front */
+.reverse {
+    animation: back-flip 3s;
+}
