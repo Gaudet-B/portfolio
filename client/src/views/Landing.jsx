@@ -1,33 +1,75 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-// import {  }
 import styles from '../components/style.module.css'
 
 
 const Landing = () => {
 
+    // const [classToggle, setClassToggle] = useState(false)
+    // const [counter, setCounter] = useState(0)
+
+    // const handleToggle = e => {
+    //     if (!classToggle) {
+    //         setClassToggle(true)
+    //         if (e.target.id == "projects") {
+    //             e.target.className = `${styles.projects} ${styles.hoverZoom} ${styles.float}`
+    //         } else if (e.target.id == "contact") {
+    //             e.target.className = `${styles.contact} ${styles.hoverZoom} ${styles.float}`
+    //         } else if (e.target.id == "resume") {
+    //             e.target.className = `${styles.resume} ${styles.hoverZoom} ${styles.float}`
+    //         }
+    //     }
+    //     else if (classToggle == true) {
+    //         setClassToggle(false)
+    //         if (e.target.id == "projects") {
+    //             e.target.className = `${styles.projects} ${styles.hover} ${styles.hoverZoom}`
+    //         } else if (e.target.id == "contact") {
+    //             e.target.className = `${styles.contact} ${styles.hover} ${styles.hoverZoom}`
+    //         } else if (e.target.id == "resume") {
+    //             e.target.className = `${styles.resume} ${styles.hover} ${styles.hoverZoom}`
+    //         }
+    //     }
+    // }
+
     var counter = 0
 
     const displayButtons = () => {
 
-        // display the buttons
-        document.getElementById("projects").setAttribute("class", `${styles.hoverZoom} ${styles.projects}`)
-        document.getElementById("contact").setAttribute("class", `${styles.hoverZoom} ${styles.contact}`)
-        document.getElementById("resume").setAttribute("class", `${styles.hoverZoom} ${styles.resume}`)
+        // display the buttons and thier labels
+        let project = document.getElementById("projects")
+        setTimeout(() => project.setAttribute("class", styles.projects), 200)
+        setTimeout(() => project.setAttribute("class", `${styles.hoverZoom} ${styles.projects}`), 2000)
+        let projectLabel = document.getElementById("projects-label")
+        setTimeout(() => projectLabel.setAttribute("class", styles.label), 2000)
+        setTimeout(() => projectLabel.innerHTML = "<p>Personal</p><p>Projects</p>", 2000)
 
-        // display button labels
-        document.getElementById("projects-label").innerHTML = "<p>Personal</p><p>Projects</p>"
-        document.getElementById("contact-label").innerHTML = "<p>Contact</p>"
-        document.getElementById("resumeLabel").innerHTML = "<p>Professional</p><p>Resume</p>"
+        let contact = document.getElementById("contact")
+        setTimeout(() => contact.setAttribute("class", styles.contact), 200)
+        setTimeout(() => contact.setAttribute("class", `${styles.hoverZoom} ${styles.contact}`), 2000)
+        let contactLabel = document.getElementById("contact-label")
+        setTimeout(() => contactLabel.setAttribute("class", styles.label), 2000)
+        setTimeout(() => contactLabel.innerHTML = "<p>Contact</p>", 2000)
+
+        let resume = document.getElementById("resume")
+        setTimeout(() => resume.setAttribute("class", styles.resume), 200)
+        setTimeout(() => resume.setAttribute("class", `${styles.hoverZoom} ${styles.resume}`), 2000)
+        let resumeLabel = document.getElementById("resumeLabel")
+        setTimeout(() => resumeLabel.setAttribute("class", styles.label), 2000)
+        setTimeout(() => resumeLabel.innerHTML = "<p>Professional</p><p>Resume</p>", 2000)
+
+        // add the class for float animation, asynchronously so buttons do not float in unison
+        // setTimeout(() => project.setAttribute("class", `${styles.hoverZoom} ${styles.projects} ${styles.float}`), 3800)
+        // setTimeout(() => contact.setAttribute("class", `${styles.hoverZoom} ${styles.contact} ${styles.float}`), 3100)
+        // setTimeout(() => resume.setAttribute("class", `${styles.hoverZoom} ${styles.resume} ${styles.float}`), 3500)
 
         // delay, then call the function to display background
-        setTimeout(displayBackground, 500)
+        setTimeout(displayBackground, 2500)
 
         // delay, then call the function to display socail links
-        setTimeout(displaySocial, 2500)
+        setTimeout(displaySocial, 4000)
         
         // delay, then call the function to display copyright and est. text
-        setTimeout(displayCopyright, 3000)
+        setTimeout(displayCopyright, 4200)
 
     }
 
@@ -36,11 +78,35 @@ const Landing = () => {
         
         // displays each div that makes up the background "grid"
         document.getElementById("bg-horizontal").setAttribute("class", styles.bgHorizontal)
-        document.getElementById("bg-vertical-1").setAttribute("class", styles.bgVertical1)
-        document.getElementById("bg-vertical-2").setAttribute("class", styles.bgVertical2)
-        document.getElementById("bg-vertical-3").setAttribute("class", styles.bgVertical3)
-        document.getElementById("bg-vertical-4").setAttribute("class", styles.bgVertical4)
-        document.getElementById("bg-vertical-5").setAttribute("class", styles.bgVertical5)
+
+        document.getElementById("bg-vertical-0").setAttribute("class", `${styles.bgVertical} ${styles.bgVertical0}`)
+        setTimeout(() => document.getElementById("bg-vertical-0-lights").setAttribute("class", styles.bgLights), 3700 + 30)
+        setTimeout(() => document.getElementById("bg-vertical-0-light-block").setAttribute("class", styles.bgLightBlock), 3700)
+
+        document.getElementById("bg-vertical-1").setAttribute("class", `${styles.bgVertical} ${styles.bgVertical1}`)
+        setTimeout(() => document.getElementById("bg-vertical-1-lights").setAttribute("class", styles.bgLights), 2900 + 30)
+        setTimeout(() => document.getElementById("bg-vertical-1-light-block").setAttribute("class", styles.bgLightBlock), 2900)
+
+        document.getElementById("bg-vertical-2").setAttribute("class", `${styles.bgVertical} ${styles.bgVertical2}`)
+        setTimeout(() => document.getElementById("bg-vertical-2-lights").setAttribute("class", styles.bgLights), 4900 + 30)
+        setTimeout(() => document.getElementById("bg-vertical-2-light-block").setAttribute("class", styles.bgLightBlock), 4900)
+
+        document.getElementById("bg-vertical-3").setAttribute("class", `${styles.bgVertical} ${styles.bgVertical3}`)
+        setTimeout(() => document.getElementById("bg-vertical-3-lights").setAttribute("class", styles.bgLights), 4100 + 30)
+        setTimeout(() => document.getElementById("bg-vertical-3-light-block").setAttribute("class", styles.bgLightBlock), 4100)
+
+        document.getElementById("bg-vertical-4").setAttribute("class", `${styles.bgVertical} ${styles.bgVertical4}`)
+        setTimeout(() => document.getElementById("bg-vertical-4-lights").setAttribute("class", styles.bgLights), 3800 + 30)
+        setTimeout(() => document.getElementById("bg-vertical-4-light-block").setAttribute("class", styles.bgLightBlock), 3800)
+
+        document.getElementById("bg-vertical-5").setAttribute("class", `${styles.bgVertical} ${styles.bgVertical5}`)
+        setTimeout(() => document.getElementById("bg-vertical-5-lights").setAttribute("class", styles.bgLights), 3500 + 30)
+        setTimeout(() => document.getElementById("bg-vertical-5-light-block").setAttribute("class", styles.bgLightBlock), 3500)
+
+        document.getElementById("bg-vertical-6").setAttribute("class", `${styles.bgVertical} ${styles.bgVertical6}`)
+        setTimeout(() => document.getElementById("bg-vertical-6-lights").setAttribute("class", styles.bgLights), 3500 + 30)
+        setTimeout(() => document.getElementById("bg-vertical-6-light-block").setAttribute("class", styles.bgLightBlock), 3500)
+
         // document.getElementById("background-image").setAttribute("class", styles.backgroundImage)
     }
 
@@ -62,16 +128,30 @@ const Landing = () => {
     }
 
     // --> BUTTON onMouseOver <--
-    const buttonHover = (e) => {
-        e.setAttribute("class", styles.unmask)
-    }
+    // const buttonHover = e => {
+    //     let stuff = e.target
+    //     console.log(stuff);
+    //     if (e.target.id == "projects") {
+    //         e.target.className = `${styles.projects} ${styles.hover} ${styles.hoverZoom}`
+    //     } else if (e.target.id == "contact") {
+    //         e.target.className = `${styles.contact} ${styles.hover} ${styles.hoverZoom}`
+    //     } else if (e.target.id == "resume") {
+    //         e.target.className = `${styles.resume} ${styles.hover} ${styles.hoverZoom}`
+    //     }
+    // }
     // --> BUTTON onMouseOut <--
-    const buttonOut = (e) => {
-        e.setAttribute("class", styles.mask)
-    }
+    // const buttonOut = e => {
+    //     if (e.target.id == "projects") {
+    //         e.target.className = `${styles.projects} ${styles.hoverZoom} ${styles.float}`
+    //     } else if (e.target.id == "contact") {
+    //         e.target.className = `${styles.contact} ${styles.hoverZoom} ${styles.float}`
+    //     } else if (e.target.id == "resume") {
+    //         e.target.className = `${styles.resume} ${styles.hoverZoom} ${styles.float}`
+    //     }
+    // }
 
     // the lines the typewriter will write
-    const dataText = ["Brian F. Gaudet", "Full Stack", "Web Developer"]
+    const dataText = ["Brian F. Gaudet", "  ", "Full Stack", "Web Developer"]
 
     useEffect(() => {
         // const script = document.createElement("script")
@@ -79,6 +159,8 @@ const Landing = () => {
         // script.async = true
         // document.body.appendChild(script)
         // document.addEventListener('DOMContentLoaded', function (event) {
+
+        // setCounter(0)
         
         // the function calls itself until the array of words is empty
         const typeWriter = (text, i, fnCallback) => {
@@ -90,31 +172,40 @@ const Landing = () => {
                     // if this is the last character in the word, stop the blinking cursor
                     if (i == text.length - 1) {
                         // add next character to h1 w/o blinking cursor
-                        document.querySelector("h1").innerHTML = text.substring(0, i + 1)
+                        document.getElementById("name").innerHTML = text.substring(0, i + 1)
                     } else {
                         // add next character to h1 w/ blinking cursor
-                        document.querySelector("h1").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+                        document.getElementById("name").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
                     }
-                // SECOND WORD
-                } else if (text.length == 10) {
+                // check for empty SECOND WORD here
+                } else if (text.length == 2) {
                     if (i == text.length - 1) {
-                        // add next character to line-two w/o blinking cursor
+                        // add next character to h1 w/o blinking cursor
                         document.getElementById("line-two").innerHTML = text.substring(0, i + 1)
                     } else {
-                        // add next character to line-two w/ blinking cursor
+                        // add next character to h1 w/ blinking cursor
                         document.getElementById("line-two").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
                     }
                 // THIRD WORD
+                } else if (text.length == 10) {
+                    if (i == text.length - 1) {
+                        // add next character to line-two w/o blinking cursor
+                        document.getElementById("line-three").innerHTML = text.substring(0, i + 1)
+                    } else {
+                        // add next character to line-two w/ blinking cursor
+                        document.getElementById("line-three").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+                    }
+                // FOURTH WORD
                 } else if (text.length == 13) {
-                    // if this is the last character in the THIRD WORD, call FUNCTION TO DISPLAY BUTTONS
+                    // if this is the last character in the FOURTH WORD, call FUNCTION TO DISPLAY BUTTONS
                     if (i == text.length - 1) {
                         // add next character to line-three w/ blinking cursor - **keep cursor blinking since this is the last line**
-                        document.getElementById("line-three").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+                        document.getElementById("line-four").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
                         // --> CALL FUNCTION TO DISPLAY BUTTONS: <--
                         setTimeout(displayButtons, 1000)
                     } else {
                         // add next character to line-three w/ blinking cursor
-                        document.getElementById("line-three").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+                        document.getElementById("line-four").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
                     }
                 }
     
@@ -132,13 +223,11 @@ const Landing = () => {
         // function to start the typewriter
         const StartTextAnimation = (i) => {
             if (typeof dataText[i] == 'undefined') {
-                setTimeout(function () {
-                    StartTextAnimation(0)
-                }, 20000)
+                return
             }
             console.log(counter);
-            // check that we haven't hit the final (THIRD) word in the array
-            if (i < 4 && counter < 4) {
+            // check that we haven't hit the final (FOURTH) word in the array
+            if (i < 5 && counter < 5) {
                 // the counter keeps the typewriter from repeating once finished with the array of words so the text remains on-screen
                 counter++
                 // call the Typewriter function
@@ -154,33 +243,74 @@ const Landing = () => {
     })
 
     const typedLineClass = `${styles.typedLine} ${styles.line1}`
+    const typedLineClassInvis = `${styles.typedLine} ${styles.line1} ${styles.invis}`
+    
+    // const unZoomProjects = `${styles.projects} ${styles.hoverZoom} ${styles.float}`
+    // const zoomProjects = `${styles.projects} ${styles.hover} ${styles.hoverZoom}`
 
+    // const unZoomContact = `${styles.contact} ${styles.hoverZoom} ${styles.float}`
+    // const zoomContact = `${styles.contact} ${styles.hover} ${styles.hoverZoom}`
+
+    // const unZoomResume = `${styles.resume} ${styles.hoverZoom} ${styles.float}`
+    // const zoomResume = `${styles.resume} ${styles.hover} ${styles.hoverZoom}`
+    
     return (
         <div id="background-image" className={styles.bg}>
             <div id="bg-horizontal"></div>
-            <div id="bg-vertical-1"></div>
-            <div id="bg-vertical-2"></div>
-            <div id="bg-vertical-3"></div>
-            <div id="bg-vertical-4"></div>
-            <div id="bg-vertical-5"></div>
+            <div id="bg-vertical-0">
+                <div id="bg-vertical-0-light-block">
+                    <div id="bg-vertical-0-lights"></div>
+                </div>
+            </div>
+            <div id="bg-vertical-1">
+                <div id="bg-vertical-1-light-block">
+                    <div id="bg-vertical-1-lights"></div>
+                </div>
+            </div>
+            <div id="bg-vertical-2">
+                <div id="bg-vertical-2-light-block">
+                    <div id="bg-vertical-2-lights"></div>
+                </div>
+            </div>
+            <div id="bg-vertical-3">
+                <div id="bg-vertical-3-light-block">
+                    <div id="bg-vertical-3-lights"></div>
+                </div>
+            </div>
+            <div id="bg-vertical-4">
+                <div id="bg-vertical-4-light-block">
+                    <div id="bg-vertical-4-lights"></div>
+                </div>
+            </div>
+            <div id="bg-vertical-5">
+                <div id="bg-vertical-5-light-block">
+                    <div id="bg-vertical-5-lights"></div>
+                </div>
+            </div>
+            <div id="bg-vertical-6">
+                <div id="bg-vertical-6-light-block">
+                    <div id="bg-vertical-6-lights"></div>
+                </div>
+            </div>
             <div className={styles.body}>
                 <h1 id="name" className={typedLineClass}></h1>
-                <h3 id="line-two" className={typedLineClass}></h3>
+                <h3 id="line-two" className={typedLineClassInvis}></h3>
                 <h3 id="line-three" className={typedLineClass}></h3>
+                <h3 id="line-four" className={typedLineClass}></h3>
                 <div id="display-buttons" className={styles.buttonContainer}>
                     {/* Projects Button */}
-                    <div className={styles.button}>
-                        <a id="projects" href="C:/Portfolio/typewriter/projects.html" className="empty">
-                            <div className={styles.mask} onMouseOver={buttonHover} onMouseOut={buttonOut}></div>
+                    <div id="" className={styles.button}>
+                        <a id="projects" href="/projects" className="" >
+                            <div className={styles.mask}></div>
                         </a>
-                        <div id="projects-label" className={styles.label}></div>
+                        <div id="projects-label" className=""></div>
                     </div>
                     {/* Contact Button */}
                     <div className={styles.button}>
-                        <a id="contact" href="#" className="empty">
-                            <div className="mask" onMouseOver={buttonHover} onMouseOut={buttonOut}></div>
+                        <a id="contact" href="#" className="" >
+                            <div className={styles.mask}></div>
                         </a>
-                        <div id="contact-label" className={styles.label}></div>
+                        <div id="contact-label" className=""></div>
                         {/* Socail Links */}
                         <div id="social" className="">
                             <a id="socialLinkedIn"></a>
@@ -191,10 +321,10 @@ const Landing = () => {
                     </div>
                     {/* Resume Button */}
                     <div className={styles.button}>
-                        <a id="resume" href="C:/Portfolio/typewriter/resume.html" className="empty">
-                            <div className="mask" onMouseOver={buttonHover} onMouseOut={buttonOut}></div>
+                        <a id="resume" href="C:/Portfolio/typewriter/resume.html" className="" >
+                            <div className={styles.mask}></div>
                         </a>
-                        <div id="resumeLabel" className={styles.label}></div>
+                        <div id="resumeLabel" className=""></div>
                     </div>
 
                 </div>
