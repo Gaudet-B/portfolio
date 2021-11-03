@@ -1,0 +1,21 @@
+/* ======> {{ PROJECTS }} <====== */
+
+/* ---> Global <--- */
+
+.projectsBackground {
+    padding-top: 4em;
+    width: 100vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background-color: #262626;
+    /* text-shadow: 3px 3px 1px black; */
+}
+
+h2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 3em;
+    color: whitesmoke;
+}

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import styles from '../components/style.module.css'
+import styles from '../components/landing.style.module.css'
 
 
 const Landing = () => {
@@ -321,7 +321,7 @@ const Landing = () => {
                     </div>
                     {/* Resume Button */}
                     <div className={styles.button}>
-                        <a id="resume" href="C:/Portfolio/typewriter/resume.html" className="" >
+                        <a id="resume" href="/resume" className="" >
                             <div className={styles.mask}></div>
                         </a>
                         <div id="resumeLabel" className=""></div>

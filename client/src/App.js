@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Landing from './views/Landing'
-import CustomCarousel from './components/CustomCarousel';
-// import Projects from './views/Projects'
+// import CustomCarousel from './components/CustomCarousel';
+import Projects from './views/Projects'
+import Resume from './views/Resume'
 
 
 function App() {
@@ -15,8 +16,11 @@ function App() {
             <Landing />
           </Route>
           <Route exact path="/projects">
-            {/* <Projects /> */}
-            <CustomCarousel />
+            <Projects />
+            {/* <CustomCarousel /> */}
+          </Route>
+          <Route exact path="/resume">
+            <Resume />
           </Route>
         </Switch>
       </BrowserRouter>
