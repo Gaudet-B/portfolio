@@ -80,7 +80,7 @@
     }
 }
 /* CARD FLIPPING (projects page) */
-@keyframes flip {
+/* @keyframes flip {
     0% {transform: rotateY(0deg)}
     50% {transform: rotateY(90deg)}
     100% {transform: rotateY(0deg)}
@@ -89,7 +89,7 @@
     0% {transform: rotateY(0deg)}
     50% {transform: rotateY(-90deg)}
     100% {transform: rotateY(0deg)}
-}
+} */
 
 
 /* ======> {{ LANDING }} <====== */
@@ -474,28 +474,28 @@ h1 {
 
 /* ---> Global <--- */
 
-.background {
+/* .background {
     background-color: #20242986;
     text-shadow: 3px 3px 1px black;
-}
+} */
 
 /* ---> Card Flipping <--- */
 
 /* flip front-to-back */
-.flip {
+/* .flip {
     animation: flip 3s;
-}
+} */
 /* flip back-to-front */
-.reverse {
+/* .reverse {
     animation: back-flip 3s;
-}
+} */
 
 /* ---> Carousel <--- */
 
-#root .App .bg-dark .py-5 .carousel .carousel-inner .active {
+/* #root .App .bg-dark .py-5 .carousel .carousel-inner .active {
     height: 85vh;
     width: 80%;
     margin: auto;
     border: 5px double whitesmoke;
     border-radius: 6% / 5%
-}
+} */

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Landing from './views/Landing'
-import Projects from './views/Projects'
+import CustomCarousel from './components/CustomCarousel';
+// import Projects from './views/Projects'
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
             <Landing />
           </Route>
           <Route exact path="/projects">
-            <Projects />
+            {/* <Projects /> */}
+            <CustomCarousel />
           </Route>
         </Switch>
       </BrowserRouter>

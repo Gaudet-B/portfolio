@@ -1,0 +1,332 @@
+@keyframes front-flip-one {
+    0% {
+        transform-origin: center;
+        transform: rotateY(0deg);
+        filter: blur(0.1px);
+    }
+    50% {
+        transform-origin: center;
+        transform: rotateY(90deg);
+        filter: blur(5px);
+    }
+    100% {
+        transform-origin: center;
+        transform: rotateY(180deg);
+        filter: blur(0px);
+    }
+}
+@keyframes front-flip-two {
+    0% {
+        /* transform-origin: center; */
+        transform-origin: -200px 20px 0;
+        transform: rotateY(0deg);
+        filter: blur(0.1px);
+    }
+    50% {
+        transform-origin: -200px 20px 0;
+        transform: rotateY(90deg);
+        filter: blur(5px);
+    }
+    100% {
+        transform-origin: -200px 20px 0;
+        transform: rotateY(180deg);
+        filter: blur(0px);
+    }
+}
+@keyframes front-flip-three {
+    0% {
+        transform-origin: center;
+        transform: rotateY(0deg);
+        filter: blur(0.1px);
+    }
+    50% {
+        transform-origin: center;
+        transform: rotateY(90deg);
+        filter: blur(5px);
+    }
+    100% {
+        transform-origin: center;
+        transform: rotateY(180deg);
+        filter: blur(0px);
+    }
+}
+@keyframes front-flip-four {
+    0% {
+        transform-origin: right;
+        transform: rotateY(0deg);
+        filter: blur(0.1px);
+    }
+    50% {
+        transform-origin: center;
+        transform: rotateY(90deg);
+        filter: blur(5px);
+    }
+    100% {
+        transform-origin: right;
+        transform: rotateY(180deg);
+        filter: blur(0px);
+    }
+}
+
+@keyframes back-flip-one {
+    0% {
+        transform-origin: center;
+        transform: rotateY(0deg);
+        filter: blur(0.1px);
+    }
+    50% {
+        transform-origin: center;
+        transform: rotateY(-90deg);
+        filter: blur(5px);
+    }
+    100% {
+        transform-origin: center;
+        transform: rotateY(-180deg);
+        filter: blur(0px);
+    }
+}
+@keyframes back-flip-two {
+    0% {
+        transform-origin: center;
+        transform: rotateY(0deg);
+        filter: blur(0.1px);
+    }
+    50% {
+        transform-origin: center;
+        transform: rotateY(-90deg);
+        filter: blur(5px);
+    }
+    100% {
+        transform-origin: center;
+        transform: rotateY(-180deg);
+        filter: blur(0px);
+    }
+}
+@keyframes back-flip-three {
+    0% {
+        transform-origin: center;
+        transform: rotateY(0deg);
+        filter: blur(0.1px);
+    }
+    50% {
+        transform-origin: center;
+        transform: rotateY(-90deg);
+        filter: blur(5px);
+    }
+    100% {
+        transform-origin: center;
+        transform: rotateY(-180deg);
+        filter: blur(0px);
+    }
+}
+@keyframes back-flip-four {
+    0% {
+        transform-origin: center;
+        transform: rotateY(0deg);
+        filter: blur(0.1px);
+    }
+    50% {
+        transform-origin: center;
+        transform: rotateY(-90deg);
+        filter: blur(5px);
+    }
+    100% {
+        transform-origin: center;
+        transform: rotateY(-180deg);
+        filter: blur(0px);
+    }
+}
+
+@keyframes un-mask {
+    0% {
+        background-color: #262626;
+        opacity: 1;
+    }
+    50% {
+        background-color: #262626;
+        opacity: 1;
+    }
+    90% {
+        background-color: #262626;
+        opacity: 1;
+    }
+    100% {
+        background-color: transparent;
+        opacity: 1;
+    }
+}
+
+.carousel {
+    width: 1130px;
+    perspective: 1500px; 
+    background: #262626; 
+    padding-top: 10%; 
+    margin-bottom: 3rem; 
+}
+
+.spinner { 
+    transform-style: preserve-3d; 
+    height: 300px; 
+    transform-origin: 50% 50% -500px; 
+    transition: 1.25s ease-out; 
+}
+
+.card { 
+    transform-style: preserve-3d;
+    perspective: 1500px;
+    width: 40%; 
+    min-width: 400px;
+    max-width: 400px; 
+    height: 500px;
+    position: absolute;
+    margin-left: 325px;
+    transform-origin: 50% 50% -500px;
+    border: 4px double whitesmoke;
+    border-radius: 6% / 5%;
+    background-color: #262626;
+}
+
+.cardThreeDiv {
+    transform: rotateY(-180deg);
+}
+
+.cardFront {
+    width: 100%;
+    position: absolute;
+}
+
+.cardBack {
+    height: 100%;
+    position: relative;
+    border: 4px double whitesmoke;
+    border-radius: 6% / 5%;
+    transform: translate3d(0, 0, -10px);
+    background-color: #262626;
+}
+
+.left {
+    position: absolute;
+    margin-left: -5px;
+    height: 96%;
+    margin-top: 7px;
+    border: 1px solid transparent;
+    border-radius: 20% / 50%;
+    width: 10px;
+    background-color: whitesmoke;
+    opacity: .7;
+    transform-origin: center;
+    transform: translate3d(0, 0, -5px) translate(0px) rotateY(80deg);
+}
+.right {
+    position: absolute;
+    height: 96%;
+    margin-top: 7px;
+    border: 1px solid transparent;
+    border-radius: 20% / 50%;
+    width: 10px;
+    background-color: whitesmoke;
+    opacity: .7;
+    transform-origin: center;
+    transform: translate3d(0, 0, -5px) translate(396px) rotateY(-100deg);
+}
+
+.cardOne { transform: rotateY(0deg); }
+.cardTwo { transform: rotateY(-90deg); }
+/* .cardThree { transform: rotateY(-180deg); } */
+.cardThree { 
+    /* transform-style: preserve-3d;
+    perspective: 1500px; */
+    /* width: 40%;  */
+    min-width: 400px;
+    max-width: 400px; 
+    height: 500px;
+    position: absolute;
+    /* margin-left: 325px; */
+    transform-origin: center;
+    /* border: 4px double whitesmoke; */
+    /* border-radius: 6% / 5%; */
+    background-color: #262626;
+}
+.cardFour { transform: rotateY(-270deg); }
+
+.span { 
+    color: #fff; 
+    margin: 5%;
+    display: inline-block; 
+    text-decoration: none; 
+    font-size: 2rem; 
+    transition: 0.6s color; 
+    position: relative; 
+    margin-top: -6rem; 
+    border-bottom: none; 
+    line-height: 0; }
+    
+.span:hover { color: #888; cursor: pointer; }
+
+.card img {
+    width: 99%;
+    border: 1px solid transparent;
+    border-radius: 5% / 8%;
+}
+
+body {
+    background-color: #262626;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.cardFront {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.cardBack {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.container {
+    width: fit-content;
+    padding: 12px 40px;
+}
+
+.flipOne {
+    animation: front-flip-one .8s ease-in;
+}
+.reverseOne {
+    animation: back-flip-one .8s ease-in;
+}
+
+.flipTwo {
+    animation: front-flip-two .8s ease-in;
+}
+.reverseTwo {
+    animation: back-flip-two .8s ease-in;
+}
+
+.flipThree {
+    animation: front-flip-three .8s ease-in;
+}
+.reverseThree {
+    animation: back-flip-three .8s ease-in;
+}
+
+.flipFour {
+    animation: front-flip-four .8s ease-in;
+}
+.reverseFour {
+    animation: back-flip-four .8s ease-in;
+}
+
+/* .mask {
+    animation: un-mask 1.5s ease-in;
+} */
