@@ -6,14 +6,14 @@
 /* ======> {{ ANIMATIONS }} <====== */
 
 /* TYPEWRITER */
-@keyframes typewriter{
+/* @keyframes typewriter {
     from{width: 0;}
     to{width: 10em;}
 }
-@keyframes blinkTextCursor{
+@keyframes blinkTextCursor {
     from{border-right-color: rgba(255,255,255,0.75);}
     to{border-right-color: transparent;}
-}
+} */
 @keyframes caret {
     50% {
     border-color: transparent;
@@ -112,6 +112,10 @@ h1 {
     height: 100vh;
 }
 
+/* div#background-image.bg {
+    position: absolute;
+} */
+
 .body {
     position: absolute;
     height: 100vh;
@@ -169,11 +173,7 @@ h1 {
     transform: rotate(60deg);
 }
 .bgVertical1 {
-    /* animation: fade-in 5s; */
-    /* position: absolute; */
     margin-left: 105px;
-    /* border-left: 1px solid rgba(245, 245, 245, 0.287); */
-    /* width: 20px; */
     height: 1600px;
     transform: rotate(42deg);
 }
@@ -249,6 +249,12 @@ h1 {
 /* ---> TYPEWRITER <--- */
 
 /* Body */
+
+.typewriterDiv {
+    position: relative;
+    top: 16%;
+}
+
 .line1{
     position: relative;
     top: 16%;  
@@ -274,10 +280,10 @@ h1 {
 }
 
 /* Animation */
-.anim-typewriter{
+/* .anim-typewriter{
     animation: typewriter 1.5s steps(65) 1s 1 normal both,
                 blinkTextCursor 450ms steps(65) infinite normal;
-}
+} */
 
 
 /* ---> BUTTONS <--- */

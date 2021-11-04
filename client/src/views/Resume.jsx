@@ -10,7 +10,7 @@ const Resume = () => {
         link.crossOrigin = "anonymous"
         document.body.appendChild(link)
 
-        document.querySelector("html").setAttribute("style", "overflow: scroll;")
+        document.querySelector("html").setAttribute("style", "overflow-x: hidden; overflow-y: scroll;")
 
         return () => {
             document.body.removeChild(link)

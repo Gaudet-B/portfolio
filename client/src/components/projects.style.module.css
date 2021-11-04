@@ -1,16 +1,40 @@
 /* ======> {{ PROJECTS }} <====== */
 
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+
+@keyframes glow {
+    0% {color: rgba(255,255,255,.75); text-shadow: 1px 1px 1px rgba(255,255,255,.75);}
+    50% {color: whitesmoke; text-shadow: 2px 1px 1px rgba(245, 245, 245, 0.788);}
+    100% {color: rgba(255,255,255,.75); text-shadow: 1px 1px 1px rgba(255,255,255,.75);}
+}
+
 /* ---> Global <--- */
 
 .projectsBackground {
     padding-top: 4em;
+
+    /* position: absolute; */
+    height: 100vh;
     width: 100vw;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    background-color: #262626;
-    /* text-shadow: 3px 3px 1px black; */
+    color: rgba(255,255,255,.75);
+    font-family: 'Anonymous Pro';  
+    background: linear-gradient(8deg, rgba(26,26,26,0.2) 0%, rgba(25,25,25,1) 70%);
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover; */
+}
+
+div#projectsContainer.projectsBackground {
+    position: absolute;
+    /* height: 100vh;
+    width: 100vw;
+    color: rgba(255,255,255,.75);
+    font-family: 'Anonymous Pro', monospace;  
+    background: linear-gradient(8deg, rgba(26,26,26,0.2) 0%, rgba(25,25,25,1) 70%);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover; */
 }
 
 h2 {
@@ -18,4 +42,21 @@ h2 {
     margin-bottom: 0px;
     font-size: 3em;
     color: whitesmoke;
+    animation: glow 7s ease infinite;
+}
+
+/* .bg {
+    background-color: rgb(25,25,25); 
+    margin: 0px; 
+    height: 100vh;
+} */
+
+.bg {
+    background-image: url("../assets/3d-background.png");
+    height: 100%;
+    width: 100%;
+    -webkit-backgound-size: cover;
+    -moz-backgound-size: cover;
+    background-size: cover;
+    text-align: center;
 }

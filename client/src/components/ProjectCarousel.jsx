@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import styles from '../components/style.module.css'
+import styles from '../components/landing.style.module.css'
 import example1 from '../assets/project_1.1_example.png'
 import example2 from '../assets/project_2_example.png'
 import example3 from '../assets/rorschach_2.jpg'

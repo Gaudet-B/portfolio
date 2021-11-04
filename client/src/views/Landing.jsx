@@ -7,6 +7,7 @@ const Landing = () => {
 
     // const [classToggle, setClassToggle] = useState(false)
     // const [counter, setCounter] = useState(0)
+    const [loaded, setLoaded] = useState(false)
 
     // const handleToggle = e => {
     //     if (!classToggle) {
@@ -62,14 +63,7 @@ const Landing = () => {
         // setTimeout(() => contact.setAttribute("class", `${styles.hoverZoom} ${styles.contact} ${styles.float}`), 3100)
         // setTimeout(() => resume.setAttribute("class", `${styles.hoverZoom} ${styles.resume} ${styles.float}`), 3500)
 
-        // delay, then call the function to display background
-        setTimeout(displayBackground, 2500)
-
-        // delay, then call the function to display socail links
-        setTimeout(displaySocial, 4000)
         
-        // delay, then call the function to display copyright and est. text
-        setTimeout(displayCopyright, 4200)
 
     }
 
@@ -162,85 +156,100 @@ const Landing = () => {
 
         // setCounter(0)
         
-        // the function calls itself until the array of words is empty
-        const typeWriter = (text, i, fnCallback) => {
-            // check to make sure there's still text to type
-            if (text == undefined) return
-            if (i < text.length) {
-                // FIRST WORD => length of 15 is the first word - if the array of words changes, update these lengths
-                if (text.length == 15) {
-                    // if this is the last character in the word, stop the blinking cursor
-                    if (i == text.length - 1) {
-                        // add next character to h1 w/o blinking cursor
-                        document.getElementById("name").innerHTML = text.substring(0, i + 1)
-                    } else {
-                        // add next character to h1 w/ blinking cursor
-                        document.getElementById("name").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+        if (loaded == false) {
+
+            // the function calls itself until the array of words is empty
+            const typeWriter = (text, i, fnCallback) => {
+                // check to make sure there's still text to type
+                if (text == undefined) return
+                if (i < text.length) {
+                    // FIRST WORD => length of 15 is the first word - if the array of words changes, update these lengths
+                    if (text.length == 15) {
+                        // if this is the last character in the word, stop the blinking cursor
+                        if (i == text.length - 1) {
+                            // add next character to h1 w/o blinking cursor
+                            document.getElementById("name").innerHTML = text.substring(0, i + 1)
+                        } else {
+                            // add next character to h1 w/ blinking cursor
+                            document.getElementById("name").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+                        }
+                    // check for empty SECOND WORD here
+                    } else if (text.length == 2) {
+                        if (i == text.length - 1) {
+                            // add next character to h1 w/o blinking cursor
+                            document.getElementById("line-two").innerHTML = text.substring(0, i + 1)
+                        } else {
+                            // add next character to h1 w/ blinking cursor
+                            document.getElementById("line-two").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+                        }
+                    // THIRD WORD
+                    } else if (text.length == 10) {
+                        if (i == text.length - 1) {
+                            // add next character to line-two w/o blinking cursor
+                            document.getElementById("line-three").innerHTML = text.substring(0, i + 1)
+                        } else {
+                            // add next character to line-two w/ blinking cursor
+                            document.getElementById("line-three").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+                        }
+                    // FOURTH WORD
+                    } else if (text.length == 13) {
+                        // if this is the last character in the FOURTH WORD, call FUNCTION TO DISPLAY BUTTONS
+                        if (i == text.length - 1) {
+                            // add next character to line-three w/ blinking cursor - **keep cursor blinking since this is the last line**
+                            document.getElementById("line-four").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+                            // --> CALL FUNCTION TO DISPLAY BUTTONS: <--
+                            setTimeout(displayButtons, 1000)
+                            // delay, then call the function to display background
+                            setTimeout(displayBackground, 3500)
+                            // delay, then call the function to display socail links
+                            setTimeout(displaySocial, 5000)
+                            // delay, then call the function to display copyright and est. text
+                            setTimeout(displayCopyright, 5200)
+                        } else {
+                            // add next character to line-three w/ blinking cursor
+                            document.getElementById("line-four").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
+                        }
                     }
-                // check for empty SECOND WORD here
-                } else if (text.length == 2) {
-                    if (i == text.length - 1) {
-                        // add next character to h1 w/o blinking cursor
-                        document.getElementById("line-two").innerHTML = text.substring(0, i + 1)
-                    } else {
-                        // add next character to h1 w/ blinking cursor
-                        document.getElementById("line-two").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
-                    }
-                // THIRD WORD
-                } else if (text.length == 10) {
-                    if (i == text.length - 1) {
-                        // add next character to line-two w/o blinking cursor
-                        document.getElementById("line-three").innerHTML = text.substring(0, i + 1)
-                    } else {
-                        // add next character to line-two w/ blinking cursor
-                        document.getElementById("line-three").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
-                    }
-                // FOURTH WORD
-                } else if (text.length == 13) {
-                    // if this is the last character in the FOURTH WORD, call FUNCTION TO DISPLAY BUTTONS
-                    if (i == text.length - 1) {
-                        // add next character to line-three w/ blinking cursor - **keep cursor blinking since this is the last line**
-                        document.getElementById("line-four").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
-                        // --> CALL FUNCTION TO DISPLAY BUTTONS: <--
-                        setTimeout(displayButtons, 1000)
-                    } else {
-                        // add next character to line-three w/ blinking cursor
-                        document.getElementById("line-four").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true"></span>'
-                    }
+        
+                    // short wait between characters
+                    setTimeout(function () {
+                        typeWriter(text, i + 1, fnCallback)
+                    }, 100)
                 }
-    
-                // short wait between characters
-                setTimeout(function () {
-                    typeWriter(text, i + 1, fnCallback)
-                }, 100)
+                // when the word is finished, call for the next word if it exists
+                else if (typeof fnCallback == 'function') {
+                    // call callback after timeout
+                    setTimeout(fnCallback, 700)
+                }
             }
-            // when the word is finished, call for the next word if it exists
-            else if (typeof fnCallback == 'function') {
-                // call callback after timeout
-                setTimeout(fnCallback, 700)
+            // function to start the typewriter
+            const StartTextAnimation = (i) => {
+                if (typeof dataText[i] == 'undefined') {
+                    return
+                }
+                console.log(counter);
+                // check that we haven't hit the final (FOURTH) word in the array
+                if (i < 5 && counter < 5) {
+                    // the counter keeps the typewriter from repeating once finished with the array of words so the text remains on-screen
+                    counter++
+                    // call the Typewriter function
+                    typeWriter(dataText[i], 0, function () {
+                        // start the next line
+                        StartTextAnimation(i + 1)
+                    })
+                }
             }
+            // start the animation
+            StartTextAnimation(0)
+            setLoaded(!loaded)
+        } else {
+            displayButtons()
+            displayBackground()
+            displayCopyright()
+            displaySocial()
         }
-        // function to start the typewriter
-        const StartTextAnimation = (i) => {
-            if (typeof dataText[i] == 'undefined') {
-                return
-            }
-            console.log(counter);
-            // check that we haven't hit the final (FOURTH) word in the array
-            if (i < 5 && counter < 5) {
-                // the counter keeps the typewriter from repeating once finished with the array of words so the text remains on-screen
-                counter++
-                // call the Typewriter function
-                typeWriter(dataText[i], 0, function () {
-                    // start the next line
-                    StartTextAnimation(i + 1)
-                })
-            }
-        }
-        // start the animation
-        StartTextAnimation(0)
         // })
-    })
+    }, [loaded])
 
     const typedLineClass = `${styles.typedLine} ${styles.line1}`
     const typedLineClassInvis = `${styles.typedLine} ${styles.line1} ${styles.invis}`
@@ -255,7 +264,7 @@ const Landing = () => {
     // const zoomResume = `${styles.resume} ${styles.hover} ${styles.hoverZoom}`
     
     return (
-        <div id="background-image" className={styles.bg}>
+        <div id="background-image" className={styles.bg} >
             <div id="bg-horizontal"></div>
             <div id="bg-vertical-0">
                 <div id="bg-vertical-0-light-block">
@@ -293,10 +302,22 @@ const Landing = () => {
                 </div>
             </div>
             <div className={styles.body}>
-                <h1 id="name" className={typedLineClass}></h1>
-                <h3 id="line-two" className={typedLineClassInvis}></h3>
-                <h3 id="line-three" className={typedLineClass}></h3>
-                <h3 id="line-four" className={typedLineClass}></h3>
+                {
+                    (!loaded) ?
+                        <div className={styles.typewriterDiv}>
+                        <h1 id="name" className={typedLineClass}></h1>
+                        <h3 id="line-two" className={typedLineClassInvis}></h3>
+                        <h3 id="line-three" className={typedLineClass}></h3>
+                        <h3 id="line-four" className={typedLineClass}></h3>
+                        </div>
+                    :
+                        <div className={styles.typewriterDiv}>
+                        <h1 id="name" className={typedLineClass}>{ dataText[0] }</h1>
+                        <h3 id="line-two" className={typedLineClassInvis}>{ dataText[1] }</h3>
+                        <h3 id="line-three" className={typedLineClass}>{ dataText[2] }</h3>
+                        <h3 id="line-four" className={typedLineClass}>{ dataText[3] }</h3>
+                        </div>
+                }
                 <div id="display-buttons" className={styles.buttonContainer}>
                     {/* Projects Button */}
                     <div id="" className={styles.button}>
