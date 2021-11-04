@@ -112,10 +112,6 @@ h1 {
     height: 100vh;
 }
 
-/* div#background-image.bg {
-    position: absolute;
-} */
-
 .body {
     position: absolute;
     height: 100vh;
@@ -140,14 +136,6 @@ h1 {
 
 
 /* ---> BACKGROUND <--- */
-
-/* .backgroundImage {
-    background-image: url("../assets/3d-background.png");
-    -webkit-backgound-size: cover;
-    -moz-backgound-size: cover;
-    backgound-size: cover;
-    height: 100vh;
-} */
 
 /* background effect divs */
 .bgHorizontal {
@@ -219,31 +207,6 @@ h1 {
     width: 0px;
     border-left: 1px solid rgba(245, 245, 245, 0.287);
 }
-/* .bgVertical1Lights {
-    animation: lighting 3s ease-out infinite;
-    position: relative;
-    border-left: 2px solid whitesmoke;
-}
-.bgVertical2Lights {
-    animation: lighting 3s ease-out infinite;
-    position: relative;
-    border-left: 2px solid whitesmoke;
-}
-.bgVertical3Lights {
-    animation: lighting 3s ease-out infinite;
-    position: relative;
-    border-left: 2px solid whitesmoke;
-}
-.bgVertical4Lights {
-    animation: lighting 3s ease-out infinite;
-    position: relative;
-    border-left: 2px solid whitesmoke;
-}
-.bgVertical5Lights {
-    animation: lighting 3s ease-out infinite;
-    position: relative;
-    border-left: 2px solid whitesmoke;
-} */
 
 
 /* ---> TYPEWRITER <--- */
@@ -279,16 +242,11 @@ h1 {
     height: 20px;
 }
 
-/* Animation */
-/* .anim-typewriter{
-    animation: typewriter 1.5s steps(65) 1s 1 normal both,
-                blinkTextCursor 450ms steps(65) infinite normal;
-} */
-
 
 /* ---> BUTTONS <--- */
 
 /* Individual Button Containers */
+
 /* 3d transform animation */
 .hoverZoom {
     transform: 
@@ -306,15 +264,12 @@ h1 {
     transition: .6s ease-in-out transform;
     cursor: pointer;
 }
+
 /* Hover Zoom Animation */
 .hoverZoom:hover {
-    /* animation: none; */
     transform: translate3d(0px, 0px, -250px);
 }
-/* float animation */
-/* .button .float {
-    animation: float 8s ease-in-out infinite
-} */
+
 /* Row of Buttons */
 .buttonContainer {
     animation: fade-in 3s;
@@ -326,6 +281,7 @@ h1 {
     margin-top: 18vh;
 }
 
+/* button class */
 .button {
     animation: fade-in 3s;
     display: flex;
@@ -333,6 +289,7 @@ h1 {
     align-items: center;
 }
 
+/* label class */
 .label {
     display: flex;
     flex-direction: column;
@@ -342,6 +299,7 @@ h1 {
     padding-top: 12px;
     animation: fade-in 3s;
 }
+/* spacing */
 .label p {
     margin: 0px;
     padding: 0px;

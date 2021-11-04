@@ -127,14 +127,10 @@ const CustomCarousel = () => {
         if (id == "spanLeft") {
             setLeftAngle(leftAngle + 90)
             setRightAngle(rightAngle + 90)
-            console.log("left - " + leftAngle)
-            console.log(spinner.style)
             spinner.setAttribute("style", `-webkit-transform: rotateY(${leftAngle}deg); -moz-transform: rotateY(${leftAngle}deg); transform: rotateY(${leftAngle}deg);`)
         } else {
             setRightAngle(rightAngle - 90)
             setLeftAngle(leftAngle - 90)
-            console.log("right - " + rightAngle)
-            console.log(spinner.style)
             spinner.setAttribute("style", `-webkit-transform: rotateY(${rightAngle}deg); -moz-transform: rotateY(${rightAngle}deg); transform: rotateY(${rightAngle}deg);`)
         }
     }

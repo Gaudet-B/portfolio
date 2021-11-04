@@ -13,28 +13,15 @@
 
 .projectsBackground {
     padding-top: 4em;
-
-    /* position: absolute; */
     height: 100vh;
     width: 100vw;
     color: rgba(255,255,255,.75);
     font-family: 'Anonymous Pro';  
     background: linear-gradient(8deg, rgba(26,26,26,0.2) 0%, rgba(25,25,25,1) 70%);
-    /* -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover; */
 }
 
 div#projectsContainer.projectsBackground {
     position: absolute;
-    /* height: 100vh;
-    width: 100vw;
-    color: rgba(255,255,255,.75);
-    font-family: 'Anonymous Pro', monospace;  
-    background: linear-gradient(8deg, rgba(26,26,26,0.2) 0%, rgba(25,25,25,1) 70%);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover; */
 }
 
 h2 {
@@ -44,12 +31,6 @@ h2 {
     color: whitesmoke;
     animation: glow 7s ease infinite;
 }
-
-/* .bg {
-    background-color: rgb(25,25,25); 
-    margin: 0px; 
-    height: 100vh;
-} */
 
 .bg {
     background-image: url("../assets/3d-background.png");

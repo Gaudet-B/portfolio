@@ -1,3 +1,7 @@
+/* ======> {{ CAROUSEL COMPONENT }} <====== */
+
+/* Animations: */
+
 @keyframes front-flip {
     0% {
         transform-origin: center;
@@ -52,10 +56,11 @@
     }
 }
 
+/* Styles: */
+
 .carousel {
     width: 1130px;
     perspective: 1500px; 
-    /* background: #262626;  */
     padding-top: 5%; 
     margin-bottom: 3rem; 
 }
@@ -63,6 +68,7 @@
 .spinner { 
     transform-style: preserve-3d; 
     height: 300px; 
+    /* this creates the 3D "rotation" space */
     transform-origin: 50% 50% -500px; 
     transition: 1.25s ease-out; 
 }
@@ -92,6 +98,7 @@
     transform-origin: 50% 50% -500px;
 }
 
+/* Postiion cards around y-axis */
 .cardOneDiv { transform: rotateY(0deg); }
 .cardTwoDiv { transform: rotateY(-90deg); }
 .cardThreeDiv { transform: rotateY(-180deg); }
@@ -111,6 +118,7 @@
     background-color: #262626;
 }
 
+/* these are the 3D "sides" of the cards: */
 .left {
     position: absolute;
     margin-left: -5px;
@@ -137,8 +145,10 @@
     transform: translate3d(0, 0, -5px) translate(396px) rotateY(-100deg);
 }
 
+/* left and right directional buttons -> *NOTE* the font syle of parent element will affect the style of these buttons! *NOTE* */
 .span { 
-    color: #fff; 
+    /* color: #fff;  */
+    color: rgba(255,255,255,.75);
     margin: 5%;
     display: inline-block; 
     text-decoration: none; 
@@ -149,7 +159,8 @@
     border-bottom: none; 
     line-height: 0; }
     
-.span:hover { color: #888; cursor: pointer; }
+/* .span:hover { color: #888; cursor: pointer; } */
+.span:hover { color: whitesmoke; text-shadow: 1px 1px 1px rgba(245, 245, 245, 0.788); font-size: 4.1rem; cursor: pointer;}
 
 .card img {
     width: 99%;
@@ -187,6 +198,7 @@ body {
     padding: 12px 40px;
 }
 
+/* classes that handle card flipping */
 .flip {
     animation: front-flip .8s ease-in;
 }
