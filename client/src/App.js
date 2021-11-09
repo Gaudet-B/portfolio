@@ -1,11 +1,12 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+// import styles from './components/main.style.module.css'
 import Landing from './views/Landing'
 // import CustomCarousel from './components/CustomCarousel';
 // import Background from './components/Background'
 import Projects from './views/Projects'
 import Resume from './views/Resume'
-import styles from './components/main.style.module.css'
+import Contact from './views/Contact'
 
 
 function App() {
@@ -45,6 +46,9 @@ function App() {
             <Route exact path="/projects">
               <Projects />
               {/* <CustomCarousel /> */}
+            </Route>
+            <Route exact path="/contact">
+              <Contact />
             </Route>
             <Route exact path="/resume">
               <Resume />

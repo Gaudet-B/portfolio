@@ -152,7 +152,7 @@ const CustomCarousel = () => {
 
     return (
         <div className={styles.container}>
-            <base  href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/wanaka-tree.jpg"/>
+            {/* <base  href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/wanaka-tree.jpg"/> */}
             <div id="carousel" className={styles.carousel}>
                 <figure id="spinner" className={styles.spinner}>
                     <div className={cardDivOne}>

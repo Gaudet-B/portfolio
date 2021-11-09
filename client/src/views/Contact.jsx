@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react'
-import styles from '../components/projects.style.module.css'
-import CustomCarousel from '../components/CustomCarousel'
 import Header from '../components/Header'
+import Form from '../components/Form'
+import styles from '../components/contact.style.module.css'
 
 
-const Projects = () => {
+const Contact = () => {
 
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        document.querySelector("html").setAttribute("style", "overflow-x: hidden; overflow-y: scroll;")
         const loadData = async () => {
-            await new Promise((res) => setTimeout(res, 3000))
+            await new Promise((res) => setTimeout(res, 2000))
             setLoading(false)
         }
+        document.querySelector("html").setAttribute("style", "overflow-y: scroll;")
         loadData()
     })
 
@@ -27,19 +27,18 @@ const Projects = () => {
                 </div>
             </div>
         )
+
     } else {
         return (
-            <div className={styles.bg}>
-                <div id="projectsContainer" className={styles.projectsBackground}>
-                    <Header left="HOME" right="CONTACT"/>
-                    <h2>P R O J E C T S</h2>
-                    <div style={{ width: "fit-content", margin: "auto" }}>
-                        <CustomCarousel />
-                    </div>
+            <div className={styles.bg} >
+                <div className={styles.contactBackground}>
+                    <Header left="PROJECTS" right="RESUME"/>
+                    <h2>Contact Brian</h2>
+                    <Form />
                 </div>
             </div>
         )
     }
 }
 
-export default Projects
+export default Contact
