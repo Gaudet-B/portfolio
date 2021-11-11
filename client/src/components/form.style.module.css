@@ -110,7 +110,7 @@
     letter-spacing: 1.2px;
     color: whitesmoke;
     text-shadow: 2px 2px 2px rgb(20, 20, 20, 0.9);
-    /* animation: float 20s linear infinite; */
+    animation: float 20s linear infinite;
     /* position: absolute; */
 }
 .formButton:hover {

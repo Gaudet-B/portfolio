@@ -32,8 +32,19 @@ const Header = props => {
     //     }
     // }
 
-    const leftLink = left.toLowerCase()
-    const rightLink = right.toLowerCase()
+    var leftLink, rightLink
+
+    if (left == "HOME") {
+        leftLink = "/"
+    } else {
+        leftLink = left.toLowerCase()
+    }
+
+    if (right == "HOME") {
+        rightLink = "/"
+    } else {
+        rightLink = right.toLowerCase()
+    }
 
     // const leftStyle = classNames("nav left")
     // const rightStyle = classNames("nav right")

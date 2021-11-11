@@ -84,10 +84,12 @@ const Landing = () => {
         document.getElementById("social").setAttribute("class", styles.social)
 
         document.getElementById("socialLinkedIn").setAttribute("class", styles.socialLinkedIn)
-        document.getElementById("socialLinkedIn").setAttribute("href", "linkedin.com/in/brian-f-gaudet")
+        document.getElementById("socialLinkedIn").setAttribute("href", "http://linkedin.com/in/brian-f-gaudet")
+        document.getElementById("socialLinkedIn").setAttribute("target", "_blank")
 
         document.getElementById("socialGitHub").setAttribute("class", styles.socialGitHub)
-        document.getElementById("socialGitHub").setAttribute("href", "github.com/Gaudet-B")
+        document.getElementById("socialGitHub").setAttribute("href", "http://github.com/Gaudet-B")
+        document.getElementById("socialGitHub").setAttribute("target", "_blank")
     }
 
     // --> DISPLAY COPYRIGHT AND EST. TEXT <--
@@ -176,7 +178,9 @@ const Landing = () => {
 
     useEffect(() => {
         
-        sessionStorage.setItem('loaded', JSON.stringify(loaded))
+        // sessionStorage.setItem('loaded', JSON.stringify(loaded))
+        // console.log(loaded)
+        // console.log(sessionStorage.getItem('loaded'))
 
         if (!loaded) {
             console.log(`LOADED 1 -> ${loaded}`)
@@ -191,13 +195,20 @@ const Landing = () => {
             // delay, then call the function to display copyright and est. text
             setTimeout(displayCopyright, 10200)
             // set loaded to true, so animation doesn't happen on subsequent visits
-            setLoaded(!loaded)
+
+            // setLoaded(true)
+            sessionStorage.setItem('loaded', JSON.stringify(true))
+
         } else if (loaded) {
             // just display the page loading animations (without typewriter) without delays
             displayButtons()
             displayBackground()
             displayCopyright()
             displaySocial()
+        }
+        return () => {
+            // setLoaded(true)
+            sessionStorage.setItem('loaded', JSON.stringify(true))
         }
         // })
     }, [loaded])
@@ -246,26 +257,28 @@ const Landing = () => {
             <div className={styles.body}>
 
                 {
+                    // (!sessionStorage.getItem('loaded')) ?
                     (!loaded) ?
                         <div className={styles.typewriterDiv}>
-                        <h1 id="name" className={typedLineClass}></h1>
-                        <h3 id="line-two" className={typedLineClassInvis}></h3>
-                        <h3 id="line-three" className={typedLineClass}></h3>
-                        <h3 id="line-four" className={typedLineClass}></h3>
+                            <h1 id="name" className={typedLineClass}></h1>
+                            <h3 id="line-two" className={typedLineClassInvis}></h3>
+                            <h3 id="line-three" className={typedLineClass}></h3>
+                            <h3 id="line-four" className={typedLineClass}></h3>
                         </div>
                     :
                         <div className={styles.typewriterDiv}>
-                        <h1 id="name" className={typedLineClass}>{ dataText[0] }</h1>
-                        <h3 id="line-two" className={typedLineClassInvis}>{ dataText[1] }</h3>
-                        <h3 id="line-three" className={typedLineClass}>{ dataText[2] }</h3>
-                        <h3 id="line-four" className={typedLineClass}>{ dataText[3] }<span aria-hidden="true"></span></h3>
+                            <h1 id="name" className={typedLineClass}>{ dataText[0] }</h1>
+                            <h3 id="line-two" className={typedLineClassInvis}>{ dataText[1] }</h3>
+                            <h3 id="line-three" className={typedLineClass}>{ dataText[2] }</h3>
+                            <h3 id="line-four" className={typedLineClass}>{ dataText[3] }<span aria-hidden="true"></span></h3>
                         </div>
                 }
 
-                <h1 id="name" className={typedLineClass}></h1>
+                {/* <h1 id="name" className={typedLineClass}></h1>
                 <h3 id="line-two" className={typedLineClassInvis}></h3>
                 <h3 id="line-three" className={typedLineClass}></h3>
-                <h3 id="line-four" className={typedLineClass}></h3>
+                <h3 id="line-four" className={typedLineClass}></h3> */}
+
                 <div id="display-buttons" className={styles.buttonContainer}>
 
                     {/* Projects Button */}
@@ -278,7 +291,7 @@ const Landing = () => {
 
                     {/* Contact Button */}
                     <div className={styles.button}>
-                        <a id="contact" href="#" className="" >
+                        <a id="contact" href="/contact" className="" >
                             <div className={styles.mask}></div>
                         </a>
                         <div id="contact-label" className=""></div>

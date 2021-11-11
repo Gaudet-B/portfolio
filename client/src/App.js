@@ -7,6 +7,7 @@ import Landing from './views/Landing'
 import Projects from './views/Projects'
 import Resume from './views/Resume'
 import Contact from './views/Contact'
+import Admin from './views/Admin'
 
 
 function App() {
@@ -52,6 +53,9 @@ function App() {
             </Route>
             <Route exact path="/resume">
               <Resume />
+            </Route>
+            <Route exact path="/administrators">
+              <Admin />
             </Route>
           </Switch>
         </BrowserRouter>
