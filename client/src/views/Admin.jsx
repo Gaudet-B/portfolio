@@ -7,12 +7,19 @@ const Admin = () => {
 
     const [loggedIn, setLoggedIn] = useState(false)
     const [formState, setFormState] = useState({})
+    const [pJformState, setPJformState] = useState({})
     const [validState, setValidState] = useState({})
+    const [projects, setProjects] = useState([])
 
     // const [admins, setAdmins] = useState([])
 
     const history = useHistory()
 
+    const instance = axios.create({
+        withCredentials: true,
+        baseURL: "http://localhost:8000/api"
+    })
+    
     useEffect(() => {
 
         // axios.get("http://localhost:8000/api/admins")
@@ -21,6 +28,10 @@ const Admin = () => {
         //         console.log(admins);
         //     })
         //     .catch(err => console.log(err))
+
+        instance.get("/projects/all")
+            .then(res => setProjects(res.data))
+            .catch(err => console.log(err))
 
         const link = document.createElement("link")
         link.href = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -44,10 +55,18 @@ const Admin = () => {
         })
     }
 
+    const handlePjChange = e => {
+        setPJformState({
+            ...pJformState,
+            [e.target.name]: e.target.value
+        })
+    }
+
+
     const handleSubmit = e => {
         e.preventDefault()
         console.log(`submit`)
-        axios.post("http://localhost:8000/api/loginadmin", formState)
+        instance.post("/loginadmin", formState)
             .then(res => {
                 console.log(`RESPONSE: ${res}`)
                 setFormState({})
@@ -64,6 +83,52 @@ const Admin = () => {
                 setValidState(errObj)
                 console.log(errObj)
             })
+    }
+
+    const handleCreate = e => {
+        e.preventDefault()
+        console.log(`create`)
+        instance.post("/projects/new", pJformState)
+            .then(res => {
+                console.log(`RESPONSE: ${res}`)
+                setPJformState({})
+            })
+            .catch(err => {
+                console.log(`ERROR: ${err.response.data}`)
+                // const {errors} = err.response.data
+                // let errObj = {}
+                // for (const [key, value] of Object.entries(errors)) {
+                //     errObj[key] = value.message
+                // }
+                // setValidState(errObj)
+                // console.log(errObj)
+            })
+    }
+
+    const handleLogout = e => {
+        e.preventDefault()
+        instance.get("/logoutadmin")
+            .then(res => {
+                console.log("goodbye")
+                setLoggedIn(false)
+                history.push("/administrators")
+        })
+            .catch(err => console.log("error"))
+    }
+
+    const handleClick = (id) => {
+        instance.get(`/projects/edit/${id}`)
+            .then(res => {
+                console.log("!")
+                // history.push("/")
+            })
+            .catch(err => console.log("error"))
+    }
+
+    const handleDelete = (id) => {
+        instance.delete(`/projects/${id}`)
+            .then(res => console.log("deleted"))
+            .catch(err => console.log("error"))
     }
 
     // const handleClick = (id) => {
@@ -95,8 +160,11 @@ const Admin = () => {
         )
     } else {
         return (
-            <div className="bg-dark" style={{ height: "100vh", width: "100vw" }}>
-                <h1 className="display-2">LOGGED IN</h1>
+            <div className="bg-dark p-4 text-center" style={{ height: "100vh", width: "100vw" }}>
+                <h1 className="display-2 my-3">CONTENT MANAGEMENT</h1>
+                <div className="text-center my-4">
+                    <h1 className="display-5">Current Project Content</h1>
+                </div>
                 <table className="table">
                     <thead className="bg-light">
                         <tr>
@@ -106,51 +174,68 @@ const Admin = () => {
                             <th>Summary</th>
                             <th>Demo</th>
                             <th>Github</th>
+                            <th>ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody className="bg-light">
-                        <tr>
-                            <th>Title</th>
-                            <td>Role(s)</td>
-                            <td>Technologies</td>
-                            <td>Summary</td>
-                            <td>Demo</td>
-                            <td>Github</td>
-                        </tr>
+                        {(projects.length > 0) ?
+                        projects.map((project, idx) => {
+                            return (
+                            <tr key={idx}>
+                                <th>{project.title}</th>
+                                <td>{project.myRole}</td>
+                                <td>{project.technologies[0]}...</td>
+                                <td>{project.summary[0]}...</td>
+                                <td>{project.demo}</td>
+                                <td>{project.github}</td>
+                                <td>
+                                    <div className="d-flex flex-row justify-content-between">
+                                        <button onClick={() => handleClick(project._id)} className="btn btn-secondary mx-2">edit</button>
+                                        <button onClick={() => handleDelete(project._id)} className="btn btn-danger mx-2">delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            )
+                        })
+                        :
+                        null
+                        }
                     </tbody>
                 </table>
-                <div className="border border-light" style={{width: "75%", height: "2px", margin: "auto"}}></div>
+                <div className="border border-secondary rounded my-5" style={{ width: "75%", height: "2px", margin: "auto" }}></div>
                 <div style={{ width: "80%", margin: "auto" }}>
-                    <div className="my-5 py-3 px-5 border border-light rounded" style={{ width: "100%" }}>
-                        <h1 className="text-light">New Project</h1>
-                        <form className="form text-light" style={{ width: "80%" }}>
+                    <div className="my-5 py-3 px-5 border border-light rounded" style={{ width: "80%", margin: "auto" }}>
+                        <h1 className="text-light text-decoration-underline mb-4">New Project</h1>
+                        <form onSubmit={handleCreate} className="form text-light" style={{ width: "100%", margin: "auto" }}>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
-                                <label className="form-label fs-4 ms-5" htmlFor="title">Title</label>
-                                <input className="form-control" name="title" style={{ width: "60%" }}/>
+                                <label className="form-label fs-4 ms-4" htmlFor="title">Title</label>
+                                <input onChange={handlePjChange} className="form-control" name="title" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
-                                <label className="form-label fs-4 ms-5" htmlFor="myRole">Role(s)</label>
-                                <input className="form-control" name="myRole" style={{ width: "60%" }}/>
+                                <label className="form-label fs-4 ms-4" htmlFor="myRole">Role(s)</label>
+                                <input onChange={handlePjChange} className="form-control" name="myRole" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
-                                <label className="form-label fs-4 ms-5" htmlFor="technologies">Technologies</label>
-                                <input className="form-control" name="technologies" style={{ width: "60%" }}/>
+                                <label className="form-label fs-4 ms-4" htmlFor="technologies">Technologies</label>
+                                <input onChange={handlePjChange} className="form-control" name="technologies" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
-                                <label className="form-label fs-4 ms-5" htmlFor="summary">Summary</label>
-                                <input className="form-control" name="summary" style={{ width: "60%" }}/>
+                                <label className="form-label fs-4 ms-4" htmlFor="summary">Summary</label>
+                                <input onChange={handlePjChange} className="form-control" name="summary" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
-                                <label className="form-label fs-4 ms-5" htmlFor="demo">Demo</label>
-                                <input className="form-control" name="demo" style={{ width: "60%" }}/>
+                                <label className="form-label fs-4 ms-4" htmlFor="demo">Demo</label>
+                                <input onChange={handlePjChange} className="form-control" name="demo" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
-                                <label className="form-label fs-4 ms-5" htmlFor="github">Github</label>
-                                <input className="form-control" name="github" style={{ width: "60%" }}/>
+                                <label className="form-label fs-4 ms-4" htmlFor="github">Github</label>
+                                <input onChange={handlePjChange} className="form-control" name="github" style={{ width: "60%" }}/>
                             </div>
+                            <button className="btn btn-outline-light mt-4 mb-3 fs-5" style={{ width: "30%", minWidth: "fit-content", margin: "auto" }} >create</button>
                         </form>
                     </div>
                 </div>
+                <button onClick={handleLogout} className="btn btn-secondary fs-4 p-2" style={{ width: "20%", margin: "auto" }}>logout</button>
             </div>
         )
     }

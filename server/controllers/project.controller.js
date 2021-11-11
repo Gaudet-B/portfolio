@@ -20,3 +20,10 @@ module.exports.all = (req, res) => {
         .then(allProjects => res.json(allProjects))
         .catch(err => res.json(err))
 }
+
+module.exports.delete = (req, res) => {
+    const {id} = req.params
+    Project.deleteOne({ _id: id })
+        .then(confirmation => res.json(confirmation))
+        .catch(err => res.status(400).json(err))
+}

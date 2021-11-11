@@ -11,9 +11,11 @@ module.exports = app => {
     app.post("/api/contact", AppController.contact)
     
     app.post("/api/loginadmin", AdminController.login)
-    app.post("/api/projects/new", authenticate, ProjectController.create)
-    app.get("/api/projects/all", authenticate, ProjectController.all)
     app.get("/api/logoutadmin", AdminController.logout)
+    app.post("/api/projects/new", authenticate, ProjectController.create)
+    app.get("/api/projects", ProjectController.all)
+    app.get("/api/projects/all", authenticate, ProjectController.all)
+    app.delete("/api/projects/:id", authenticate, ProjectController.delete)
     
     // app.post("/api/registeradmin", AdminController.new)
     // app.get("/api/adminconsole", authenticate, AdminController.findOne)

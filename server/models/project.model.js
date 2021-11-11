@@ -9,4 +9,4 @@ const ProjectSchema = mongoose.Schema({
     github: {type: String}
 }, { timestamps: true })
 
-module.exports.Admin = mongoose.model("Admin", AdminSchema)
+module.exports.Project = mongoose.model("Project", ProjectSchema)

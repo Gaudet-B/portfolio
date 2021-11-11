@@ -3,23 +3,23 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 
-module.exports.new = (req, res) => {
-    console.log(`REQUEST: ${req.body.username}`)
-    Admin.create(req.body)
-        .then(admin => {
-            const adminToken = jwt.sign({
-                    id: admin._id
-                }, process.env.JWT_KEY)
-            res
-                .cookie("admintoken", adminToken, { httpOnly: true })
-                .json({ msg: "success", admin: admin })
-            console.log(`RES: ${admin}`)
-        })
-        .catch(err => {
-            console.log(`ERR: ${err}`);
-            res.status(400).json(err)
-        })
-}
+// module.exports.new = (req, res) => {
+//     console.log(`REQUEST: ${req.body.username}`)
+//     Admin.create(req.body)
+//         .then(admin => {
+//             const adminToken = jwt.sign({
+//                     id: admin._id
+//                 }, process.env.JWT_KEY)
+//             res
+//                 .cookie("admintoken", adminToken, { httpOnly: true })
+//                 .json({ msg: "success", admin: admin })
+//             console.log(`RES: ${admin}`)
+//         })
+//         .catch(err => {
+//             console.log(`ERR: ${err}`);
+//             res.status(400).json(err)
+//         })
+// }
 
 module.exports.login = async(req, res) => {
     console.log(`controller`)
@@ -40,9 +40,9 @@ module.exports.login = async(req, res) => {
         id: admin._id
     }, process.env.JWT_KEY)
 
-    res
-        .cookie("admintoken", adminToken, { httpOnly: true })
-        .json({ msg: "success" })
+    console.log(`token: ${adminToken}`)
+
+    res.cookie("admintoken", adminToken, { httpOnly: true }).json({ msg: "success" })
 }
 
 module.exports.logout = (req, res) => {
@@ -50,19 +50,19 @@ module.exports.logout = (req, res) => {
     res.sendStatus(200)
 }
 
-module.exports.all = (req, res) => {
-    Admin.find()
-        .then(allAdmins => {
-            // console.log(allAdmins)
-            res.json(allAdmins)
-        })
-        .catch(err => res.json(err))
-}
+// module.exports.all = (req, res) => {
+//     Admin.find()
+//         .then(allAdmins => {
+//             // console.log(allAdmins)
+//             res.json(allAdmins)
+//         })
+//         .catch(err => res.json(err))
+// }
 
-module.exports.delete = (req, res) => {
-    const {id} = req.params
-    console.log(id)
-    Admin.deleteOne({ _id: id })
-        .then(confirmation => res.json(confirmation))
-        .catch(err => res.status(400).jason(err))
-}
+// module.exports.delete = (req, res) => {
+//     const {id} = req.params
+//     console.log(id)
+//     Admin.deleteOne({ _id: id })
+//         .then(confirmation => res.json(confirmation))
+//         .catch(err => res.status(400).jason(err))
+// }

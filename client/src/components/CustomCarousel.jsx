@@ -1,5 +1,7 @@
+import axios from 'axios'
 import { useEffect, useState } from 'react'
 import styles from '../components/carousel.style.module.css'
+import CarouselContent from './CarouselContent'
 
 
 const CustomCarousel = () => {
@@ -16,6 +18,17 @@ const CustomCarousel = () => {
     const [isFlippedTwo, setIsFlippedTwo] = useState(false)
     const [isFlippedThree, setIsFlippedThree] = useState(false)
     const [isFlippedFour, setIsFlippedFour] = useState(false)
+
+    const [projects, setProjects] = useState([])
+
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/projects")
+            .then(res => {
+                setProjects(res.data)
+                // console.log(projects)
+            })
+            .catch(err => console.log(err))
+    })
 
     // function to flip cards
     const flipCard = num => {
@@ -160,11 +173,12 @@ const CustomCarousel = () => {
                             <div id="left" className={styles.left}></div>
                             <div id="right" className={styles.right}></div>
                             <div id="card-one-back" className={styles.cardBack}>
-                                <div id="mask">
+                                <CarouselContent project={projects[0]} />
+                                {/* <div id="mask">
                                     <h4>PROJECT TITLE</h4>
                                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt commodi facilis repellat? Illum soluta delectus ipsa, sapiente mollitia fugiat quas expedita similique nobis ullam at sit suscipit voluptate pariatur labore.</p>
                                     <p>Stuff, stuff, stuff</p>
-                                </div>
+                                </div> */}
                             </div>
                             <div id="card-one-front" className={styles.cardFront}>
                                 <div id="mask">
