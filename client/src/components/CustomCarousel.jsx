@@ -1,10 +1,13 @@
-import axios from 'axios'
+// import axios from 'axios'
 import { useEffect, useState } from 'react'
 import styles from '../components/carousel.style.module.css'
-import CarouselContent from './CarouselContent'
+import CardBack from './CardBack'
+import CardFront from './CardFront'
+import project1img from '../assets/project_1.1_example.png'
+import project2img from '../assets/project_2_example.png'
 
 
-const CustomCarousel = () => {
+const CustomCarousel = props => {
 
     // import classnames utility --> https://github.com/JedWatson/classnames //
     const classNames = require("classnames")
@@ -19,16 +22,8 @@ const CustomCarousel = () => {
     const [isFlippedThree, setIsFlippedThree] = useState(false)
     const [isFlippedFour, setIsFlippedFour] = useState(false)
 
-    const [projects, setProjects] = useState([])
-
-    useEffect(() => {
-        axios.get("http://localhost:8000/api/projects")
-            .then(res => {
-                setProjects(res.data)
-                // console.log(projects)
-            })
-            .catch(err => console.log(err))
-    })
+    // pull projects array from props
+    const { projects } = props
 
     // function to flip cards
     const flipCard = num => {
@@ -134,6 +129,7 @@ const CustomCarousel = () => {
         setTimeout(() => {newBack.innerHTML = frontHtml}, 750)
     }
 
+    // function to rotate the carousel
     const spin = e => {
         let spinner = document.getElementById("spinner");
         let id = e.target.id
@@ -173,7 +169,7 @@ const CustomCarousel = () => {
                             <div id="left" className={styles.left}></div>
                             <div id="right" className={styles.right}></div>
                             <div id="card-one-back" className={styles.cardBack}>
-                                <CarouselContent project={projects[0]} />
+                                <CardBack project={projects[0]} />
                                 {/* <div id="mask">
                                     <h4>PROJECT TITLE</h4>
                                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt commodi facilis repellat? Illum soluta delectus ipsa, sapiente mollitia fugiat quas expedita similique nobis ullam at sit suscipit voluptate pariatur labore.</p>
@@ -181,12 +177,13 @@ const CustomCarousel = () => {
                                 </div> */}
                             </div>
                             <div id="card-one-front" className={styles.cardFront}>
-                                <div id="mask">
+                                <CardFront project = {projects[0]} />
+                                {/* <div id="mask">
                                     <img src="wanaka-tree.jpg" alt="placeholder" />
                                     <h4>Technologies used, etc, etc</h4>
                                     <p>Short summary of the project</p>
                                     <p>with full details on back (and github)</p>
-                                </div>
+                                </div> */}
                             </div>
                         </figure>
                     </div>
@@ -203,7 +200,7 @@ const CustomCarousel = () => {
                             </div>
                             <div id="card-two-front" className={styles.cardFront}>
                                 <div id="mask">
-                                    <img src="still-lake.jpg" alt="placeholder" />
+                                    <img src={project1img} alt="placeholder" />
                                     <h4>Technologies used, etc, etc</h4>
                                     <p>Short summary of the project</p>
                                     <p>with full details on back (and github)</p>
@@ -224,7 +221,7 @@ const CustomCarousel = () => {
                             </div>
                             <div id="card-three-front" className={styles.cardFront}>
                                 <div id="mask">
-                                    <img src="pink-milford-sound.jpg" alt="placeholder" />
+                                    <img src={project2img} alt="placeholder" />
                                     <h4>Technologies used, etc, etc</h4>
                                     <p>Short summary of the project</p>
                                     <p>with full details on back (and github)</p>
@@ -245,7 +242,7 @@ const CustomCarousel = () => {
                             </div>
                             <div id="card-four-front" className={styles.cardFront}>
                                 <div id="mask">
-                                    <img src="paradise.jpg" alt="placeholder" />
+                                    <img src={project2img} alt="placeholder" />
                                     <h4>Technologies used, etc, etc</h4>
                                     <p>Short summary of the project</p>
                                     <p>with full details on back (and github)</p>

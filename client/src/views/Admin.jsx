@@ -46,7 +46,7 @@ const Admin = () => {
         return () => {
             document.body.removeChild(link)
         }
-    })
+    }, [])
 
     const handleChange = e => {
         setFormState({
@@ -216,12 +216,20 @@ const Admin = () => {
                                 <input onChange={handlePjChange} className="form-control" name="myRole" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
+                                <label className="form-label fs-4 ms-4" htmlFor="languages">Languages/Frameworks</label>
+                                <input onChange={handlePjChange} className="form-control" name="languages" style={{ width: "60%" }}/>
+                            </div>
+                            <div className="form-group d-flex flex-row justify-content-between my-3">
                                 <label className="form-label fs-4 ms-4" htmlFor="technologies">Technologies</label>
                                 <input onChange={handlePjChange} className="form-control" name="technologies" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
                                 <label className="form-label fs-4 ms-4" htmlFor="summary">Summary</label>
                                 <input onChange={handlePjChange} className="form-control" name="summary" style={{ width: "60%" }}/>
+                            </div>
+                            <div className="form-group d-flex flex-row justify-content-between my-3">
+                                <label className="form-label fs-4 ms-4" htmlFor="details">Details</label>
+                                <input onChange={handlePjChange} className="form-control" name="details" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
                                 <label className="form-label fs-4 ms-4" htmlFor="demo">Demo</label>
