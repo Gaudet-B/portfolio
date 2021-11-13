@@ -5,7 +5,7 @@ import axios from 'axios'
 const CardBack = props => {
 
     const { project } = props
-    const { details, demo } = project
+    // const { details, demo } = project
 
     // const splitArr = (num, arr) => {
     //     let returnArr = []
@@ -33,18 +33,17 @@ const CardBack = props => {
                 <p>{project.technologies}</p>
                 {/* <p>{project.summary}</p> */}
                 <ul>
-                {/* {(details.length > 1) ? */}
-                {(!details) ?
-                <p>{details}</p>
-                :
-                details.map((detail, idx) => {
+                {(project.details.length > 1) ?
+                project.details.map((detail, idx) => {
                     return (
-                        <li key={idx} style={{ marginRight: "6px" }} >{detail}</li>
+                        <li key={idx} >{detail}</li>
                     )
                 })
+                :
+                <p>{project.details}</p>
                 }
                 </ul>
-                <a href={project.github} >Github Repo</a>
+                <a href={project.github} style={{ color: "whitesmoke", fontFamily: "helvetica" }} >Github Repo</a>
 
                 {/* <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt commodi facilis repellat? Illum soluta delectus ipsa, sapiente mollitia fugiat quas expedita similique nobis ullam at sit suscipit voluptate pariatur labore.</p>
                 <p>Stuff, stuff, stuff</p> */}

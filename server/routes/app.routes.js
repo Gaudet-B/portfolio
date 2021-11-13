@@ -12,10 +12,12 @@ module.exports = app => {
     
     app.post("/api/loginadmin", AdminController.login)
     app.get("/api/logoutadmin", AdminController.logout)
-    app.post("/api/projects/new", authenticate, ProjectController.create)
     app.get("/api/projects", ProjectController.all)
+    app.post("/api/projects/new", authenticate, ProjectController.create)
     app.get("/api/projects/all", authenticate, ProjectController.all)
-    app.delete("/api/projects/:id", authenticate, ProjectController.delete)
+    app.get("/api/projects/:id", authenticate, ProjectController.one)
+    app.put("/api/projects/update/:id", authenticate, ProjectController.edit)
+    app.delete("/api/projects/delete/:id", authenticate, ProjectController.delete)
     
     // app.post("/api/registeradmin", AdminController.new)
     // app.get("/api/adminconsole", authenticate, AdminController.findOne)

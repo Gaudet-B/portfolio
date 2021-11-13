@@ -8,6 +8,7 @@ import Projects from './views/Projects'
 import Resume from './views/Resume'
 import Contact from './views/Contact'
 import Admin from './views/Admin'
+import Edit from './views/Edit'
 
 
 function App() {
@@ -56,6 +57,9 @@ function App() {
             </Route>
             <Route exact path="/administrators">
               <Admin />
+            </Route>
+            <Route exact path="/projects/:id">
+              <Edit />
             </Route>
           </Switch>
         </BrowserRouter>

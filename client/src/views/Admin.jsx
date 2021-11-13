@@ -8,8 +8,11 @@ const Admin = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [formState, setFormState] = useState({})
     const [pJformState, setPJformState] = useState({})
+    const [detail, setDetail] = useState("")
+    const [details, setDetails] = useState([])
     const [validState, setValidState] = useState({})
     const [projects, setProjects] = useState([])
+    const [detailInputs, setDetailInputs] = useState(["details", "details"])
 
     // const [admins, setAdmins] = useState([])
 
@@ -62,11 +65,25 @@ const Admin = () => {
         })
     }
 
+    const handleDetailChange = e => {
+        setDetail(e.target.value)
+    }
+    
+    // -----> MIGHT NEED SEPARATE STATE TO PUSH NEW DETAILS TO THE ARRAY
+    //     --------> IF SO, ABOVE SPREAD OPERATOR MAY NOT WORK!
+    
+    const handleDetailInputs = e => {
+        if (e.target.value === "") return
+        setDetailInputs(detailInputs => [...detailInputs, e.target.name])
+        setDetails(details => [...details, e.target.value])
+        setPJformState({...pJformState, details: details})
+    }
+
 
     const handleSubmit = e => {
         e.preventDefault()
         console.log(`submit`)
-        instance.post("/loginadmin", formState)
+        instance.post("/loginadmin", formState, {details: details})
             .then(res => {
                 console.log(`RESPONSE: ${res}`)
                 setFormState({})
@@ -117,16 +134,17 @@ const Admin = () => {
     }
 
     const handleClick = (id) => {
-        instance.get(`/projects/edit/${id}`)
-            .then(res => {
-                console.log("!")
-                // history.push("/")
-            })
-            .catch(err => console.log("error"))
+        history.push(`/projects/${id}`)
+        // instance.get(`/projects/edit/${id}`)
+        //     .then(res => {
+        //         console.log("!")
+        //         // history.push("/")
+        //     })
+        //     .catch(err => console.log("error"))
     }
 
     const handleDelete = (id) => {
-        instance.delete(`/projects/${id}`)
+        instance.delete(`/projects/delete/${id}`)
             .then(res => console.log("deleted"))
             .catch(err => console.log("error"))
     }
@@ -160,7 +178,7 @@ const Admin = () => {
         )
     } else {
         return (
-            <div className="bg-dark p-4 text-center" style={{ height: "100vh", width: "100vw" }}>
+            <div className="bg-dark p-4 text-center">
                 <h1 className="display-2 my-3">CONTENT MANAGEMENT</h1>
                 <div className="text-center my-4">
                     <h1 className="display-5">Current Project Content</h1>
@@ -170,9 +188,9 @@ const Admin = () => {
                         <tr>
                             <th>Title</th>
                             <th>Role(s)</th>
-                            <th>Technologies</th>
+                            <th>Languages</th>
                             <th>Summary</th>
-                            <th>Demo</th>
+                            <th>Details</th>
                             <th>Github</th>
                             <th>ACTIONS</th>
                         </tr>
@@ -184,14 +202,14 @@ const Admin = () => {
                             <tr key={idx}>
                                 <th>{project.title}</th>
                                 <td>{project.myRole}</td>
-                                <td>{project.technologies[0]}...</td>
-                                <td>{project.summary[0]}...</td>
-                                <td>{project.demo}</td>
+                                <td>{project.languages}...</td>
+                                <td>{project.summary}...</td>
+                                <td>{project.details.length}</td>
                                 <td>{project.github}</td>
                                 <td>
-                                    <div className="d-flex flex-row justify-content-between">
-                                        <button onClick={() => handleClick(project._id)} className="btn btn-secondary mx-2">edit</button>
-                                        <button onClick={() => handleDelete(project._id)} className="btn btn-danger mx-2">delete</button>
+                                    <div className="d-flex flex-row justify-content-evenly">
+                                        <button onClick={() => handleClick(project._id)} className="btn btn-secondary mx-2" style={{ width: "75px" }}>edit</button>
+                                        <button onClick={() => handleDelete(project._id)} className="btn btn-danger mx-2" style={{ width: "75px" }}>delete</button>
                                     </div>
                                 </td>
                             </tr>
@@ -227,9 +245,21 @@ const Admin = () => {
                                 <label className="form-label fs-4 ms-4" htmlFor="summary">Summary</label>
                                 <input onChange={handlePjChange} className="form-control" name="summary" style={{ width: "60%" }}/>
                             </div>
+                            <div className="d-flex flex-column my-5" style={{ width: "100%" }}>
+                            {(detailInputs.length > 1) ?
+                            detailInputs.map((input, idx) => {
+                                return(
+                                    <div className="form-group d-flex flex-row justify-content-between my-2" key={idx}>
+                                        <label className="form-label fs-4 ms-4" htmlFor={`${input}[${idx}]`}>Detail</label>
+                                        <input onChange={handleDetailChange} onBlur={handleDetailInputs} className="form-control" name={`${input}[${idx}]`} style={{ width: "60%" }}/>
+                                    </div>
+                            )})
+                            :
                             <div className="form-group d-flex flex-row justify-content-between my-3">
-                                <label className="form-label fs-4 ms-4" htmlFor="details">Details</label>
-                                <input onChange={handlePjChange} className="form-control" name="details" style={{ width: "60%" }}/>
+                                <label className="form-label fs-4 ms-4" htmlFor="details[0]">Detail</label>
+                                <input onChange={handleDetailChange} onBlur={handleDetailInputs} className="form-control" name="details[0]" style={{ width: "60%" }}/>
+                            </div>
+                            }
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
                                 <label className="form-label fs-4 ms-4" htmlFor="demo">Demo</label>

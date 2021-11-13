@@ -3,8 +3,10 @@ const mongoose = require('mongoose')
 const ProjectSchema = mongoose.Schema({
     title: {type: String},
     myRole: {type: String},
-    technologies: {type: Array},
-    summary: {type: Array},
+    languages: {type: String},
+    technologies: {type: String},
+    summary: {type: String},
+    details: {type: Array},
     demo: {type: Array},
     github: {type: String}
 }, { timestamps: true })
