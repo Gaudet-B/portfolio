@@ -8,6 +8,7 @@ const ProjectSchema = mongoose.Schema({
     summary: {type: String},
     details: {type: Array},
     demo: {type: Array},
+    image: {type: String},
     github: {type: String}
 }, { timestamps: true })
 

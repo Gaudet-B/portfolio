@@ -2,15 +2,25 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import project2img from '../assets/project_2_example.png'
+import project1img from '../assets/project_1.1_example.png'
 
 const CardFront = props => {
 
     const { project } = props
     // console.log(project)
-
+    
     // const techs = project.technologies.toString()
     // const summary = project.summary.toString()
 
+    const selectPhoto = project => {
+        if (project === "MyDraft Partner") return project2img
+        else if (project === "P!ZZA") return project1img
+        else if (project === "Myth Game") return project2img
+        else if (project === "briangaudet.com") return project2img
+    }
+
+    const source = selectPhoto(project.title)
+    
     if (!project) {
         return (
             <h3>UNDER CONSTRUCTION</h3>
@@ -18,7 +28,7 @@ const CardFront = props => {
     } else {
         return (
             <div id="mask">
-                <img src={project2img} alt="placeholder" />
+                <img src={source} alt="placeholder" />
                 <p style={{ fontSize: "2rem", fontWeight: "bold", margin: "18px 0px 14px 0px" }}>{project.title}</p>
                 <p style={{ fontSize: "16pt", fontWeight: "bold", letterSpacing: ".18em", color: "rgba(255,255,255,.75)", marginTop: "0px" }}>{project.myRole}</p>
                 <p style={{ fontSize: "16pt", fontWeight: "bold", marginBottom: "30px" }}> <span style={{ fontSize: "18pt" }}>&#123;</span> {project.languages} <span style={{ fontSize: "18pt" }}>&#125;</span></p>

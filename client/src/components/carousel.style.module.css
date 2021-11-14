@@ -67,7 +67,8 @@
 
 .spinner { 
     transform-style: preserve-3d; 
-    height: 300px; 
+    height: 700px; 
+    /* height: fit-content;  */
     /* this creates the 3D "rotation" space */
     transform-origin: 50% 50% -500px; 
     transition: 1.25s ease-out; 
@@ -92,7 +93,8 @@
     width: 40%; 
     min-width: 600px;
     max-width: 600px; 
-    height: 550px;
+    /* height: 550px; */
+    height: fit-content;
     position: absolute;
     margin-left: 20%;
     transform-origin: 50% 50% -500px;

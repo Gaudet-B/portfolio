@@ -266,6 +266,10 @@ const Admin = () => {
                                 <input onChange={handlePjChange} className="form-control" name="demo" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
+                                <label className="form-label fs-4 ms-4" htmlFor="image">Image</label>
+                                <input onChange={handlePjChange} className="form-control" name="image" style={{ width: "60%" }}/>
+                            </div>
+                            <div className="form-group d-flex flex-row justify-content-between my-3">
                                 <label className="form-label fs-4 ms-4" htmlFor="github">Github</label>
                                 <input onChange={handlePjChange} className="form-control" name="github" style={{ width: "60%" }}/>
                             </div>

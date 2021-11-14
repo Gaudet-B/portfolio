@@ -27,12 +27,14 @@ const Edit = () => {
             .then(res => {
                 setProject(res.data)
                 setLoading(!loading)
-                setTimeout(() => {
-                    for (const detail in project.details) {
-                        setDetailInputs(detailInputs => [...detailInputs, "details"])
-                        setDetails(details => [...details, detail])
-                    }
-                }, 1000);
+                if (!project) {
+                    setTimeout(() => {
+                        setProject(res.data)
+                        displayDetails(project)
+                    }, 2000)
+                } else {
+                    displayDetails(project)
+                }
             })
             .catch(err => console.log(err))
 
@@ -49,6 +51,13 @@ const Edit = () => {
             document.body.removeChild(link)
         }
     }, [])
+
+    const displayDetails = (project) => {
+        for (let i = 0; i < project.details.length; i++) {
+            setDetailInputs(detailInputs => [...detailInputs, "details"])
+            setDetails(details => [...details, project.details[i]])
+        }
+    }
 
     const handleFormChange = e => {
         setFormState({
@@ -196,6 +205,10 @@ const Edit = () => {
                         <div className="form-group d-flex flex-row justify-content-between my-3">
                             <label className="form-label fs-4 ms-4" htmlFor="demo">Demo</label>
                             <input onChange={handleFormChange} className="form-control" name="demo" placeholder={project.demo} style={{ width: "60%" }}/>
+                        </div>
+                        <div className="form-group d-flex flex-row justify-content-between my-3">
+                            <label className="form-label fs-4 ms-4" htmlFor="image">Image</label>
+                            <input onChange={handleFormChange} className="form-control" name="image" placeholder={project.image} style={{ width: "60%" }}/>
                         </div>
                         <div className="form-group d-flex flex-row justify-content-between my-3">
                             <label className="form-label fs-4 ms-4" htmlFor="github">Github</label>

@@ -192,19 +192,10 @@ const CustomCarousel = props => {
                             <div id="left" className={styles.left}></div>
                             <div id="right" className={styles.right}></div>
                             <div id="card-two-back" className={styles.cardBack}>
-                                <div id="mask">
-                                    <h4>PROJECT TITLE</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt commodi facilis repellat? Illum soluta delectus ipsa, sapiente mollitia fugiat quas expedita similique nobis ullam at sit suscipit voluptate pariatur labore.</p>
-                                    <p>Stuff, stuff, stuff</p>
-                                </div>
+                                <CardBack project={projects[1]} />
                             </div>
                             <div id="card-two-front" className={styles.cardFront}>
-                                <div id="mask">
-                                    <img src={project1img} alt="placeholder" />
-                                    <h4>Technologies used, etc, etc</h4>
-                                    <p>Short summary of the project</p>
-                                    <p>with full details on back (and github)</p>
-                                </div>
+                                <CardFront project = {projects[1]} />
                             </div>
                         </figure>
                     </div>
@@ -213,19 +204,10 @@ const CustomCarousel = props => {
                             <div id="left" className={styles.left}></div>
                             <div id="right" className={styles.right}></div>
                             <div id="card-three-back" className={styles.cardBack}>
-                                <div id="mask">
-                                    <h4>PROJECT TITLE</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt commodi facilis repellat? Illum soluta delectus ipsa, sapiente mollitia fugiat quas expedita similique nobis ullam at sit suscipit voluptate pariatur labore.</p>
-                                    <p>Stuff, stuff, stuff</p>
-                                </div>
+                                <CardBack project={projects[2]} />
                             </div>
                             <div id="card-three-front" className={styles.cardFront}>
-                                <div id="mask">
-                                    <img src={project2img} alt="placeholder" />
-                                    <h4>Technologies used, etc, etc</h4>
-                                    <p>Short summary of the project</p>
-                                    <p>with full details on back (and github)</p>
-                                </div>
+                                <CardFront project = {projects[2]} />
                             </div>
                         </figure>
                     </div>
@@ -234,19 +216,10 @@ const CustomCarousel = props => {
                             <div id="left" className={styles.left}></div>
                             <div id="right" className={styles.right}></div>
                             <div id="card-four-back" className={styles.cardBack}>
-                                <div id="mask">
-                                    <h4>PROJECT TITLE</h4>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt commodi facilis repellat? Illum soluta delectus ipsa, sapiente mollitia fugiat quas expedita similique nobis ullam at sit suscipit voluptate pariatur labore.</p>
-                                    <p>Stuff, stuff, stuff</p>
-                                </div>
+                                <CardBack project={projects[3]} />
                             </div>
                             <div id="card-four-front" className={styles.cardFront}>
-                                <div id="mask">
-                                    <img src={project2img} alt="placeholder" />
-                                    <h4>Technologies used, etc, etc</h4>
-                                    <p>Short summary of the project</p>
-                                    <p>with full details on back (and github)</p>
-                                </div>
+                                <CardFront project = {projects[3]} />
                             </div>
                         </figure>
                     </div>
