@@ -315,10 +315,11 @@ h1 {
     border: 6px double black;
     border-radius: 20%;
     animation: fade-in 3s;
-    background-image: url("../assets/GitHub.jpg");
+    background-image: url("../assets/projects-icon.png");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
+    background-color: whitesmoke;
     width: 200px;
     height: 200px;
     margin: 0px;
@@ -340,13 +341,14 @@ h1 {
 }
 
 .resume {
-    border: 6px double whitesmoke;
+    border: 6px double black;
     border-radius: 20%;
     animation: fade-in 3s;
-    background-image: url("../assets/LinkedIn.jpg");
+    background-image: url("../assets/resume-icon.png");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
+    background-color: whitesmoke;
     width: 200px;
     height: 200px;
     margin: 0px;
