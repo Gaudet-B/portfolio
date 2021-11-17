@@ -51,8 +51,8 @@ const Header = props => {
 
     return (
         <div className={styles.mainContainer}>
-            <a href={leftLink} id="left" className={styles.nav}> &lt; { left } </a>
-            <a href={rightLink} id="right" className={styles.nav}> { right } &gt; </a>
+            <a href={leftLink} id="left" className={styles.nav}> &lt; { left }<span aria-hidden="true"></span> </a>
+            <a href={rightLink} id="right" className={styles.nav}> { right }<span aria-hidden="true"></span> &gt; </a>
         </div>
     )
 }

@@ -7,6 +7,15 @@
     100% {color: rgba(255,255,255,.75); text-shadow: 1px 1px 1px rgba(255,255,255,.75);}
 }
 
+@keyframes caret {
+    50% { border-color: transparent; }
+}
+
+span {
+    border-right: .05em solid;
+    animation: caret 1s steps(1) infinite;
+}
+
 
 .mainContainer {
     position: absolute;
@@ -20,7 +29,8 @@
 }
 
 .nav {
-    color: rgba(255,255,255,.75);
+    /* color: rgba(255,255,255,.75); */
+    color: rgba(0, 143, 17, .9);
     /* margin: 5%; */
     display: inline-block; 
     text-decoration: none; 

@@ -11,7 +11,7 @@ const Projects = () => {
     const [projects, setProjects] = useState([])
 
     useEffect(() => {
-        document.querySelector("html").setAttribute("style", "overflow-x: hidden; overflow-y: scroll;")
+        document.querySelector("html").setAttribute("style", "overflow-x: auto; overflow-y: auto;")
         const loadData = async () => {
             await new Promise((res) => setTimeout(res, 3000))
             setLoading(false)

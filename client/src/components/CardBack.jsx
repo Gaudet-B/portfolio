@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
+import Demo from './Demo'
+import styles from '../components/carousel.style.module.css'
 
 const CardBack = props => {
 
-    const { project } = props
+    const { project, flipCard, flip } = props
     // const { details, demo } = project
 
     // const splitArr = (num, arr) => {
@@ -27,23 +29,28 @@ const CardBack = props => {
         )
     } else {
         return (
-            <div id="mask">
-                <p>{project.title}</p>
-                <p>{project.myRole}</p>
-                <p>{project.technologies}</p>
+            <div id="mask" style={{ height: "inherit", padding: "5px" }}>
+                <p style={{ color: "rgba(0, 143, 17, .9)", fontSize: "2.25rem", marginTop: "20px", marginBottom: "20px"}}>{project.title}</p>
+                <p><strong>My Role(s):</strong> {project.myRole}</p>
+                <p><strong>Technologies Used:</strong> {project.technologies}</p>
                 {/* <p>{project.summary}</p> */}
-                <ul>
-                {(project.details.length > 1) ?
-                project.details.map((detail, idx) => {
-                    return (
-                        <li key={idx} >{detail}</li>
-                    )
-                })
-                :
-                <p>{project.details}</p>
-                }
-                </ul>
-                <a href={project.github} style={{ color: "whitesmoke", fontFamily: "helvetica" }} >Github Repo</a>
+                <div>
+                    <p style={{fontSize: "14pt", marginTop: "10px", marginBottom: "5px", textDecoration: "underline" }}><strong>Application Details:</strong></p>
+                    <ul style={{ textAlign: "left" }}>
+                    {(project.details.length > 1) ?
+                    project.details.map((detail, idx) => {
+                        return (
+                            <li key={idx} style={{ margin: "10px 0px" }}>{detail}</li>
+                        )
+                    })
+                    :
+                    <p>{project.details}</p>
+                    }
+                    </ul>
+                </div>
+                <Demo />
+                <p className={styles.flipLink} onClick={() => flipCard(flip)}><strong> || </strong> flip back to front of card <strong> || </strong></p>
+                {/* <a href={project.github} style={{ marginTop: "10px", position: "relative" }} >Github Repo</a> */}
 
                 {/* <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt commodi facilis repellat? Illum soluta delectus ipsa, sapiente mollitia fugiat quas expedita similique nobis ullam at sit suscipit voluptate pariatur labore.</p>
                 <p>Stuff, stuff, stuff</p> */}

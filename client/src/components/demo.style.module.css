@@ -1,0 +1,28 @@
+.main {
+    margin: auto;
+    padding: 8px;
+    width: 90%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.demo {
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    background-image: url("../assets/rorschach.webp");
+    /* background-color: lavenderblush; */
+    background-size: cover;
+}
+
+.demoMask {
+    height: inherit;
+    width: inherit;
+    background-color: rgb(26, 26, 26, .6);
+    background-size: cover;
+}
+.demoMask:hover {
+    transition: .5s ease-in;
+    background-color: transparent;
+}

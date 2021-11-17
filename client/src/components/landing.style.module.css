@@ -15,9 +15,7 @@
     to{border-right-color: transparent;}
 } */
 @keyframes caret {
-    50% {
-    border-color: transparent;
-    }
+    50% { border-color: transparent; }
 }
 /* FADE-IN */
 @keyframes fade-in {
@@ -116,7 +114,8 @@ h1 {
     position: absolute;
     height: 100%;
     width: 100%;
-    color: rgba(255,255,255,.75);
+    /* color: rgba(255,255,255,.75); */
+    color: rgba(0, 143, 17, .9);
     font-family: 'Anonymous Pro', monospace;  
     background: linear-gradient(6deg, rgba(26,26,26,0.1) 0%, rgba(25,25,25,1) 62%);
     -webkit-background-size: cover;
@@ -330,10 +329,11 @@ h1 {
     border: 6px double black;
     border-radius: 20%;
     animation: fade-in 3s;
-    background-image: url("../assets/Email.jpg");
+    background-image: url("../assets/email-icon.png");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
+    background-color: whitesmoke;
     width: 200px;
     height: 200px;
     margin: 0px;
