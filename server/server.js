@@ -2,7 +2,6 @@ const cors = require('cors')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const nodemailer = require("nodemailer")
-const jwt = require("jsonwebtoken")
 
 const app = express()
 const port = 8000

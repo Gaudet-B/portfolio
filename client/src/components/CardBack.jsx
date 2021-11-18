@@ -30,10 +30,11 @@ const CardBack = props => {
     } else {
         return (
             <div id="mask" style={{ height: "inherit", padding: "5px" }}>
-                <p style={{ color: "rgba(0, 143, 17, .9)", fontSize: "2.25rem", marginTop: "20px", marginBottom: "20px"}}>{project.title}</p>
+                <p style={{ color: "rgba(0, 143, 17, .9)", fontSize: "2.25rem", marginTop: "10px", marginBottom: "20px"}}>{project.title}</p>
                 <p><strong>My Role(s):</strong> {project.myRole}</p>
                 <p><strong>Technologies Used:</strong> {project.technologies}</p>
                 {/* <p>{project.summary}</p> */}
+                <div style={{ height: "0px", border: "1px solid rgba(0, 143, 17, .9)", width: "65%", margin: "auto" }}></div>
                 <div>
                     <p style={{fontSize: "14pt", marginTop: "10px", marginBottom: "5px", textDecoration: "underline" }}><strong>Application Details:</strong></p>
                     <ul style={{ textAlign: "left" }}>
@@ -41,15 +42,16 @@ const CardBack = props => {
                     project.details.map((detail, idx) => {
                         return (
                             <li key={idx} style={{ margin: "10px 0px" }}>{detail}</li>
-                        )
-                    })
-                    :
-                    <p>{project.details}</p>
+                            )
+                        })
+                        :
+                        <p>{project.details}</p>
                     }
                     </ul>
                 </div>
+                <div style={{ height: "0px", border: "1px solid rgba(0, 143, 17, .9)", width: "65%", margin: "auto" }}></div>
                 <Demo />
-                <p className={styles.flipLink} onClick={() => flipCard(flip)}><strong> || </strong> flip back to front of card <strong> || </strong></p>
+                <p className={styles.flipLink} onClick={() => flipCard(flip)}><strong> || </strong> flip back to the front of card <strong> || </strong></p>
                 {/* <a href={project.github} style={{ marginTop: "10px", position: "relative" }} >Github Repo</a> */}
 
                 {/* <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt commodi facilis repellat? Illum soluta delectus ipsa, sapiente mollitia fugiat quas expedita similique nobis ullam at sit suscipit voluptate pariatur labore.</p>

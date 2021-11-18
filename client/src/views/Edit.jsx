@@ -118,11 +118,12 @@ const Edit = () => {
                         <th style={{ borderRight: "1px solid whitesmoke" }}>Summary</th>
                         <th style={{ borderRight: "1px solid whitesmoke" }}>Details</th>
                         <th style={{ borderRight: "1px solid whitesmoke" }}>Demo</th>
+                        <th style={{ borderRight: "1px solid whitesmoke" }}>Image</th>
                         <th style={{ borderRight: "1px solid whitesmoke" }}>Github</th>
                         <th>ACTIONS</th>
                     </tr>
                 </thead>
-                <tbody className="bg-secondary text-light" style={{ borderBottom: "1px solid black" }}>
+                <tbody className="bg-secondary text-light text-break" style={{ borderBottom: "1px solid black" }}>
                     <tr style={{ borderTop: "8px solid transparent" }}>
                         <td style={{ maxWidth: "7%", overflow: "auto", borderRight: "1px solid whitesmoke", height: "400px" }}>{project.myRole}</td>
                         <td style={{ maxWidth: "10%", overflow: "auto", borderRight: "1px solid whitesmoke", height: "400px" }}>{project.languages}</td>
@@ -146,6 +147,7 @@ const Edit = () => {
                         }
                         </td>
                         <td style={{ maxWidth: "8%", overflow: "auto", borderRight: "1px solid whitesmoke", height: "400px" }}>{project.demo}</td>
+                        <td style={{ maxWidth: "8%", overflow: "auto", borderRight: "1px solid whitesmoke", height: "400px" }}>{project.image}</td>
                         <td style={{ maxWidth: "8%", overflow: "auto", borderRight: "1px solid whitesmoke", height: "400px" }}>{project.github}</td>
                         <td style={{ maxWidth: "7%", overflow: "auto", height: "400px" }}><button onClick={() => handleDelete(project._id)} className="btn btn-danger mx-2" style={{ width: "75px" }}>delete</button></td>
                     </tr>

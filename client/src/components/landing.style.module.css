@@ -115,7 +115,7 @@ h1 {
     height: 100%;
     width: 100%;
     /* color: rgba(255,255,255,.75); */
-    color: rgba(0, 143, 17, .9);
+    color: rgba(0, 218, 25, 0.5);
     font-family: 'Anonymous Pro', monospace;  
     background: linear-gradient(6deg, rgba(26,26,26,0.1) 0%, rgba(25,25,25,1) 62%);
     -webkit-background-size: cover;
@@ -253,7 +253,7 @@ h1 {
         translate3d(0px, 0px, -250px)
         rotateX(27deg)
         scale(0.9, 0.9);
-    box-shadow: 0 70px 40px -20px rgba(245, 245, 245, 0.24);
+    box-shadow: 0 70px 40px -20px rgba(245, 245, 245, 0.1);
     animation: fade-in 3s;
     height: 150px;
     width: 150px;
@@ -293,7 +293,7 @@ h1 {
     display: flex;
     flex-direction: column;
     text-align: center;
-    color: whitesmoke;
+    color: rgba(0, 218, 25, 0.5);
     font-size: 18pt;
     padding-top: 12px;
     animation: fade-in 3s;
@@ -375,6 +375,7 @@ h1 {
     display: flex;
     flex-direction: column;
     text-align: center;
+    color: rgba(245, 245, 245, 0.3);
 }
 .copyright p {
     margin: 0px;

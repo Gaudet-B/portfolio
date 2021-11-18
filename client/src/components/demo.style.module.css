@@ -1,6 +1,6 @@
 .main {
     margin: auto;
-    padding: 8px;
+    padding: 12px 4px;
     width: 90%;
     height: 200px;
     display: flex;
@@ -11,7 +11,7 @@
     height: 100px;
     width: 100px;
     border: 1px solid black;
-    background-image: url("../assets/rorschach.webp");
+    /* background-image: url("../assets/rorschach.webp"); */
     /* background-color: lavenderblush; */
     background-size: cover;
 }

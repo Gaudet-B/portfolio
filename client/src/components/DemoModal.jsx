@@ -33,7 +33,7 @@ const DemoModal = props => {
     }
 
     return (
-        <div onClick={handleShow} className={styles.demo}>
+        <div onClick={handleShow} className={styles.demo} style={{ backgroundImage: `url(/static/media/rorschach.b0972cda.webp)` }}>
             <div className={styles.demoMask}>
             <Modal show={show} onHide={handleClose}>
                 {
