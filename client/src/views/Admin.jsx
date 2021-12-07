@@ -10,6 +10,7 @@ const Admin = () => {
     const [pJformState, setPJformState] = useState({})
     const [detail, setDetail] = useState("")
     const [details, setDetails] = useState([])
+    const [image, setImage] = useState()
     const [validState, setValidState] = useState({})
     const [projects, setProjects] = useState([])
     const [detailInputs, setDetailInputs] = useState(["details", "details"])
@@ -83,7 +84,7 @@ const Admin = () => {
     const handleSubmit = e => {
         e.preventDefault()
         console.log(`submit`)
-        instance.post("/loginadmin", formState, {details: details})
+        instance.post("/loginadmin", formState)
             .then(res => {
                 console.log(`RESPONSE: ${res}`)
                 setFormState({})
@@ -102,13 +103,33 @@ const Admin = () => {
             })
     }
 
+    const handleImageChange = e => {
+        console.log(e.target.files[0].name)
+        let object = e.target.files[0]
+        console.log(object)
+        setImage(object)
+        console.log(image)
+        setPJformState({...pJformState, mainImage: image})
+    }
+
     const handleCreate = e => {
         e.preventDefault()
         console.log(`create`)
-        instance.post("/projects/new", pJformState)
+        console.log(pJformState)
+        let data = new FormData()
+        // data.append("hello", "world")
+        for (const key in pJformState) {
+            // console.log(`${key}: ${pJformState[key]}`)
+            data.append(`${key}`, `${pJformState[key]}`)
+            // data.set("hello", "world")
+        }
+        // console.log(data.get("hello"))
+        // console.log(`data: ${data}`)
+        const config = { headers: {'content-type': 'multipart/form-data'}}
+        instance.post("/projects/new", data, config)
             .then(res => {
                 console.log(`RESPONSE: ${res}`)
-                setPJformState({})
+                // setPJformState({})
             })
             .catch(err => {
                 console.log(`ERROR: ${err.response.data}`)
@@ -234,7 +255,7 @@ const Admin = () => {
                                 <input onChange={handlePjChange} className="form-control" name="myRole" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
-                                <label className="form-label fs-4 ms-4" htmlFor="languages">Languages/Frameworks</label>
+                                <label className="form-label fs-4 ms-4 text-wrap" htmlFor="languages">Languages/ Frameworks</label>
                                 <input onChange={handlePjChange} className="form-control" name="languages" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
@@ -268,6 +289,10 @@ const Admin = () => {
                             <div className="form-group d-flex flex-row justify-content-between my-3">
                                 <label className="form-label fs-4 ms-4" htmlFor="image">Image</label>
                                 <input onChange={handlePjChange} className="form-control" name="image" style={{ width: "60%" }}/>
+                            </div>
+                            <div className="form-group d-flex flex-row justify-content-between my-3">
+                                <label className="form-label fs-4 ms-4" htmlFor="mainImage">Main Image</label>
+                                <input type="file" onChange={handleImageChange} className="form-control-file" name="mainImage" style={{ width: "60%" }}/>
                             </div>
                             <div className="form-group d-flex flex-row justify-content-between my-3">
                                 <label className="form-label fs-4 ms-4" htmlFor="github">Github</label>

@@ -29,7 +29,7 @@ const CardFront = props => {
     } else {
         return (
             <div id="mask" style={{ padding: "5px" }}>
-                <img src={project.image} alt="placeholder" />
+                <img src={project.mainImage} alt="placeholder" />
                 <p style={{ fontSize: "2rem", fontWeight: "bold", margin: "18px 0px 14px 0px" }}>{project.title}</p>
                 <p style={{ fontSize: "16pt", fontWeight: "bold", letterSpacing: ".18em", color: "rgba(255,255,255,.75)", marginTop: "0px" }}>{project.myRole}</p>
                 <p style={{ fontSize: "16pt", fontWeight: "bold", marginBottom: "30px", color: "rgba(0, 143, 17, .9)" }}><strong style={{ fontSize: "18pt", color: "rgb(0, 214, 25)" }}>&#123;</strong> {project.languages} <strong style={{ fontSize: "18pt", color: "rgb(0, 214, 25)" }}>&#125;</strong></p>

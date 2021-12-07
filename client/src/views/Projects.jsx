@@ -10,12 +10,13 @@ const Projects = () => {
     const [loading, setLoading] = useState(true)
     const [projects, setProjects] = useState([])
 
+    const loadData = async () => {
+        await new Promise((res) => setTimeout(res, 3000))
+        setLoading(false)
+    }
+
     useEffect(() => {
         document.querySelector("html").setAttribute("style", "overflow-x: auto; overflow-y: auto;")
-        const loadData = async () => {
-            await new Promise((res) => setTimeout(res, 3000))
-            setLoading(false)
-        }
         loadData()
         axios.get("http://localhost:8000/api/projects")
             .then(res => {

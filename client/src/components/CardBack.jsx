@@ -50,7 +50,7 @@ const CardBack = props => {
                     </ul>
                 </div>
                 <div style={{ height: "0px", border: "1px solid rgba(0, 143, 17, .9)", width: "65%", margin: "auto" }}></div>
-                <Demo />
+                <Demo project={project} />
                 <p className={styles.flipLink} onClick={() => flipCard(flip)}><strong> || </strong> flip back to the front of card <strong> || </strong></p>
                 {/* <a href={project.github} style={{ marginTop: "10px", position: "relative" }} >Github Repo</a> */}
 

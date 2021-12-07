@@ -10,6 +10,9 @@ const Edit = () => {
     const [detail, setDetail] = useState("")
     const [details, setDetails] = useState([])
     const [project, setProject] = useState({})
+    const [image, setImage] = useState()
+    const [imageBinary, setImageBinary] = useState()
+    const [imageUrl, setImageUrl] = useState()
     const [detailInputs, setDetailInputs] = useState(["details"])
 
     const {id} = useParams()
@@ -25,19 +28,46 @@ const Edit = () => {
 
         instance.get(`/projects/${id}`)
             .then(res => {
-                setProject(res.data)
+                console.log(res.data.mainImage)
+                let buffer = res.data.mainImage
+                console.log(buffer)
+                let base64 = Buffer.from(res.data.mainImage.data.join(""), "binary").toString("base64")
                 setLoading(!loading)
+                setProject(res.data)
+                setImageUrl(base64)
+                console.log(base64)
+                // console.log(res.data.mainImage.data)
+                setImageBinary(res.data.mainImage.data)
+                // const binaryFlat = imageBinary.join("")
+                // console.log(binaryFlat)
+                setTimeout(() => {
+                    let src = getSource(res.data.mainImage.data)      // <-- use .join("") to flatten
+                    console.log(src)
+                    // setImageUrl(src)
+                }, 2000)
+                // console.log(imageBinary)
                 if (!project) {
                     setTimeout(() => {
                         setProject(res.data)
                         displayDetails(project)
                     }, 2000)
+                    // setTimeout(() => {
+                    //     displayDetails(project)
+                    //     let src = getSource(project.mainImage.data)
+                    //     console.log(src)
+                    //     setImageUrl(src)
+                    //     console.log(`URL -> ${imageUrl}`)
+                    // }, 4000);
                 } else {
                     displayDetails(project)
+                    // let src = getSource(project.mainImage.data)
+                    // console.log(src)
+                    // setImageUrl(src)
+                    // console.log(`URL -> ${imageUrl}`)
                 }
             })
             .catch(err => console.log(err))
-
+        
         const link = document.createElement("link")
         link.href = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         link.rel = "stylesheet"
@@ -45,7 +75,7 @@ const Edit = () => {
         link.crossOrigin = "anonymous"
         document.body.appendChild(link)
 
-        document.querySelector("html").setAttribute("style", "overflow: auto;")
+        document.querySelector("html").setAttribute("style", "overflow: auto;") 
 
         return () => {
             document.body.removeChild(link)
@@ -53,6 +83,8 @@ const Edit = () => {
     }, [])
 
     const displayDetails = (project) => {
+        console.log(project)
+        // console.log(project.mainImage)
         for (let i = 0; i < project.details.length; i++) {
             setDetailInputs(detailInputs => [...detailInputs, "details"])
             setDetails(details => [...details, project.details[i]])
@@ -81,13 +113,44 @@ const Edit = () => {
         setFormState({...formState, details: details})
     }
 
+    const handleImageChange = e => {
+        console.log(e.target.files[0].name)
+        let object = e.target.files[0]
+        console.log(object)
+        // for (const key in object) {
+        //     console.log(`${key}: ${object[key]}`)
+        //     setImage({[key]: object[key]})
+        //     console.log(image)
+        // }
+        // let entries = Object.entries(object)
+        // console.log(entries)
+        // entries.forEach(entry => {
+        //     console.log(`${entry[0]}: ${entry[1]}`)
+        //     setImage({...image, [entry[0]]: entry[1]})
+        // })
+        // setImage({...e.target.files[0]})
+        setImage(object)
+        console.log(image)
+        setFormState({...formState, mainImage: image})
+    }
+
     const handleUpdate = e => {
         e.preventDefault()
         console.log(`update`)
-        instance.put(`/projects/update/${id}`, formState)
+        const config = { headers: {'content-type': 'multipart/form-data'}}
+        let data = new FormData()
+        for (const key in formState) {
+            // console.log(`${key}: ${formState[key]}`)
+            data.append(`${key}`, `${formState[key]}`)
+        }
+        console.log(data)
+        // data.append("headers", {"content-type": "multipart/form-data"})
+        // setFormState({...formState, mainImage: })
+        console.log(`form: ${formState.mainImage}`)
+        instance.put(`/projects/update/${id}`, data, config)
             .then(res => {
                 console.log(`RESPONSE: ${res}`)
-                setFormState({})
+                // setFormState({})
             })
             .catch(err => {
                 console.log(`ERROR: ${err.response.data}`)
@@ -104,6 +167,22 @@ const Edit = () => {
         history.push(`/administrators`)
     }
 
+    const getSource = binary => {
+        let base64
+        // console.log(`***binary***: ${binary}`)
+        let blob = new Blob(binary, {type: "image/png"})
+        // console.log(blob)
+        let reader = new FileReader()
+        reader.readAsDataURL(blob)
+        reader.onloadend = () => {
+            base64 = reader.result
+            // console.log(base64)
+            // setImageUrl(base64)
+            // console.log(imageUrl)
+            return base64
+        }
+    }
+
     if (!loading) {
 
     return (
@@ -118,7 +197,8 @@ const Edit = () => {
                         <th style={{ borderRight: "1px solid whitesmoke" }}>Summary</th>
                         <th style={{ borderRight: "1px solid whitesmoke" }}>Details</th>
                         <th style={{ borderRight: "1px solid whitesmoke" }}>Demo</th>
-                        <th style={{ borderRight: "1px solid whitesmoke" }}>Image</th>
+                        <th style={{ borderRight: "1px solid whitesmoke" }}>image</th>
+                        <th style={{ borderRight: "1px solid whitesmoke" }}>Main Image</th>
                         <th style={{ borderRight: "1px solid whitesmoke" }}>Github</th>
                         <th>ACTIONS</th>
                     </tr>
@@ -148,6 +228,12 @@ const Edit = () => {
                         </td>
                         <td style={{ maxWidth: "8%", overflow: "auto", borderRight: "1px solid whitesmoke", height: "400px" }}>{project.demo}</td>
                         <td style={{ maxWidth: "8%", overflow: "auto", borderRight: "1px solid whitesmoke", height: "400px" }}>{project.image}</td>
+                        <td style={{ maxWidth: "8%", overflow: "auto", borderRight: "1px solid whitesmoke", height: "400px" }}>
+                            {/* <img src={() => getSource(project.mainImage.data)} style={{ width: "25px", height: "25px" }}/> */}
+                            <img src={`data:image/png;base64,${imageUrl}`} style={{ width: "25px", height: "25px" }}/>
+                            {/* {project.mainImage.data} */}
+                            {/* <img src={imageUrl} style={{ width: "25px", height: "25px" }} /> */}
+                        </td>
                         <td style={{ maxWidth: "8%", overflow: "auto", borderRight: "1px solid whitesmoke", height: "400px" }}>{project.github}</td>
                         <td style={{ maxWidth: "7%", overflow: "auto", height: "400px" }}><button onClick={() => handleDelete(project._id)} className="btn btn-danger mx-2" style={{ width: "75px" }}>delete</button></td>
                     </tr>
@@ -157,7 +243,7 @@ const Edit = () => {
             <div style={{ width: "80%", margin: "auto" }}>
                 <div className="my-5 py-3 px-5 border border-light rounded" style={{ width: "80%", margin: "auto" }}>
                     <h1 className="text-light text-decoration-underline mb-4">Edit Project</h1>
-                    <form onSubmit={handleUpdate} className="form text-light" style={{ width: "100%", margin: "auto" }}>
+                    <form onSubmit={handleUpdate} className="form text-light" style={{ width: "100%", margin: "auto" }} encType="multipart/form-data">
                         <div className="form-group d-flex flex-row justify-content-between my-3">
                             <label className="form-label fs-4 ms-4" htmlFor="title">Title</label>
                             <input onChange={handleFormChange} className="form-control" name="title" placeholder={project.title} style={{ width: "60%" }}/>
@@ -209,8 +295,12 @@ const Edit = () => {
                             <input onChange={handleFormChange} className="form-control" name="demo" placeholder={project.demo} style={{ width: "60%" }}/>
                         </div>
                         <div className="form-group d-flex flex-row justify-content-between my-3">
-                            <label className="form-label fs-4 ms-4" htmlFor="image">Image</label>
-                            <input onChange={handleFormChange} className="form-control" name="image" placeholder={project.image} style={{ width: "60%" }}/>
+                            <label className="form-label fs-4 ms-4" htmlFor="image">image</label>
+                            <input type="text" onChange={handleFormChange} className="form-control" name="image" placeholder={project.image} style={{ width: "60%" }}/>
+                        </div>
+                        <div className="form-group d-flex flex-row justify-content-between my-3">
+                            <label className="form-label fs-4 ms-4" htmlFor="mainImage">Main Image</label>
+                            <input type="file" onChange={handleImageChange} className="form-control-file" name="mainImage" style={{ width: "60%" }}/>
                         </div>
                         <div className="form-group d-flex flex-row justify-content-between my-3">
                             <label className="form-label fs-4 ms-4" htmlFor="github">Github</label>
