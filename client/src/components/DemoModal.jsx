@@ -16,53 +16,57 @@ import getImages from '../scripts/images.js'
 
 const DemoModal = props => {
 
-    const { demo, project } = props
+    const { project } = props
 
     const [loading, setLoading] = useState(true)
     const [show, setShow] = useState(false)
-    const [step, setStep] = useState(demo)
+    const [step, setStep] = useState(1)
     const [demos, setDemos] = useState(getImages())
+    const [projectImages, setProjectImages] = useState([])
 
     const history = useHistory()
 
     const handleClose = () => {
         setShow(false)
-        setStep(demo)
+        setStep(1)
         // setStep(demo)
     }
 
-    const handleShow = () => {
+    const handleShow = e => {
+        e.preventDefault()
+        console.log(e.target.parentNode.id)
         setShow(true)
-        setStep(demo)
+        setStep(e.target.parentNode.id)
     }
 
     const handleNext = () => {
-        setStep(step + 1)
+        setStep(parseInt(step) + 1)
     }
 
     const handleBack = () => {
-        setStep(step - 1)
+        setStep(parseInt(step) - 1)
     }
-
-    var projectImages = []
 
     const setImages = () => {
         if (project.title === "MyDraft Partner") {
-            projectImages = demos.draft 
+            setProjectImages(demos.draft)
         } else {
-            projectImages = demos.pizza
+            setProjectImages(demos.pizza)
         }
+        // console.log(projectImages)
     }
 
     const loadData = async () => {
-        await new Promise((res) => setTimeout(res, 6000))
+        await new Promise((res) => setTimeout(res, 500))
         setLoading(false)
     }
 
     useEffect(() => {
         loadData()
         setImages()
-        console.log(projectImages)
+        // document.querySelector(".modal-dialog").setAttribute("style", "height: 100% !important;")
+        // document.querySelector(".modal-content").setAttribute("style", "height: 100% !important;")
+        // console.log(projectImages)
     }, [])
 
     if (loading) {
@@ -77,40 +81,38 @@ const DemoModal = props => {
     } else {
 
     return (
-        <div>
-            {projectImages.map((image, idx) => {
-                return(
-                    <div key={idx} onClick={handleShow} className={styles.demo} style={{ backgroundImage: `url(/static/media/rorschach.b0972cda.webp)` }}>
-                        <div className={styles.demoMask}>{image}</div>
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%" }}>
+            {(projectImages) ? projectImages.map((image, idx) => {
+                if (idx < 5) return(
+
+                    <div key={idx} id={idx + 1} onClick={handleShow} className={styles.demo} style={{ backgroundImage: `url(${image})`, backgroundPosition: "center" }}>
+                        <div className={styles.demoMask}></div>
                     </div>
                 )
-            })}
+                else return(
+                    null
+                )
+            }) : null
+            }
         {/* <div onClick={handleShow} className={styles.demo} style={{ backgroundImage: `url(/static/media/rorschach.b0972cda.webp)` }}>
             <div className={styles.demoMask}> */}
-            <Modal size="sm" show={show} onHide={handleClose} style={{ position: "absolute", transform: "translateY(-1000px) translateX(350px)", boxShadow: "0px 0px 0px 500px rgb(26, 26, 26, .9)", backgroundColor: "rgb(26, 26, 26, .9)" }}>
-                {(step < 1 || step > 4) ? handleClose()
+            <Modal show={show} onHide={handleClose} className={styles.modalBody} style={{ backgroundImage: `url(${projectImages[step - 1]})` }} >
+                {(step < 1 || step > projectImages.length) ? handleClose()
                 :
-                <Container>
-                    <Modal.Header>
-                        <Button onClick={() => setStep(0)}>
+                <Container className={styles.modalContainer} >
+                    <Modal.Header style={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", fontSize: "20pt", fontFamily: "Roboto" }}>
+                        {/* <Button onClick={() => setStep(0)}> */}
+                        <div className={styles.modalButton} onClick={handleClose}>
                             X
-                        </Button>
+                        </div>
                     </Modal.Header>
-                    <Modal.Body>
-                        {(step === 1) ?
-                        <img src={image1} ></img>
-                        :
-                        (step === 2) ?
-                        <img src={image2} ></img>
-                        :
-                        (step === 3) ?
-                        <img src={image3} ></img>
-                        :
-                        (step === 4) ?
-                        <img src={image4} ></img>
-                        : null
-                        }
+                    <Modal.Body >
+                        {/* <img src={projectImages[step - 1]} ></img> */}
                     </Modal.Body>
+                    <Modal.Footer style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                        <div className={styles.modalButton} onClick={handleBack} >back</div>
+                        <div className={styles.modalButton} onClick={handleNext} >next</div>
+                    </Modal.Footer>
                 </Container>
 
 
@@ -168,10 +170,6 @@ const DemoModal = props => {
                 // :
                 // <p>Loading...</p>
             }
-            <Modal.Footer>
-                <Button onClick={handleBack} >Back</Button>
-                <Button onClick={handleNext} >Next</Button>
-            </Modal.Footer>
         </Modal>
         {/* </div>
         </div> */}

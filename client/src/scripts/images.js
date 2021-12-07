@@ -40,7 +40,7 @@ const getImages = () => {
     for (let i = 0; i < pizzaImages.length; i++) {
         object.pizza.push(pizzaImages[i])
     }
-    console.log(object)
+    // console.log(object)
     return object
 }
 
