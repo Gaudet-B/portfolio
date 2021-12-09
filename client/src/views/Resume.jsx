@@ -32,7 +32,7 @@ const Resume = () => {
         return () => {
             document.body.removeChild(link)
         }
-    })
+    }, [])
 
     // const classArr = ["bg-dark", "text-light", "p-5", "d-flex", "flex-column", "justify-content-center", styles.mainContent]
     const classArr = ["bg-dark", "p-5", styles.mainContent]

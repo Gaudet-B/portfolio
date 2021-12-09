@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container'
 import Modal from 'react-bootstrap/Modal'
@@ -18,11 +18,26 @@ const DemoModal = props => {
 
     const { project } = props
 
+    const getWindowHeight = () => {
+        return window.innerHeight
+        // let height = window.innerHeight
+        // setWindowHeight(height)
+        // console.log(windowHeight)
+    }
+    const getWindowWidth = () => {
+        return window.innerWidth
+        // let width = window.innerWidth
+        // setWindowWidth(width)
+        // console.log(windowWidth)
+    }
+
     const [loading, setLoading] = useState(true)
     const [show, setShow] = useState(false)
     const [step, setStep] = useState(1)
     const [demos, setDemos] = useState(getImages())
     const [projectImages, setProjectImages] = useState([])
+    const [windowHeight, setWindowHeight] = useState(getWindowHeight())
+    const [windowWidth, setWindowWidth] = useState(getWindowWidth())
 
     const history = useHistory()
 
@@ -34,7 +49,7 @@ const DemoModal = props => {
 
     const handleShow = e => {
         e.preventDefault()
-        console.log(e.target.parentNode.id)
+        // console.log(e.target.parentNode.id)
         setShow(true)
         setStep(e.target.parentNode.id)
     }
@@ -61,12 +76,23 @@ const DemoModal = props => {
         setLoading(false)
     }
 
+    const resizeWindow = () => {
+        setWindowHeight(window.innerHeight)
+        setWindowWidth(window.innerWidth)
+    }
+
     useEffect(() => {
         loadData()
         setImages()
+        // getWindowHeight()
+        // getWindowWidth()
+        window.addEventListener("resize", resizeWindow)
         // document.querySelector(".modal-dialog").setAttribute("style", "height: 100% !important;")
         // document.querySelector(".modal-content").setAttribute("style", "height: 100% !important;")
-        // console.log(projectImages)
+        console.log(`${windowHeight}, ${windowWidth}`)
+        return () => {
+            window.removeEventListener("resize", resizeWindow)
+        }
     }, [])
 
     if (loading) {
@@ -81,6 +107,7 @@ const DemoModal = props => {
     } else {
 
     return (
+        <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%" }}>
             {(projectImages) ? projectImages.map((image, idx) => {
                 if (idx < 5) return(
@@ -173,6 +200,8 @@ const DemoModal = props => {
         </Modal>
         {/* </div>
         </div> */}
+        </div>
+        <Link onClick={handleShow} className={styles.link} > +3 more images</Link>
         </div>
     )
 }
