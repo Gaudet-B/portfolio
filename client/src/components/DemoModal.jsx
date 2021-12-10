@@ -11,12 +11,12 @@ import image3 from '../assets/project_1.1_example.png'
 import image4 from '../assets/project_2_example.png'
 
 import styles from './demo.style.module.css'
-import getImages from '../scripts/images.js'
+// import getImages from '../scripts/images.js'
 
 
 const DemoModal = props => {
 
-    const { project } = props
+    const { project, images } = props
 
     const getWindowHeight = () => {
         return window.innerHeight
@@ -30,60 +30,72 @@ const DemoModal = props => {
         // setWindowWidth(width)
         // console.log(windowWidth)
     }
-
+    
     const [loading, setLoading] = useState(true)
     const [show, setShow] = useState(false)
     const [step, setStep] = useState(1)
-    const [demos, setDemos] = useState(getImages())
-    const [projectImages, setProjectImages] = useState([])
+    // const [demos, setDemos] = useState(getImages())
+    // const [projectImages, setProjectImages] = useState([])
     const [windowHeight, setWindowHeight] = useState(getWindowHeight())
     const [windowWidth, setWindowWidth] = useState(getWindowWidth())
-
+    
     const history = useHistory()
-
+    
     const handleClose = () => {
         setShow(false)
         setStep(1)
         // setStep(demo)
     }
-
+    
     const handleShow = e => {
         e.preventDefault()
         // console.log(e.target.parentNode.id)
         setShow(true)
         setStep(e.target.parentNode.id)
     }
-
+    
     const handleNext = () => {
         setStep(parseInt(step) + 1)
     }
-
+    
     const handleBack = () => {
         setStep(parseInt(step) - 1)
     }
-
-    const setImages = () => {
-        if (project.title === "MyDraft Partner") {
-            setProjectImages(demos.draft)
-        } else {
-            setProjectImages(demos.pizza)
-        }
-        // console.log(projectImages)
+    
+    // const setImages = () => {
+    //     if (project.title === "MyDraft Partner") {
+    //         setProjectImages(demos.draft)
+    //     } else if (project.title === "P!ZZA") {
+    //         setProjectImages(demos.pizza)
+    //     } else if (project.title === "briangaudet.com") {
+    //         setProjectImages([])
+    //     } else if (project.title === "Myth Game") {
+    //         setProjectImages([])
+    //     } else return
+    //     console.log(projectImages)
+    // }
+    
+    const loadData = () => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 500);
     }
-
-    const loadData = async () => {
-        await new Promise((res) => setTimeout(res, 500))
-        setLoading(false)
-    }
-
+    // const loadData = async () => {
+    //     await new Promise((res) => setTimeout(res, 500))
+    //     setLoading(false)
+    // }
+    
     const resizeWindow = () => {
         setWindowHeight(window.innerHeight)
         setWindowWidth(window.innerWidth)
+        console.log(windowHeight)
+        console.log(windowWidth)
     }
 
     useEffect(() => {
+        console.log(images)
         loadData()
-        setImages()
+        // setImages()
         // getWindowHeight()
         // getWindowWidth()
         window.addEventListener("resize", resizeWindow)
@@ -109,7 +121,7 @@ const DemoModal = props => {
     return (
         <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%" }}>
-            {(projectImages) ? projectImages.map((image, idx) => {
+            {(images) ? images.map((image, idx) => {
                 if (idx < 5) return(
 
                     <div key={idx} id={idx + 1} onClick={handleShow} className={styles.demo} style={{ backgroundImage: `url(${image})`, backgroundPosition: "center" }}>
@@ -123,22 +135,23 @@ const DemoModal = props => {
             }
         {/* <div onClick={handleShow} className={styles.demo} style={{ backgroundImage: `url(/static/media/rorschach.b0972cda.webp)` }}>
             <div className={styles.demoMask}> */}
-            <Modal show={show} onHide={handleClose} className={styles.modalBody} style={{ backgroundImage: `url(${projectImages[step - 1]})` }} >
-                {(step < 1 || step > projectImages.length) ? handleClose()
+
+            <Modal show={show} onHide={handleClose} className={(project.title === "P!ZZA") ? styles.mobileBody : styles.modalBody} style={(project.title === "P!ZZA") ? { backgroundImage: `url(${images[step - 1]})`, transform: `translateY(-${Math.max(800, windowHeight)}px) translateX(${windowWidth / 3}px)` } : { backgroundImage: `url(${images[step - 1]})`, transform: `translateY(-${Math.max(800, windowHeight)}px) translateX(${windowWidth / 8}px)` }} >
+                {(step < 1 || step > images.length) ? handleClose()
                 :
                 <Container className={styles.modalContainer} >
                     <Modal.Header style={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", fontSize: "20pt", fontFamily: "Roboto" }}>
                         {/* <Button onClick={() => setStep(0)}> */}
-                        <div className={styles.modalButton} onClick={handleClose}>
+                        <div className={(project.title === "P!ZZA") ? styles.mobileButton : styles.modalButton} onClick={handleClose}>
                             X
                         </div>
                     </Modal.Header>
                     <Modal.Body >
-                        {/* <img src={projectImages[step - 1]} ></img> */}
+                        {/* <img src={images[step - 1]} ></img> */}
                     </Modal.Body>
                     <Modal.Footer style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                        <div className={styles.modalButton} onClick={handleBack} >back</div>
-                        <div className={styles.modalButton} onClick={handleNext} >next</div>
+                        <div className={(project.title === "P!ZZA") ? styles.mobileButton : styles.modalButton} onClick={handleBack} >back</div>
+                        <div className={(project.title === "P!ZZA") ? styles.mobileButton : styles.modalButton} onClick={handleNext} >next</div>
                     </Modal.Footer>
                 </Container>
 
@@ -201,7 +214,19 @@ const DemoModal = props => {
         {/* </div>
         </div> */}
         </div>
-        <Link onClick={handleShow} className={styles.link} > +3 more images</Link>
+        {(images.length > 5) ?
+        <Link 
+            to="#" 
+            onClick={() => {
+                setStep(6)
+                setShow(true)
+            }}
+            className={styles.link} 
+        > 
+            +{images.length - 5} more image(s)
+        </Link>
+        : null
+        }
         </div>
     )
 }

@@ -27,8 +27,8 @@ const CustomCarousel = props => {
     const [cardThreeAngle, setCardThreeAngle] = useState(180)
     const [cardFourAngle, setCardFourAngle] = useState(180)
 
-    // pull projects array from props
-    const { projects } = props
+    // pull projects array and images array from props
+    const { projects, images } = props
 
     // function to flip cards
     const flipCard = num => {
@@ -261,7 +261,7 @@ const CustomCarousel = props => {
                                 <div id="left" className={styles.left}></div>
                                 <div id="right" className={styles.right}></div>
                                 <div id="card-one-back" className={styles.cardBack}>
-                                    <CardBack flipCard={frontFlip2} flip={"one"} project={projects[0]} />
+                                    <CardBack flipCard={frontFlip2} flip={"one"} project={projects[0]} images={images.draft} />
                                     {/* <div id="mask">
                                         <h4>PROJECT TITLE</h4>
                                         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt commodi facilis repellat? Illum soluta delectus ipsa, sapiente mollitia fugiat quas expedita similique nobis ullam at sit suscipit voluptate pariatur labore.</p>
@@ -286,7 +286,7 @@ const CustomCarousel = props => {
                                 <div id="left" className={styles.left}></div>
                                 <div id="right" className={styles.right}></div>
                                 <div id="card-two-back" className={styles.cardBack}>
-                                    <CardBack flipCard={frontFlip2} flip={"two"} project={projects[1]} />
+                                    <CardBack flipCard={frontFlip2} flip={"two"} project={projects[1]} images={images.pizza} />
                                 </div>
                                 <div id="card-two-front" className={styles.cardFront}>
                                     <CardFront flipCard={frontFlip2} flip={"two"} project = {projects[1]} />
@@ -300,7 +300,7 @@ const CustomCarousel = props => {
                                 <div id="left" className={styles.left}></div>
                                 <div id="right" className={styles.right}></div>
                                 <div id="card-three-back" className={styles.cardBack}>
-                                    <CardBack flipCard={frontFlip2} flip={"three"} project={projects[2]} />
+                                    <CardBack flipCard={frontFlip2} flip={"three"} project={projects[2]} images={images.myth} />
                                 </div>
                                 <div id="card-three-front" className={styles.cardFront}>
                                     <CardFront flipCard={frontFlip2} flip={"three"} project = {projects[2]} />
@@ -314,7 +314,7 @@ const CustomCarousel = props => {
                                 <div id="left" className={styles.left}></div>
                                 <div id="right" className={styles.right}></div>
                                 <div id="card-four-back" className={styles.cardBack}>
-                                    <CardBack flipCard={frontFlip2} flip={"four"} project={projects[3]} />
+                                    <CardBack flipCard={frontFlip2} flip={"four"} project={projects[3]} images={images.portfolio} />
                                 </div>
                                 <div id="card-four-front" className={styles.cardFront}>
                                     <CardFront flipCard={frontFlip2} flip={"four"} project = {projects[3]} />

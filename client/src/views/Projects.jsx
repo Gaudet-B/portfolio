@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react'
-import styles from '../components/projects.style.module.css'
+import axios from 'axios'
+
 import CustomCarousel from '../components/CustomCarousel'
 import Header from '../components/Header'
-import axios from 'axios'
+
+import styles from '../components/projects.style.module.css'
+import getImages from '../scripts/images.js'
 
 
 const Projects = () => {
 
     const [loading, setLoading] = useState(true)
     const [projects, setProjects] = useState([])
+    const [images, setImages] = useState(getImages())
 
     const loadData = async () => {
         await new Promise((res) => setTimeout(res, 3000))
@@ -18,6 +22,8 @@ const Projects = () => {
     useEffect(() => {
         document.querySelector("html").setAttribute("style", "overflow-x: auto; overflow-y: auto;")
         loadData()
+        // images = getImages()
+        console.log(images)
         axios.get("http://localhost:8000/api/projects")
             .then(res => {
                 setProjects(res.data)
@@ -43,7 +49,7 @@ const Projects = () => {
                     <Header left="HOME" right="CONTACT"/>
                     <h2>P R O J E C T S</h2>
                     <div style={{ width: "fit-content", margin: "auto" }}>
-                        <CustomCarousel projects={projects} />
+                        <CustomCarousel projects={projects} images={images} />
                     </div>
                 </div>
             </div>

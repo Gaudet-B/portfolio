@@ -19,6 +19,7 @@ span {
 
 .mainContainer {
     position: absolute;
+    /* width: 100%; */
     width: 90vw;
     padding-left: 50px;
     padding-right: 50px;

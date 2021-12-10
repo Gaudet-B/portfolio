@@ -6,7 +6,7 @@ import styles from '../components/carousel.style.module.css'
 
 const CardBack = props => {
 
-    const { project, flipCard, flip } = props
+    const { project, images, flipCard, flip } = props
     // const { details, demo } = project
 
     // const splitArr = (num, arr) => {
@@ -37,20 +37,24 @@ const CardBack = props => {
                 <div style={{ height: "0px", border: "1px solid rgba(0, 143, 17, .9)", width: "65%", margin: "auto" }}></div>
                 <div>
                     <p style={{fontSize: "14pt", marginTop: "10px", marginBottom: "5px", textDecoration: "underline" }}><strong>Application Details:</strong></p>
-                    <ul style={{ textAlign: "left" }}>
+                    
                     {(project.details.length > 1) ?
-                    project.details.map((detail, idx) => {
+                    <ul style={{ textAlign: "left" }}>
+                    {project.details.map((detail, idx) => {
                         return (
                             <li key={idx} style={{ margin: "10px 0px" }}>{detail}</li>
                             )
-                        })
-                        :
-                        <p>{project.details}</p>
-                    }
+                        })}
                     </ul>
+                    :
+                    <div>
+                    <br/><p style={{ width: "fit-content", margin: "auto" }}>{project.details}</p><br/>
+                    </div>
+                    }
+
                 </div>
                 <div style={{ height: "0px", border: "1px solid rgba(0, 143, 17, .9)", width: "65%", margin: "auto" }}></div>
-                <Demo project={project} />
+                <Demo project={project} images={images} />
                 <p className={styles.flipLink} onClick={() => flipCard(flip)}><strong> || </strong> flip back to the front of card <strong> || </strong></p>
                 {/* <a href={project.github} style={{ marginTop: "10px", position: "relative" }} >Github Repo</a> */}
 
