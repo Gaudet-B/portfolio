@@ -38,7 +38,7 @@
     min-width: fit-content;
     max-width: 60vw;
     height: fit-content;
-    margin-top: 2em;
+    /* margin-top: 2em; */
     margin: auto;
     padding: 50px 80px;
     display: flex;
@@ -47,6 +47,19 @@
     border-radius: 10% / 15%;
     background-color: rgb(20, 20, 20, 0.4);
     /* height: 500px; */
+}
+.responsiveMain {
+    max-width: fit-content;
+    /* max-width: 60vw; */
+    height: fit-content;
+    /* margin-top: 2em; */
+    margin: auto;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    border: 5px double whitesmoke;
+    border-radius: 10% / 15%;
+    background-color: rgb(20, 20, 20, 0.4);
 }
 
 .formComponent {
@@ -57,6 +70,14 @@
     justify-content: space-between;
     text-align: left;
 }
+.responsiveComponent {
+    width: 100%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    text-align: left;
+}
 
 .label {
     width: 38%;
@@ -64,11 +85,29 @@
     font-size: 1.7rem;
     color: whitesmoke;
 }
+.responsiveLabel {
+    width: 90%;
+    font-size: 1.7rem;
+    color: whitesmoke;
+    margin-bottom: 20px
+}
 
 .textInput {
     margin: 0px 12px;
     padding: 8px;
     width: 60%;
+    max-width: 400px;
+    min-height: 30px;
+    /* max-width: 50%; */
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    box-shadow: 0 15px 15px -10px rgba(245, 245, 245, 0.24);
+}
+.responsiveInput {
+    margin: 0px 12px;
+    padding: 8px;
+    width: 80%;
     max-width: 400px;
     min-height: 30px;
     /* max-width: 50%; */

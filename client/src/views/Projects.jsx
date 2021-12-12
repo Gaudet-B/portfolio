@@ -46,7 +46,7 @@ const Projects = () => {
         return (
             <div className={styles.bg}>
                 <div id="projectsContainer" className={styles.projectsBackground}>
-                    <Header left="HOME" right="CONTACT"/>
+                    <Header left="HOME" right="CONTACT" windowWidth={1200}/>
                     <h2>P R O J E C T S</h2>
                     <div style={{ width: "fit-content", margin: "auto" }}>
                         <CustomCarousel projects={projects} images={images} />

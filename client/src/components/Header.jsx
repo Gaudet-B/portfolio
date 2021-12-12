@@ -7,7 +7,7 @@ const Header = props => {
     // import classnames utility --> https://github.com/JedWatson/classnames //
     const classNames = require("classnames")
 
-    const {left, right} = props
+    const {left, right, windowWidth} = props
 
     // const handleLeft = () => {
     //     if (left == "HOME") {
@@ -50,9 +50,9 @@ const Header = props => {
     // const rightStyle = classNames("nav right")
 
     return (
-        <div className={styles.mainContainer}>
-            <a href={leftLink} id="left" className={styles.nav}> &lt; { left }<span aria-hidden="true"></span> </a>
-            <a href={rightLink} id="right" className={styles.nav}> { right }<span aria-hidden="true"></span> &gt; </a>
+        <div className={(windowWidth > 800) ? styles.mainContainer : (windowWidth < 375) ? styles.smallContainer : styles.responsiveContainer} style={{ width: `${windowWidth * .9}px` }}>
+            <a href={leftLink} id="left" className={(windowWidth > 800) ? styles.nav : (windowWidth < 375) ? styles.smallNav : styles.responsiveNav}> &lt; { left }<span aria-hidden="true"></span> </a>
+            <a href={rightLink} id="right" className={(windowWidth > 800) ? styles.nav : (windowWidth < 375) ? styles.smallNav : styles.responsiveNav}> { right }<span aria-hidden="true"></span> &gt; </a>
         </div>
     )
 }

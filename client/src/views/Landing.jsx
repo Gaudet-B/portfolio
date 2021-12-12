@@ -3,6 +3,13 @@ import styles from '../components/landing.style.module.css'
 
 
 const Landing = () => {
+
+    const getWindowHeight = () => {
+        return window.innerHeight
+    }
+    const getWindowWidth = () => {
+        return window.innerWidth
+    }
     
     // import classnames utility --> https://github.com/JedWatson/classnames //
     const classNames = require("classnames")
@@ -13,7 +20,16 @@ const Landing = () => {
         return JSON.parse(stored)
     }
 
+    const [windowHeight, setWindowHeight] = useState(getWindowHeight())
+    const [windowWidth, setWindowWidth] = useState(getWindowWidth())
     const [loaded, setLoaded] = useState(getSessionStorageOrDefault('loaded', false))
+
+    const resizeWindow = () => {
+        setWindowHeight(window.innerHeight)
+        setWindowWidth(window.innerWidth)
+        console.log(windowHeight)
+        console.log(windowWidth)
+    }
 
     var counter = 0
 
@@ -22,29 +38,51 @@ const Landing = () => {
         // display the buttons and thier labels
         let project = document.getElementById("projects")
         setTimeout(() => project.setAttribute("class", styles.projects), 200)
-        setTimeout(() => project.setAttribute("class", `${styles.hoverZoom} ${styles.projects}`), 2000)
+        setTimeout(() => {
+            if (windowWidth > 800) {
+                project.setAttribute("class", `${styles.hoverZoom} ${styles.projects}`)
+            } else {
+                project.setAttribute("class", `${styles.responsiveButton} ${styles.projects}`)
+            }
+        }, 2000)
         let projectLabel = document.getElementById("projects-label")
         setTimeout(() => projectLabel.setAttribute("class", styles.label), 2000)
-        setTimeout(() => projectLabel.innerHTML = "<p>Personal</p><p>Projects</p>", 2000)
+        setTimeout(() => projectLabel.innerHTML = "<p>Personal</p><p style='margin-bottom: 50px'>Projects</p>", 2000)
 
         let contact = document.getElementById("contact")
         setTimeout(() => contact.setAttribute("class", styles.contact), 200)
-        setTimeout(() => contact.setAttribute("class", `${styles.hoverZoom} ${styles.contact}`), 2000)
+        setTimeout(() => {
+            if (windowWidth > 800) {
+                contact.setAttribute("class", `${styles.hoverZoom} ${styles.contact}`)
+            } else {
+                contact.setAttribute("class", `${styles.responsiveButton} ${styles.contact}`)
+            }
+        }, 2000)
         let contactLabel = document.getElementById("contact-label")
         setTimeout(() => contactLabel.setAttribute("class", styles.label), 2000)
-        setTimeout(() => contactLabel.innerHTML = "<p>Contact</p>", 2000)
+        setTimeout(() => contactLabel.innerHTML = "<p style='margin-bottom: 15px'>Contact</p>", 2000)
 
         let resume = document.getElementById("resume")
         setTimeout(() => resume.setAttribute("class", styles.resume), 200)
-        setTimeout(() => resume.setAttribute("class", `${styles.hoverZoom} ${styles.resume}`), 2000)
+        setTimeout(() => {
+            if (windowWidth > 800) {
+                resume.setAttribute("class", `${styles.hoverZoom} ${styles.resume}`)
+            } else {
+                resume.setAttribute("class", `${styles.responsiveButton} ${styles.resume}`)
+            }
+        }, 2000)
         let resumeLabel = document.getElementById("resumeLabel")
         setTimeout(() => resumeLabel.setAttribute("class", styles.label), 2000)
-        setTimeout(() => resumeLabel.innerHTML = "<p>Professional</p><p>Resume</p>", 2000)
+        setTimeout(() => resumeLabel.innerHTML = "<p>Professional</p><p style='margin-bottom: 50px'>Resume</p>", 2000)
 
     }
 
     // --> DISPLAY BACKGROUND <--
     const displayBackground = () => {
+
+        if (windowWidth <= 800) return
+
+        else {
         
         // displays each div that makes up the background "grid"
         document.getElementById("bg-horizontal").setAttribute("class", styles.bgHorizontal)
@@ -77,11 +115,13 @@ const Landing = () => {
         setTimeout(() => document.getElementById("bg-vertical-6-lights").setAttribute("class", styles.bgLights), 3500 + 30)
         setTimeout(() => document.getElementById("bg-vertical-6-light-block").setAttribute("class", styles.bgLightBlock), 3500)
 
+        }
     }
 
     // --> DISPLAY SOCIAL LINKS <--
     const displaySocial = () => {
-        document.getElementById("social").setAttribute("class", styles.social)
+        
+        (windowWidth > 800) ? document.getElementById("social").setAttribute("class", styles.social) : document.getElementById("social").setAttribute("class", styles.responsiveSocial)
 
         document.getElementById("socialLinkedIn").setAttribute("class", styles.socialLinkedIn)
         document.getElementById("socialLinkedIn").setAttribute("href", "http://linkedin.com/in/brian-f-gaudet")
@@ -94,7 +134,7 @@ const Landing = () => {
 
     // --> DISPLAY COPYRIGHT AND EST. TEXT <--
     const displayCopyright = () => {
-        document.getElementById("copyright").setAttribute("class", styles.copyright)
+        (windowWidth > 800) ? document.getElementById("copyright").setAttribute("class", styles.copyright) : document.getElementById("copyright").setAttribute("class", styles.responsiveCopyright)
         document.getElementById("copyright").innerHTML = "<p>© BrianGaudet</p><p>Est. 1986</p><p>Boston, MA</p>"
     }
 
@@ -156,7 +196,7 @@ const Landing = () => {
     }
 
     // function to start the typewriter
-    const StartTextAnimation = (i) => {
+    const StartTextAnimation = i => {
         if (typeof dataText[i] == 'undefined') {
             return
         }
@@ -177,6 +217,8 @@ const Landing = () => {
     const dataText = ["Brian F. Gaudet", "  ", "Full Stack", "Web Developer"]
 
     useEffect(() => {
+
+        (windowWidth > 800) ? document.querySelector("html").setAttribute("style", "overflow-x: hidden; overflow-y: hidden;") : document.querySelector("html").setAttribute("style", "overflow-x: hidden; overflow-y: auto;")
         
         // sessionStorage.setItem('loaded', JSON.stringify(loaded))
         // console.log(loaded)
@@ -198,6 +240,7 @@ const Landing = () => {
 
             // setLoaded(true)
             sessionStorage.setItem('loaded', JSON.stringify(true))
+            window.addEventListener("resize", resizeWindow)
 
         } else if (loaded) {
             // just display the page loading animations (without typewriter) without delays
@@ -205,10 +248,12 @@ const Landing = () => {
             displayBackground()
             displayCopyright()
             displaySocial()
+            window.addEventListener("resize", resizeWindow)
         }
         return () => {
             // setLoaded(true)
             sessionStorage.setItem('loaded', JSON.stringify(true))
+            window.removeEventListener("resize", resizeWindow)
         }
         // })
     }, [loaded])
@@ -217,7 +262,11 @@ const Landing = () => {
     const typedLineClassInvis = `${styles.typedLine} ${styles.line1} ${styles.invis}`
     
     return (
-        <div id="background-image" className={styles.bg} >
+        <div id="background-image" className={(windowWidth > 800) ? styles.bg : styles.responsiveBg} >
+            {(windowWidth <= 800) ? 
+            null
+            :
+            <div>
             <div id="bg-horizontal"></div>
             <div id="bg-vertical-0">
                 <div id="bg-vertical-0-light-block">
@@ -254,7 +303,10 @@ const Landing = () => {
                     <div id="bg-vertical-6-lights"></div>
                 </div>
             </div>
-            <div className={styles.body}>
+            </div>
+            }
+
+            <div className={(windowWidth > 800) ? styles.body : styles.responsiveBody}>
 
                 {
                     // (!sessionStorage.getItem('loaded')) ?
@@ -279,7 +331,7 @@ const Landing = () => {
                 <h3 id="line-three" className={typedLineClass}></h3>
                 <h3 id="line-four" className={typedLineClass}></h3> */}
 
-                <div id="display-buttons" className={styles.buttonContainer}>
+                <div id="display-buttons" className={(windowWidth > 800) ? styles.buttonContainer : styles.responsiveContainer}>
 
                     {/* Projects Button */}
                     <div id="" className={styles.button}>
@@ -289,7 +341,8 @@ const Landing = () => {
                         <div id="projects-label" className=""></div>
                     </div>
 
-                    {/* Contact Button */}
+                    {(windowWidth > 800) ? 
+                    // Contact Button
                     <div className={styles.button}>
                         <a id="contact" href="/contact" className="" >
                             <div className={styles.mask}></div>
@@ -305,15 +358,41 @@ const Landing = () => {
                         {/* Copyright & Est. Text */}
                         <div id="copyright" className=""></div>
                     </div>
-
-                    {/* Resume Button */}
+                    :
+                    // Resume Button
                     <div className={styles.button}>
                         <a id="resume" href="/resume" className="" >
                             <div className={styles.mask}></div>
                         </a>
                         <div id="resumeLabel" className=""></div>
                     </div>
+                    }
+                    {(windowWidth > 800) ? 
+                    // Resume Button
+                    <div className={styles.button}>
+                        <a id="resume" href="/resume" className="" >
+                            <div className={styles.mask}></div>
+                        </a>
+                        <div id="resumeLabel" className=""></div>
+                    </div>
+                    :
+                    // Contact Button
+                    <div className={styles.button}>
+                        <a id="contact" href="/contact" className="" >
+                            <div className={styles.mask}></div>
+                        </a>
+                        <div id="contact-label" className=""></div>
 
+                        {/* Socail Links */}
+                        <div id="social" className="">
+                            <a id="socialLinkedIn"></a>
+                            <a id="socialGitHub"></a>
+                        </div>
+
+                        {/* Copyright & Est. Text */}
+                        <div id="copyright" className=""></div>
+                    </div>
+                    }
                 </div>
             </div>
             {/* <script type="text/javascript" src="/src/components/landingScript.js"></script> */}

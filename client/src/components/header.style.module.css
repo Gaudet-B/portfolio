@@ -20,9 +20,27 @@ span {
 .mainContainer {
     position: absolute;
     /* width: 100%; */
-    width: 90vw;
+    /* width: 90vw; */
     padding-left: 50px;
     padding-right: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Anonymous Pro';
+}
+.responsiveContainer {
+    position: absolute;
+    padding-left: 40px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: 'Anonymous Pro';
+}
+.smallContainer {
+    position: absolute;
+    padding-left: 20px;
+    padding-right: 0px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -41,6 +59,28 @@ span {
     /* margin-top: -6rem;  */
     border-bottom: none; 
     line-height: 0;
+}
+.responsiveNav {
+    color: rgba(0, 143, 17, .9);
+    display: inline-block; 
+    text-decoration: none; 
+    font-size: 1.5rem; 
+    transition: 0.6s color; 
+    position: relative;
+    border-bottom: none; 
+    line-height: 0;
+}
+.smallNav {
+    color: rgba(0, 143, 17, .9);
+    display: inline-block; 
+    text-decoration: none; 
+    font-size: 1.2rem; 
+    transition: 0.6s color; 
+    position: relative;
+    border-bottom: none; 
+    line-height: 0;
+    margin-right: 25px;
+    padding: 0px 6px
 }
 
 /* #left {
