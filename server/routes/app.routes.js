@@ -21,9 +21,5 @@ module.exports = app => {
     app.get("/api/projects/:id", authenticate, ProjectController.one)
     app.put("/api/projects/update/:id", authenticate, upload.single('mainImage'), ProjectController.edit)
     app.delete("/api/projects/delete/:id", authenticate, ProjectController.delete)
-    
-    // app.post("/api/registeradmin", AdminController.new)
-    // app.get("/api/adminconsole", authenticate, AdminController.findOne)
-    // app.get("/api/admins", AdminController.all)
-    // app.delete("/api/:id", AdminController.delete)
+
 }

@@ -1,6 +1,4 @@
 
-// const nodemailer = require("nodemailer")
-// require('dotenv').config()
 const userName = process.env.USER_SECRET_KEY
 const passWord = process.env.PASS_SECRET_KEY
 
