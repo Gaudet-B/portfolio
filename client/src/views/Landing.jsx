@@ -4,26 +4,27 @@ import styles from '../components/landing.style.module.css'
 
 const Landing = () => {
 
+    // functions that track height and width of the window for responsive components
     const getWindowHeight = () => {
         return window.innerHeight
     }
     const getWindowWidth = () => {
         return window.innerWidth
     }
-    
-    // import classnames utility --> https://github.com/JedWatson/classnames //
-    const classNames = require("classnames")
 
+    // function that returns either a value from session or a default that is passed in
     const getSessionStorageOrDefault = (key, defaultValue) => {
         const stored = sessionStorage.getItem(key)
         if (!stored) return defaultValue
         return JSON.parse(stored)
     }
 
+    // height and width of window are stored in local state
     const [windowHeight, setWindowHeight] = useState(getWindowHeight())
     const [windowWidth, setWindowWidth] = useState(getWindowWidth())
     const [loaded, setLoaded] = useState(getSessionStorageOrDefault('loaded', false))
 
+    // function to be added to the onResize event listener
     const resizeWindow = () => {
         setWindowHeight(window.innerHeight)
         setWindowWidth(window.innerWidth)
@@ -31,11 +32,13 @@ const Landing = () => {
         console.log(windowWidth)
     }
 
+    // counts the number of lines the typewriter has typed - prevents the animation from looping
     var counter = 0
 
+    // --> DISPLAY BUTTONS <--
     const displayButtons = () => {
 
-        // display the buttons and thier labels
+        // display the buttons and their labels
         let project = document.getElementById("projects")
         setTimeout(() => project.setAttribute("class", styles.projects), 200)
         setTimeout(() => {
@@ -80,6 +83,7 @@ const Landing = () => {
     // --> DISPLAY BACKGROUND <--
     const displayBackground = () => {
 
+        // on smaller screens, do not display the animated background
         if (windowWidth <= 800) return
 
         else {
@@ -121,6 +125,7 @@ const Landing = () => {
     // --> DISPLAY SOCIAL LINKS <--
     const displaySocial = () => {
         
+        // separate class handles styling on smaller screens
         (windowWidth > 800) ? document.getElementById("social").setAttribute("class", styles.social) : document.getElementById("social").setAttribute("class", styles.responsiveSocial)
 
         document.getElementById("socialLinkedIn").setAttribute("class", styles.socialLinkedIn)
@@ -134,6 +139,7 @@ const Landing = () => {
 
     // --> DISPLAY COPYRIGHT AND EST. TEXT <--
     const displayCopyright = () => {
+        // separate class handles styling on smaller screens
         (windowWidth > 800) ? document.getElementById("copyright").setAttribute("class", styles.copyright) : document.getElementById("copyright").setAttribute("class", styles.responsiveCopyright)
         document.getElementById("copyright").innerHTML = "<p>© BrianGaudet</p><p>Est. 1986</p><p>Boston, MA</p>"
     }
@@ -218,11 +224,8 @@ const Landing = () => {
 
     useEffect(() => {
 
+        // allows vertical scrolling on smaller screens
         (windowWidth > 800) ? document.querySelector("html").setAttribute("style", "overflow-x: hidden; overflow-y: hidden;") : document.querySelector("html").setAttribute("style", "overflow-x: hidden; overflow-y: auto;")
-        
-        // sessionStorage.setItem('loaded', JSON.stringify(loaded))
-        // console.log(loaded)
-        // console.log(sessionStorage.getItem('loaded'))
 
         if (!loaded) {
             console.log(`LOADED 1 -> ${loaded}`)
@@ -236,10 +239,10 @@ const Landing = () => {
             setTimeout(displaySocial, 10000)
             // delay, then call the function to display copyright and est. text
             setTimeout(displayCopyright, 10200)
-            // set loaded to true, so animation doesn't happen on subsequent visits
 
-            // setLoaded(true)
+            // store "loaded" state in session, so user will not see typerwriter animation after first visit
             sessionStorage.setItem('loaded', JSON.stringify(true))
+            // add the resizeWindow function to the window as an event listener
             window.addEventListener("resize", resizeWindow)
 
         } else if (loaded) {
@@ -248,20 +251,24 @@ const Landing = () => {
             displayBackground()
             displayCopyright()
             displaySocial()
+            // add the resizeWindow function to the window as an event listener
             window.addEventListener("resize", resizeWindow)
         }
         return () => {
-            // setLoaded(true)
+            // store "loaded" state in session, so user will not see typerwriter animation after first visit
             sessionStorage.setItem('loaded', JSON.stringify(true))
+            // remove event listener when component unmounts
             window.removeEventListener("resize", resizeWindow)
         }
-        // })
     }, [loaded])
 
+    // styles for the typewriter lines
     const typedLineClass = `${styles.typedLine} ${styles.line1}`
     const typedLineClassInvis = `${styles.typedLine} ${styles.line1} ${styles.invis}`
     
     return (
+
+        // only display background w/ anmations if screen is large enough - otherwise, use bg image
         <div id="background-image" className={(windowWidth > 800) ? styles.bg : styles.responsiveBg} >
             {(windowWidth <= 800) ? 
             null
@@ -308,9 +315,8 @@ const Landing = () => {
 
             <div className={(windowWidth > 800) ? styles.body : styles.responsiveBody}>
 
-                {
-                    // (!sessionStorage.getItem('loaded')) ?
-                    (!loaded) ?
+            {/* if this is the first visit, display typewriter animation to user */}
+                {(!loaded) ?
                         <div className={styles.typewriterDiv}>
                             <h1 id="name" className={typedLineClass}></h1>
                             <h3 id="line-two" className={typedLineClassInvis}></h3>
@@ -318,6 +324,7 @@ const Landing = () => {
                             <h3 id="line-four" className={typedLineClass}></h3>
                         </div>
                     :
+            // otherwise, text will appear without the animation
                         <div className={styles.typewriterDiv}>
                             <h1 id="name" className={typedLineClass}>{ dataText[0] }</h1>
                             <h3 id="line-two" className={typedLineClassInvis}>{ dataText[1] }</h3>
@@ -326,26 +333,22 @@ const Landing = () => {
                         </div>
                 }
 
-                {/* <h1 id="name" className={typedLineClass}></h1>
-                <h3 id="line-two" className={typedLineClassInvis}></h3>
-                <h3 id="line-three" className={typedLineClass}></h3>
-                <h3 id="line-four" className={typedLineClass}></h3> */}
-
                 <div id="display-buttons" className={(windowWidth > 800) ? styles.buttonContainer : styles.responsiveContainer}>
 
                     {/* Projects Button */}
                     <div id="" className={styles.button}>
                         <a id="projects" href="/projects" className="" >
-                            <div className={styles.mask}></div>
+                            {(windowWidth > 800) ? <div className={styles.mask}></div> : null}
                         </a>
                         <div id="projects-label" className=""></div>
                     </div>
 
+                    {/* when component is in 'landscape' mode, display Contact in middle */}
                     {(windowWidth > 800) ? 
                     // Contact Button
                     <div className={styles.button}>
                         <a id="contact" href="/contact" className="" >
-                            <div className={styles.mask}></div>
+                            {(windowWidth > 800) ? <div className={styles.mask}></div> : null}
                         </a>
                         <div id="contact-label" className=""></div>
 
@@ -362,16 +365,18 @@ const Landing = () => {
                     // Resume Button
                     <div className={styles.button}>
                         <a id="resume" href="/resume" className="" >
-                            <div className={styles.mask}></div>
+                            {(windowWidth > 800) ? <div className={styles.mask}></div> : null}
                         </a>
                         <div id="resumeLabel" className=""></div>
                     </div>
                     }
+
+                    {/* when component is in 'portrait' mode, display Contact at bottom */}
                     {(windowWidth > 800) ? 
                     // Resume Button
                     <div className={styles.button}>
                         <a id="resume" href="/resume" className="" >
-                            <div className={styles.mask}></div>
+                            {(windowWidth > 800) ? <div className={styles.mask}></div> : null}
                         </a>
                         <div id="resumeLabel" className=""></div>
                     </div>
@@ -379,7 +384,7 @@ const Landing = () => {
                     // Contact Button
                     <div className={styles.button}>
                         <a id="contact" href="/contact" className="" >
-                            <div className={styles.mask}></div>
+                            {(windowWidth > 800) ? <div className={styles.mask}></div> : null}
                         </a>
                         <div id="contact-label" className=""></div>
 
@@ -395,7 +400,6 @@ const Landing = () => {
                     }
                 </div>
             </div>
-            {/* <script type="text/javascript" src="/src/components/landingScript.js"></script> */}
         </div>
     )
 }

@@ -13,8 +13,6 @@
     height: 100px;
     width: 100px;
     border: 1px solid black;
-    /* background-image: url("../assets/rorschach.webp"); */
-    /* background-color: lavenderblush; */
     background-size: cover;
     cursor: pointer;
 }
@@ -32,7 +30,6 @@
 
 .modalBody {
     position: absolute;
-    /* transform: translateY(-1000px) translateX(55px); */
     box-shadow: 0px 0px 0px 750px rgb(26, 26, 26, .9);
     background-color: rgb(26, 26, 26, .9);
     border: 2px solid transparent;
@@ -47,7 +44,6 @@
 
 .mobileBody {
     position: absolute;
-    /* transform: translateY(0px) translateX(500px); */
     box-shadow: 0px 0px 0px 750px rgb(26, 26, 26, .9);
     background-color: rgb(26, 26, 26, .9);
     border: 2px solid transparent;
@@ -55,15 +51,11 @@
     border-radius: 3% / 5%;
     background-size: cover;
     width: 400px;
-    /* max-width: 90vw; */
     max-height: 90vh;
-    /* min-width: 400px; */
     min-height: 700px
 }
 
 .modalContainer {
-    /* height: 100%; */
-    /* min-width: 1150px; */
     min-height: 700px;
     width: 100%;
     display: flex;
@@ -87,7 +79,6 @@
     box-shadow: 0px 0px 10px 1px rgb(26, 26, 26, .9);
 }
 .modalButton:hover {
-    /* font-size: 38px; */
     background-color: rgb(26, 26, 26);
     color: whitesmoke;
 }
@@ -107,14 +98,6 @@
     box-shadow: 0px 0px 10px 1px rgb(26, 26, 26, .9);
 }
 .mobileButton:hover {
-    /* font-size: 38px; */
     background-color: whitesmoke;
     color: rgb(26, 26, 26);
 }
-
-/* .link {
-    color: whitesmoke;
-} */
-/* .link:hover {
-    color: whitesmoke;
-} */

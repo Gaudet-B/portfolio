@@ -5,26 +5,20 @@ import axios from 'axios'
 
 const Form = props => {
 
-    // const getWindowHeight = () => {
-    //     return window.innerHeight
-    // }
-    // const getWindowWidth = () => {
-    //     return window.innerWidth
-    // }
-
+    // windowWidth passed down from parent
     const { windowWidth } = props
 
+    // initialize empty form
     const [formState, setFormState] = useState({
         name: "",
         email: "",
         message: "",
         reason: 'Just saying "hello."'
     })
-    
-    // const [windowHeight, setWindowHeight] = useState(getWindowHeight())
-    // const [windowWidth, setWindowWidth] = useState(getWindowWidth())
+    // input validation
     const [validState, setValidState] = useState({})
 
+    // handler for form inputs
     const handleFormChange = e => {
         setFormState({
             ...formState,
@@ -32,8 +26,10 @@ const Form = props => {
         })
     }
 
+    // submit handler 
     const handleSubmit = e => {
         e.preventDefault()
+
         axios.post("http://localhost:8000/api/contact", formState)
             .then(res => {
                 setFormState({
@@ -44,7 +40,6 @@ const Form = props => {
                 })
                 document.getElementById("contactForm").reset()
                 alert("Message sent.")
-                console.log(res.data)
             })
             .catch(err => {
                 const {errors} = err.response.data
@@ -53,44 +48,8 @@ const Form = props => {
                     errObj[key] = value.message
                 }
                 setValidState(errObj)
-                console.log(errObj)
             })
     }
-
-    // const resizeWindow = () => {
-    //     setWindowHeight(window.innerHeight)
-    //     setWindowWidth(window.innerWidth)
-    //     console.log(windowHeight)
-    //     console.log(windowWidth)
-    // }
-
-    // useEffect(() => {
-    //     window.addEventListener("resize", resizeWindow)
-    //     return () => {
-    //         window.removeEventListener("resize", resizeWindow)
-    //     }
-    // }, [])
-
-    // let offsetX 
-    // let offsetY
-
-    // const move = () => {
-    //     const button = document.getElementById("button")
-        
-    //     button.style.left = `${button.pageX - offsetX}px`
-    //     button.style.top = `${button.pageY - offsetY}px`
-    // }
-    // const add = e => {
-    //     const button = document.getElementById("button")
-    //     offsetX = e.clientX - button.getBoundingClientRect().left
-    //     offsetY = e.clientY - button.getBoundingClientRect().top
-    //     e.target.addEventListener('mousemove', move)
-    // }
-    // const remove = e => {
-    //     console.log(`OUT - ${offsetX}, ${offsetY}`)
-    //     const button = document.getElementById("button")
-    //     e.target.removeEventListener('mousemove', move)
-    // }
 
     return (
         <div style={(windowWidth > 800) ? { paddingTop: "5em" } : { paddingTop: "2em", paddingBottom: "3em", marginBottom: "1em" }}>

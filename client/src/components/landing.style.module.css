@@ -6,14 +6,6 @@
 /* ======> {{ ANIMATIONS }} <====== */
 
 /* TYPEWRITER */
-/* @keyframes typewriter {
-    from{width: 0;}
-    to{width: 10em;}
-}
-@keyframes blinkTextCursor {
-    from{border-right-color: rgba(255,255,255,0.75);}
-    to{border-right-color: transparent;}
-} */
 @keyframes caret {
     50% { border-color: transparent; }
 }
@@ -55,26 +47,20 @@
     0% {
         height: 100%;
         border-left: 1.5px solid transparent;
-        /* border-right: 2px solid transparent; */
-        /* opacity: .1; */
     }
     100% {
         height: 0%;
         border-left: 1.5px solid white;
-        /* border-right: 2px solid whitesmoke; */
-        /* opacity: 1; */
     }
 }
 @keyframes light-block {
     0% {
         height: 100%;
         border-left: 1.5px solid transparent;
-        /* border-right: 4px solid rgb(26,26,26); */
     }
     100% {
         height: 0%;
         border-left: 1.5px solid rgb(26,26,26);
-        /* border-right: 4px solid rgb(26,26,26); */
     }
 }
 
@@ -88,11 +74,6 @@
 
 /* ---> Global <--- */
 
-/* html {
-    height: 100vh;
-    overflow: hidden;
-} */
-
 body {
     margin: 0px;
 }
@@ -100,9 +81,7 @@ body {
 /* these next two are for the typewriter */
 h1 {
     font-size: 5em;
-    /* font-size: 24pt; */
     color: white;
-    /* margin-bottom: 12px; */
 }
 .body span {
     border-right: .05em solid;
@@ -117,17 +96,8 @@ h1 {
 
 }
 .responsiveBg {
-    /* background-color: rgb(25,25,25);  */
-    margin: 0px; 
-    /* min-height: fit-content; */
-    /* max-height: 100%; */
-    /* width: fit-content; */
+    margin: 0px;
     animation: un-mask 3s ease;
-    /* background-image: url("../assets/3d-background.png"); */
-    /* width: 1200px; */
-    /* height: 1500px; */
-    /* min-width: fit-content; */
-    /* max-width: 100vw; */
     -webkit-backgound-size: cover;
     -moz-backgound-size: cover;
     background-size: cover;
@@ -138,7 +108,6 @@ h1 {
     position: absolute;
     height: 100%;
     width: 100%;
-    /* color: rgba(255,255,255,.75); */
     color: rgba(0, 218, 25, 0.5);
     font-family: 'Anonymous Pro', monospace;  
     background: linear-gradient(6deg, rgba(26,26,26,0.1) 0%, rgba(25,25,25,1) 62%);
@@ -152,7 +121,6 @@ h1 {
     padding-top: 100px;
     padding-bottom: 200px;
     width: 100vw;
-    /* color: rgba(255,255,255,.75); */
     color: rgba(0, 218, 25, 0.5);
     font-family: 'Anonymous Pro', monospace;  
     background: linear-gradient(6deg, rgba(26,26,26,0) 0%, rgba(25,25,25,1) 62%);
@@ -249,16 +217,12 @@ h1 {
 .mobileBg {
     animation: un-mask 3s ease;
     background-image: url("../assets/3d-background.png");
-    /* min-height: 100vw;
-    max-height: 100%; */
     width: 100%;
     min-width: fit-content;
     max-width: 100vw;
-    /* height: 100%; */
     -webkit-backgound-size: cover;
     -moz-backgound-size: cover;
     background-size: cover;
-    /* background-position: 0px 150px; */
     text-align: center;
 }
 

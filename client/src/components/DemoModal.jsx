@@ -1,90 +1,66 @@
 import { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import Container from 'react-bootstrap/Container'
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
-
-import image1 from '../assets/rorschach_2.jpg'
-import image2 from '../assets/rorschach.webp'
-import image3 from '../assets/project_1.1_example.png'
-import image4 from '../assets/project_2_example.png'
 
 import styles from './demo.style.module.css'
-// import getImages from '../scripts/images.js'
 
 
 const DemoModal = props => {
 
+    // data to be displayed passed down from parent
     const { project, images } = props
 
+    // functions that track height and width of the window for responsive components
     const getWindowHeight = () => {
         return window.innerHeight
-        // let height = window.innerHeight
-        // setWindowHeight(height)
-        // console.log(windowHeight)
     }
     const getWindowWidth = () => {
         return window.innerWidth
-        // let width = window.innerWidth
-        // setWindowWidth(width)
-        // console.log(windowWidth)
     }
     
-    const [loading, setLoading] = useState(true)
-    const [show, setShow] = useState(false)
-    const [step, setStep] = useState(1)
-    // const [demos, setDemos] = useState(getImages())
-    // const [projectImages, setProjectImages] = useState([])
+    // height and width of window are stored in local state
     const [windowHeight, setWindowHeight] = useState(getWindowHeight())
     const [windowWidth, setWindowWidth] = useState(getWindowWidth())
     
-    const history = useHistory()
+    // boolean for spinner
+    const [loading, setLoading] = useState(true)
+
+    // boolean for modal
+    const [show, setShow] = useState(false)
+    // cycle through images in modal
+    const [step, setStep] = useState(1)
     
+    // handler that closes the modal
     const handleClose = () => {
         setShow(false)
         setStep(1)
-        // setStep(demo)
     }
     
+    // handler that shows the modal
     const handleShow = e => {
         e.preventDefault()
-        // console.log(e.target.parentNode.id)
         setShow(true)
         setStep(e.target.parentNode.id)
     }
     
+    // handlers that cycle through the images in the modal
     const handleNext = () => {
         setStep(parseInt(step) + 1)
     }
-    
     const handleBack = () => {
         setStep(parseInt(step) - 1)
     }
     
-    // const setImages = () => {
-    //     if (project.title === "MyDraft Partner") {
-    //         setProjectImages(demos.draft)
-    //     } else if (project.title === "P!ZZA") {
-    //         setProjectImages(demos.pizza)
-    //     } else if (project.title === "briangaudet.com") {
-    //         setProjectImages([])
-    //     } else if (project.title === "Myth Game") {
-    //         setProjectImages([])
-    //     } else return
-    //     console.log(projectImages)
-    // }
-    
+    // function that displays a loading spinner
     const loadData = () => {
         setTimeout(() => {
             setLoading(false)
         }, 500);
     }
-    // const loadData = async () => {
-    //     await new Promise((res) => setTimeout(res, 500))
-    //     setLoading(false)
-    // }
     
+    // function to be added to the onResize event listener
     const resizeWindow = () => {
         setWindowHeight(window.innerHeight)
         setWindowWidth(window.innerWidth)
@@ -93,20 +69,16 @@ const DemoModal = props => {
     }
 
     useEffect(() => {
-        console.log(images)
         loadData()
-        // setImages()
-        // getWindowHeight()
-        // getWindowWidth()
+        // add the resizeWindow function to the window as an event listener
         window.addEventListener("resize", resizeWindow)
-        // document.querySelector(".modal-dialog").setAttribute("style", "height: 100% !important;")
-        // document.querySelector(".modal-content").setAttribute("style", "height: 100% !important;")
-        console.log(`${windowHeight}, ${windowWidth}`)
+        // remove event listener when component unmounts
         return () => {
             window.removeEventListener("resize", resizeWindow)
         }
     }, [])
 
+    // spinner
     if (loading) {
         return (
             <div>
@@ -121,6 +93,7 @@ const DemoModal = props => {
     return (
         <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
         <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", width: "100%" }}>
+            {/* displays images in a row - 5 max */}
             {(images) ? images.map((image, idx) => {
                 if (idx < 5) return(
 
@@ -133,87 +106,30 @@ const DemoModal = props => {
                 )
             }) : null
             }
-        {/* <div onClick={handleShow} className={styles.demo} style={{ backgroundImage: `url(/static/media/rorschach.b0972cda.webp)` }}>
-            <div className={styles.demoMask}> */}
 
             <Modal show={show} onHide={handleClose} className={(project.title === "P!ZZA") ? styles.mobileBody : styles.modalBody} style={(project.title === "P!ZZA") ? { backgroundImage: `url(${images[step - 1]})`, transform: `translateY(-${Math.max(800, windowHeight)}px) translateX(${windowWidth / 3}px)` } : { backgroundImage: `url(${images[step - 1]})`, transform: `translateY(-${Math.max(800, windowHeight)}px) translateX(${windowWidth / 8}px)` }} >
                 {(step < 1 || step > images.length) ? handleClose()
                 :
                 <Container className={styles.modalContainer} >
                     <Modal.Header style={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", fontSize: "20pt", fontFamily: "Roboto" }}>
-                        {/* <Button onClick={() => setStep(0)}> */}
                         <div className={(project.title === "P!ZZA") ? styles.mobileButton : styles.modalButton} onClick={handleClose}>
                             X
                         </div>
                     </Modal.Header>
+
                     <Modal.Body >
-                        {/* <img src={images[step - 1]} ></img> */}
                     </Modal.Body>
+
                     <Modal.Footer style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                         <div className={(project.title === "P!ZZA") ? styles.mobileButton : styles.modalButton} onClick={handleBack} >back</div>
                         <div className={(project.title === "P!ZZA") ? styles.mobileButton : styles.modalButton} onClick={handleNext} >next</div>
                     </Modal.Footer>
                 </Container>
-
-
-                // (step === 1) ?
-                // <Container>
-                //     <Modal.Header>
-                //         <Button onClick={() => setStep(0)}>
-                //             X
-                //         </Button>
-                //     </Modal.Header>
-                //     <Modal.Body>
-                //         {(demo === 1) ?
-                //         <img src={image1} ></img>
-                //         :
-                //         (demo === 2) ?
-                //         <img src={image2} ></img>
-                //         :
-                //         (demo === 3) ?
-                //         <img src={image3} ></img>
-                //         :
-                //         (demo === 4) ?
-                //         <img src={image4} ></img>
-                //         :
-                //         null
-                //         }
-                //     </Modal.Body>
-                // </Container>
-                // :
-                // (step === 2) ?
-                // <Container>
-                //     <Modal.Header closeButton>
-                //     </Modal.Header>
-                //     <Modal.Body>
-
-                //     </Modal.Body>
-                // </Container>
-                // :
-                // (step === 3) ?
-                // <Container>
-                //     <Modal.Header closeButton>
-                //     </Modal.Header>
-                //     <Modal.Body>
-
-                //     </Modal.Body>
-                // </Container>
-                // :
-                // (step === 4) ?
-                // <Container>
-                //     <Modal.Header closeButton>
-                //     </Modal.Header>
-                //     <Modal.Body>
-
-                //     </Modal.Body>
-                // </Container>
-                // :
-                // <p>Loading...</p>
             }
         </Modal>
-        {/* </div>
-        </div> */}
         </div>
+
+        {/* if there are more than 5 images, display a link to access images 6+ */}
         {(images.length > 5) ?
         <Link 
             to="#" 

@@ -4,50 +4,23 @@ import styles from '../components/header.style.module.css'
 
 const Header = props => {
 
-    // import classnames utility --> https://github.com/JedWatson/classnames //
-    const classNames = require("classnames")
-
+    // link labels and windowWidth passed down from parent
     const {left, right, windowWidth} = props
 
-    // const handleLeft = () => {
-    //     if (left == "HOME") {
-    //         setShowLanding(true)
-    //     } else if (left == "CONTACT") {
-    //         setShowContact(true)
-    //     } else if (left == "PROJECTS") {
-    //         setShowProjects(true)
-    //     } else if (left == "RESUME") {
-    //         setShowResume(true)
-    //     }
-    // }
-    // const handleRight = () => {
-    //     if (right == "HOME") {
-    //         setShowLanding(true)
-    //     } else if (right == "CONTACT") {
-    //         setShowContact(true)
-    //     } else if (right == "PROJECTS") {
-    //         setShowProjects(true)
-    //     } else if (right == "RESUME") {
-    //         setShowResume(true)
-    //     }
-    // }
-
+    // link variables
     var leftLink, rightLink
-
+    // exception handling for "home" path
     if (left == "HOME") {
         leftLink = "/"
     } else {
         leftLink = left.toLowerCase()
     }
-
+    // exception handling for "home" path
     if (right == "HOME") {
         rightLink = "/"
     } else {
         rightLink = right.toLowerCase()
     }
-
-    // const leftStyle = classNames("nav left")
-    // const rightStyle = classNames("nav right")
 
     return (
         <div className={(windowWidth > 800) ? styles.mainContainer : (windowWidth < 375) ? styles.smallContainer : styles.responsiveContainer} style={{ width: `${windowWidth * .9}px` }}>

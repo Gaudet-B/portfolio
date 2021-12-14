@@ -1,3 +1,9 @@
+// this is the original functionality used to create many of the site's animations
+// everything has been moved to proper components
+// this script is left here for
+// reference purposes only
+
+
 document.addEventListener('DOMContentLoaded', function (event) {
     // the lines the typewriter will write
     const dataText = ["Brian F. Gaudet", "Full Stack", "Web Developer"]

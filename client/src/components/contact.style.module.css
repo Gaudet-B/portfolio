@@ -1,20 +1,32 @@
+/* ======> {{ CONTACT COMPONENT }} <====== */
+
+/* ---> Fonts <--- */
+
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+/* Animations: */
+
+/* subtle glow effect for headers */
 @keyframes glow {
     0% {color: rgba(255,255,255,.75); text-shadow: 1px 1px 1px rgba(255,255,255,.75);}
     50% {color: whitesmoke; text-shadow: 2px 1px 1px rgba(245, 245, 245, 0.788);}
     100% {color: rgba(255,255,255,.75); text-shadow: 1px 1px 1px rgba(255,255,255,.75);}
 }
 
+/* removes dark 'mask' from components on hover or reveals components on load */
 @keyframes un-mask {
     from {opacity: 0;}
     to {opacity: 1;}
 }
 
+/* loading spinner - outside */
 @keyframes spinner {
     0% {transform: translate3d(-50%, -50%, 0) rotate(0deg);}
     90% {transform: translate3d(-50%, -50%, 0) rotate(365deg);}
     100% {transform: translate3d(-50%, -50%, 0) rotate(360deg);}
 }
 
+/* loading spinner - inside */
 @keyframes reverse-spinner {
     0% {transform: translate3d(-50%, -50%, 0) rotate(0deg);}
     100% {transform: translate3d(-50%, -50%, 0) rotate(-360deg);}
@@ -40,20 +52,16 @@
 }
 .spinner {
     animation: spinner 2.5s ease infinite;
-    /* animation-play-state: inherit; */
     border: solid 5px transparent;
     border-bottom-color: #cfd0d1;
     border-left-color: #cfd0d1;
     border-top-color: #cfd0d1;
     border-radius: 50%;
-    /* content: ""; */
     height: 100px;
     width: 100px;
     position: absolute;
     top: 50%;
     left: 50%;
-    /* transform: translate3d(-50%, -50%, 0); */
-    /* will-change: transform; */
 }
 .logoSpinner {
     animation: reverse-spinner 3.5s linear infinite;
@@ -67,8 +75,6 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    /* top: 45%;
-    left: 47%; */
 }
 .logo {
     animation: glow 7s ease infinite;
@@ -76,34 +82,26 @@
     font-size: 3em;
     color: whitesmoke;
     position: absolute;
-    /* top: 50%;
-    left: 50%; */
     top: 47%;
     left: 48%;
 }
 
-
-
-/* ???? */
+/* background image */
 .bg {
-    /* position: absolute; */
     display: flex;
     animation: un-mask 3s ease;
     background-image: url("../assets/3d-background.png");
     height: 100%;
-    /* width: 100%; */
     -webkit-backgound-size: cover;
     -moz-backgound-size: cover;
     background-size: cover;
     text-align: center;
 }
 
+/* size and font */
 .contactBackground {
     padding-top: 4em;
     width: fit-content;
-    /* margin: auto; */
-    /* position: absolute; */
-    /* height: 100vh; */
     width: 100vw;
     color: rgba(255,255,255,.75);
     font-family: 'Anonymous Pro';

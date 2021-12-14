@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react'
+
 import Header from '../components/Header'
+
 import styles from '../components/projects.style.module.css'
+
 import git from '../assets/GitHub.jpg'
 import linked from '../assets/LinkedIn.jpg'
 import email from '../assets/email-icon.png'
 
+
 const Resume = () => {
 
+    // functions that track height and width of the window for responsive components
     const getWindowHeight = () => {
         return window.innerHeight
     }
@@ -14,6 +19,7 @@ const Resume = () => {
         return window.innerWidth
     }
 
+    // height and width of window are stored in local state
     const [windowHeight, setWindowHeight] = useState(getWindowHeight())
     const [windowWidth, setWindowWidth] = useState(getWindowWidth())
     const [loading, setLoading] = useState(true)
@@ -21,12 +27,14 @@ const Resume = () => {
     // import classnames utility --> https://github.com/JedWatson/classnames //
     const classNames = require("classnames")
 
+    // function that displays loading spinner 
     const loadData = () => {
         setTimeout(() => {
             setLoading(false)
         }, 3000)
     }
 
+    // function to be added to the onResize event listener
     const resizeWindow = () => {
         setWindowHeight(window.innerHeight)
         setWindowWidth(window.innerWidth)
@@ -37,6 +45,7 @@ const Resume = () => {
     useEffect(() => {
         loadData()
 
+        // add Bootstrap to document, remove when component unmounts (return statement - line 61)
         const link = document.createElement("link")
         link.href = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         link.rel = "stylesheet"
@@ -44,21 +53,24 @@ const Resume = () => {
         link.crossOrigin = "anonymous"
         document.body.appendChild(link)
 
+        // allow scrolling, in case that was disabled from Landing component
         document.querySelector("html").setAttribute("style", "overflow: auto;")
-        // ("style", "overflow-x: hidden; overflow-y: scroll;")
+        // add the resizeWindow function to the window as an event listener
         window.addEventListener("resize", resizeWindow)
+        // remove event listener and link when component unmounts
         return () => {
             window.removeEventListener("resize", resizeWindow)
             document.body.removeChild(link)
         }
     }, [])
 
-    // const classArr = ["bg-dark", "text-light", "p-5", "d-flex", "flex-column", "justify-content-center", styles.mainContent]
+    // combines classes for large and small screens
     const classArr = ["bg-dark", "p-5", styles.mainContent]
     const responsiveArr = ["bg-dark", "py-5", styles.mainContent]
     const mainClass = classNames(classArr)
     const responsiveClass = classNames(responsiveArr)
 
+    // spinner
     if (loading) {
         return (
             <div className={styles.loadingBackground} >
@@ -73,43 +85,48 @@ const Resume = () => {
     } else {
         return (
             <div className="bg-dark">
+
             <div className={(windowWidth > 800) ? mainClass : responsiveClass}>
+
                 <Header left="CONTACT" right="HOME" windowWidth={windowWidth} />
+
                 <div className={(windowWidth > 800) ? "bg-dark text-light p-5 d-flex flex-column justify-content-center" : "bg-dark text-light mt-3 d-flex flex-column justify-content-center"}>
-                    {/* <div className="d-flex flex-row justify-content-between px-5">
-                        <a href="#" className="link link-light text-decoration-underline ps-5" style={{ width: "fit-content", height: "fit-content", alignSelf: "center" }} >download a printable copy of this resume</a>
-                        <div className="d-flex flex-row me-5 pe-5 justify-content-evenly">
-                            <a href="/" className="link link-light text-decoration-underline mx-3">home</a>
-                            <a href="/projects" className="link link-light text-decoration-underline mx-3">projects</a>
-                            <a href="/contact" className="link link-light text-decoration-underline mx-3">contact</a>
-                        </div>
-                    </div> */}
+
                     <div className={(windowWidth > 800) ? "border border-light rounded container mt-4 p-4" : "border border-light rounded container mt-4 p-2"}>
+                    
                     <div className="d-flex flex-row justify-content-between">
+                        
                         <div className="d-flex flex-column me-4" style={(windowWidth > 800) ? { width: "65%" } : { width: "100%" }}>
                             <h1 className="display-2 text-secondary">BRIAN  GAUDET</h1>
                             <p className={(windowWidth > 800) ? "" : "ms-3"}>
                                 Highly motivated, self-sufficient and learning-obsessed developer who is seeking to collaborate with teams and individuals. Successful deployments on numerous projects have taught me both the struggle and reward of developing software applications from end to end. Experience in management, training, leadership and business operations will help guide me as I continue to grow.
                             </p>
                         </div>
+                        
                         {(windowWidth > 800) ?
                         <div className="d-flex flex-column text-end pt-4" style={{ alignItems: "flex-end", width: "fit-content" }}>
+                            
                             <a className="my-1 d-flex flex-row link link-light text-decoration-none" href="http://linkedin.com/in/brian-f-gaudet" target="_blank" style={{ width: "fit-content" }} >
                                 <p className="mt-1">linkedin.com/in/brian-f-gaudet</p>
                                 <img className="mx-2 border rounded" src={linked} alt="?" style={{ height: "40px", width: "40px" }} />
                             </a>
+                            
                             <a className="my-1 d-flex flex-row link link-light text-decoration-none" href="mailto: brian.f.gaudet@gmail.com">
                                 <p className="mt-1">brian.f.gaudet@gmail.com</p>
                                 <img className="mx-2 border rounded bg-light" src={email} alt="?" style={{ height: "40px", width: "40px" }} />
                             </a>
+                            
                             <a className="my-1 d-flex flex-row link link-light text-decoration-none" href="http://github.com/Gaudet-B" target="_blank">
                                 <p className="mt-1">github.com/Gaudet-B</p>
                                 <img className="mx-2 border rounded" src={git} alt="?" style={{ height: "40px", width: "40px" }} />
                             </a>
+
                         </div>
                         : null
                         }
                     </div>
+
+                {/* displays social links below summary on smaller screens */}
                     {(windowWidth > 800) ?
                     null
                     :
@@ -128,19 +145,24 @@ const Resume = () => {
                         </a>
                     </div>
                     }
+
                     <div className="mx-5 border-top border-secondary my-4"></div>
                     <h3 className="mt-5 mb-2 text-secondary">TECHNOLOGIES & FRAMEWORKS</h3>
+                    
                     <div className="mx-5 my-4">
                         <p className="mb-5">
                             JavaScript, Python, Java, React, Node.js, Express.js, jQuery, MySQL, MongoDB, Mongoose, Flask, Spring Boot, Socket.IO, Postman, Jinja2, AJAX, Bootstrap, React-Bootstrap, GitHub, Visual Studio Code, Sublime Text, Beautiful Soup, Selenium, bcrypt
                         </p>
                     </div>
+                    
                     <h3 className="my-3 text-secondary">TECHNICAL  PROJECTS</h3>
                     <div className={(windowWidth > 800) ? "mx-5 my-4 d-flex flex-row justify-content-between" : "my-4 d-flex flex-row justify-content-between"}>
+                        
                         <div className="d-flex flex-column" style={{ minWidth: "18%" }}>
                             <h5>MyDraft Partner</h5>
                             <h6>Full Stack Developer</h6>
                         </div>
+                        
                         <div>
                             <ul>
                                 <li>Deployed <strong>Selenium</strong> and <strong>Beautiful Soup</strong> to scrape for and parse through data, creating a <strong>MySQL</strong> database of over 500 NFL players.</li>
@@ -149,11 +171,14 @@ const Resume = () => {
                             </ul>
                         </div>
                     </div>
+
                     <div className={(windowWidth > 800) ? "mx-5 my-4 d-flex flex-row justify-content-between" : "my-4 d-flex flex-row justify-content-between"}>
+                        
                         <div className="d-flex flex-column" style={{ minWidth: "18%" }}>
                             <h5>P!ZZA</h5>
                             <h6>Full Stack Developer</h6>
                         </div>
+                        
                         <div>
                             <ul>
                                 <li>Utilized Square’s <strong>API</strong> for secure and frictionless payments.</li>
@@ -162,11 +187,14 @@ const Resume = () => {
                             </ul>
                         </div>
                     </div>
+                    
                     <div className={(windowWidth > 800) ? "mx-5 my-4 d-flex flex-row justify-content-between" : "my-4 d-flex flex-row justify-content-between"}>
+                        
                         <div className="d-flex flex-column" style={{ minWidth: "18%" }}>
                             <h5 className="text-break">briangaudet.com</h5>
                             <h6>Full Stack Developer</h6>
                         </div>
+                        
                         <div>
                             <ul>
                                 <li>Wrote various custom CSS animations, including 3D transformations, to give the site a unique style that represents both my skills and personality.</li>
@@ -174,8 +202,10 @@ const Resume = () => {
                             </ul>
                         </div>
                     </div>
+                    
                     <div className="mx-5 border-top border-secondary my-4"></div>
                     <h3 className="mt-5 mb-3 text-secondary">EDUCATION</h3>
+                    
                     <div className="mx-4">
                         <ul>
                             <li><strong>Coding Dojo </strong> - San Jose, CA (online) - <strong> Full-Stack Developer Certificate - </strong> Python, MERN, Java - 2021</li>
@@ -183,13 +213,16 @@ const Resume = () => {
                             <li><strong>Coding Dojo </strong> - San Jose, CA (online) - <strong> Full-Stack Developer Certificate - </strong> Python, MERN, Java - 2021</li>
                         </ul>
                     </div>
+                    
                     <h3 className="mt-5 mb-3 text-secondary">PROFESSIONAL  EXPERIENCE</h3>
                     <div className={(windowWidth > 800) ? "mx-5 my-4 d-flex flex-row justify-content-between" : "my-4 d-flex flex-row justify-content-between"}>
+                        
                         <div className="d-flex flex-column" style={(windowWidth > 800) ? { width: "14%" } : { width: "24%" }} >
                             <h5>BottleBoon Colsulting, LLC</h5>
                             <h6>San Diego, CA</h6>
                             <h6>2020 - 2021</h6>
                         </div>
+                        
                         <div className="" style={(windowWidth > 800) ? { width: "85%" } : { width: "75%" }} >
                             <h5 className={(windowWidth > 800) ? "fw-normal fst-italic ms-4" : "fw-normal fst-italic ms-5"}>Owner</h5>
                             <ul>
@@ -198,12 +231,15 @@ const Resume = () => {
                             </ul>
                         </div>
                     </div>
+                    
                     <div className={(windowWidth > 800) ? "mx-5 my-4 d-flex flex-row justify-content-between" : "my-4 d-flex flex-row justify-content-between"}>
+                        
                         <div className="d-flex flex-column" style={(windowWidth > 800) ? { width: "14%" } : { width: "24%" }} >
                             <h5>Waterbar</h5>
                             <h6>San Diego, CA</h6>
                             <h6>2017 - 2019</h6>
                         </div>
+                        
                         <div className="" style={(windowWidth > 800) ? { width: "85%" } : { width: "75%" }} >
                             <h5 className={(windowWidth > 800) ? "fw-normal fst-italic ms-4" : "fw-normal fst-italic ms-5"}>Beverage Manager</h5>
                             <ul>
@@ -211,12 +247,15 @@ const Resume = () => {
                             </ul>
                         </div>
                     </div>
+                    
                     <div className={(windowWidth > 800) ? "mx-5 my-4 d-flex flex-row justify-content-between" : "my-4 d-flex flex-row justify-content-between"}>
+                        
                         <div className="d-flex flex-column" style={(windowWidth > 800) ? { width: "14%" } : { width: "24%" }} >
                             <h5>Searsucker</h5>
                             <h6>San Diego, CA</h6>
                             <h6>2014 - 2016</h6>
                         </div>
+                        
                         <div className="" style={(windowWidth > 800) ? { width: "85%" } : { width: "75%" }} >
                             <h5 className={(windowWidth > 800) ? "fw-normal fst-italic ms-4" : "fw-normal fst-italic ms-5"}>General Manager</h5>
                             <ul>
@@ -224,6 +263,7 @@ const Resume = () => {
                             </ul>
                         </div>
                     </div>
+                    
                     <div className="mx-5 border-top border-secondary my-4"></div>
                     <div className="text-center">
                         <a href="#" className="link link-light text-decoration-underline" style={{ margin: "auto" }} >download a printable copy of this resume</a>

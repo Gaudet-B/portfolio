@@ -19,8 +19,6 @@ span {
 
 .mainContainer {
     position: absolute;
-    /* width: 100%; */
-    /* width: 90vw; */
     padding-left: 50px;
     padding-right: 50px;
     display: flex;
@@ -48,15 +46,12 @@ span {
 }
 
 .nav {
-    /* color: rgba(255,255,255,.75); */
     color: rgba(0, 143, 17, .9);
-    /* margin: 5%; */
     display: inline-block; 
     text-decoration: none; 
     font-size: 2rem; 
     transition: 0.6s color; 
     position: relative; 
-    /* margin-top: -6rem;  */
     border-bottom: none; 
     line-height: 0;
 }
@@ -83,27 +78,4 @@ span {
     padding: 0px 6px
 }
 
-/* #left {
-    font-size: 72px;
-}
-#right {
-    font-size: 72px;
-} */
-
 .nav:hover { color: whitesmoke; text-shadow: 1px 1px 1px rgba(245, 245, 245, 0.788); font-size: 2.05rem; cursor: pointer;}
-
-/* div#title.title {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-size: 6em;
-    color: whitesmoke;
-    animation: glow 7s ease infinite;
-} */
-
-/* .left {
-    
-}
-
-.right {
-
-} */
